@@ -1,0 +1,690 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		32C232B114B5AF008FBC07D138BC6F09 /* ConvivaCore */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 00E3681459AF2A65BD0D0C9A196AA9F0 /* Build configuration list for PBXAggregateTarget "ConvivaCore" */;
+			buildPhases = (
+			);
+			dependencies = (
+			);
+			name = ConvivaCore;
+		};
+		69449D1FDE1513B2F0493580FFE4A741 /* ConvivaAVFoundation */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 24C4DBA5148F35F80E32539CE4FEAD3A /* Build configuration list for PBXAggregateTarget "ConvivaAVFoundation" */;
+			buildPhases = (
+			);
+			dependencies = (
+				4EDB132801665F7C1E49112F58FBE16C /* PBXTargetDependency */,
+			);
+			name = ConvivaAVFoundation;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		3E5A004349E4BB67CD46512517D53DF1 /* Pods-ConvivaMediaPlayerKitTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9CB4EBB96DAAAC9F3572186F9A442F /* Pods-ConvivaMediaPlayerKitTests-dummy.m */; };
+		B05E4C23A063E94BC884E67EF1D75B10 /* Pods-ConvivaMediaPlayerKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA1B9809E3F7EDF101C512B85095EF7 /* Pods-ConvivaMediaPlayerKit-dummy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		593661A44C09BC0AFAAB8B13BA4A0DE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0A6C21615AC8B6C4696518BC785A4B94;
+			remoteInfo = "Pods-ConvivaMediaPlayerKit";
+		};
+		6E3013F652AFA2C83DB6BF17A8ED14CC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 32C232B114B5AF008FBC07D138BC6F09;
+			remoteInfo = ConvivaCore;
+		};
+		7FDCA3EE16F0B284DC6700D2609FBF35 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 32C232B114B5AF008FBC07D138BC6F09;
+			remoteInfo = ConvivaCore;
+		};
+		EEF59D4EE58B4C9E96C418B8F17F7125 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 69449D1FDE1513B2F0493580FFE4A741;
+			remoteInfo = ConvivaAVFoundation;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0C96B9B695DD6A18903E1272F28F83A6 /* Pods-ConvivaMediaPlayerKitTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ConvivaMediaPlayerKitTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		514E07A44F23519E67646861D32122B5 /* ConvivaAVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ConvivaAVFoundation.framework; path = Framework/iOS/ConvivaAVFoundation.framework; sourceTree = "<group>"; };
+		6C98266C2F9ED00E514C084091EAF534 /* Pods-ConvivaMediaPlayerKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ConvivaMediaPlayerKit.debug.xcconfig"; sourceTree = "<group>"; };
+		6FF5FDB812A07CD57616E8D7053BC56A /* Pods-ConvivaMediaPlayerKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ConvivaMediaPlayerKitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7F37ACAE5EC2C0A6D8B14D9ACADE4324 /* Pods-ConvivaMediaPlayerKitTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ConvivaMediaPlayerKitTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		8484955C5CF9617F9E6271E6FBFC53FC /* Pods-ConvivaMediaPlayerKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ConvivaMediaPlayerKit.release.xcconfig"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A7288BACA6C277D719A0DBE5D019C2AD /* libPods-ConvivaMediaPlayerKitTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-ConvivaMediaPlayerKitTests.a"; path = "libPods-ConvivaMediaPlayerKitTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0A86B4A7891F6EF6FC3DA058399008E /* ConvivaAVFoundation.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ConvivaAVFoundation.xcconfig; sourceTree = "<group>"; };
+		B5418DA4AEDAF46136F0599E72DD5633 /* libPods-ConvivaMediaPlayerKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-ConvivaMediaPlayerKit.a"; path = "libPods-ConvivaMediaPlayerKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCA1B9809E3F7EDF101C512B85095EF7 /* Pods-ConvivaMediaPlayerKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ConvivaMediaPlayerKit-dummy.m"; sourceTree = "<group>"; };
+		D2838F4B226A5B2567EE9F60A997522E /* ConvivaCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ConvivaCore.framework; path = Framework/iOS/ConvivaCore.framework; sourceTree = "<group>"; };
+		D2876C25CF1E31E452B7586E60A6CD51 /* Pods-ConvivaMediaPlayerKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ConvivaMediaPlayerKitTests.release.xcconfig"; sourceTree = "<group>"; };
+		D4DBFF0A553FB760AC1D44D13AABE268 /* ConvivaCore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ConvivaCore.xcconfig; sourceTree = "<group>"; };
+		EA53F4B56EC22E13A161FDAE66955FDD /* Pods-ConvivaMediaPlayerKit-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ConvivaMediaPlayerKit-acknowledgements.plist"; sourceTree = "<group>"; };
+		FA0EF6054283012AF88C215D203D44F3 /* Pods-ConvivaMediaPlayerKit-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ConvivaMediaPlayerKit-acknowledgements.markdown"; sourceTree = "<group>"; };
+		FD9CB4EBB96DAAAC9F3572186F9A442F /* Pods-ConvivaMediaPlayerKitTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ConvivaMediaPlayerKitTests-dummy.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		31B0E0C574EFF8B8CD09747213133D2C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA5C8A50C7A7ED56C4D5B7949BB9171E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1D9297AF7B558969D2A3566AF6866A1C /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				D4DBFF0A553FB760AC1D44D13AABE268 /* ConvivaCore.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/ConvivaCore";
+			sourceTree = "<group>";
+		};
+		1EC88D76B09AA1209DF852307C8584C7 /* ConvivaAVFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				B9D8DA4A08D4F9D7911D3A45E6CD6A67 /* Frameworks */,
+				2949F92CA6C7B2EB4ABE8E00991F48BC /* Support Files */,
+			);
+			name = ConvivaAVFoundation;
+			path = ConvivaAVFoundation;
+			sourceTree = "<group>";
+		};
+		2949F92CA6C7B2EB4ABE8E00991F48BC /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				B0A86B4A7891F6EF6FC3DA058399008E /* ConvivaAVFoundation.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/ConvivaAVFoundation";
+			sourceTree = "<group>";
+		};
+		2B5E243775F7B2BE13399CFDB54D9036 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				A2201BFAC79E32909EA66AFFE24B442D /* Pods-ConvivaMediaPlayerKit */,
+				438996FB880FD75A87A41E1A6C0E37D4 /* Pods-ConvivaMediaPlayerKitTests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		415EE9E0132591F07B81127EB1757EFB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B5418DA4AEDAF46136F0599E72DD5633 /* libPods-ConvivaMediaPlayerKit.a */,
+				A7288BACA6C277D719A0DBE5D019C2AD /* libPods-ConvivaMediaPlayerKitTests.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4325760F322B525273C1FA25C73961C5 /* ConvivaCore */ = {
+			isa = PBXGroup;
+			children = (
+				B9CC52F6A96214F00B0C5B3E78947403 /* Frameworks */,
+				1D9297AF7B558969D2A3566AF6866A1C /* Support Files */,
+			);
+			name = ConvivaCore;
+			path = ConvivaCore;
+			sourceTree = "<group>";
+		};
+		438996FB880FD75A87A41E1A6C0E37D4 /* Pods-ConvivaMediaPlayerKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				0C96B9B695DD6A18903E1272F28F83A6 /* Pods-ConvivaMediaPlayerKitTests-acknowledgements.markdown */,
+				7F37ACAE5EC2C0A6D8B14D9ACADE4324 /* Pods-ConvivaMediaPlayerKitTests-acknowledgements.plist */,
+				FD9CB4EBB96DAAAC9F3572186F9A442F /* Pods-ConvivaMediaPlayerKitTests-dummy.m */,
+				6FF5FDB812A07CD57616E8D7053BC56A /* Pods-ConvivaMediaPlayerKitTests.debug.xcconfig */,
+				D2876C25CF1E31E452B7586E60A6CD51 /* Pods-ConvivaMediaPlayerKitTests.release.xcconfig */,
+			);
+			name = "Pods-ConvivaMediaPlayerKitTests";
+			path = "Target Support Files/Pods-ConvivaMediaPlayerKitTests";
+			sourceTree = "<group>";
+		};
+		A2201BFAC79E32909EA66AFFE24B442D /* Pods-ConvivaMediaPlayerKit */ = {
+			isa = PBXGroup;
+			children = (
+				FA0EF6054283012AF88C215D203D44F3 /* Pods-ConvivaMediaPlayerKit-acknowledgements.markdown */,
+				EA53F4B56EC22E13A161FDAE66955FDD /* Pods-ConvivaMediaPlayerKit-acknowledgements.plist */,
+				CCA1B9809E3F7EDF101C512B85095EF7 /* Pods-ConvivaMediaPlayerKit-dummy.m */,
+				6C98266C2F9ED00E514C084091EAF534 /* Pods-ConvivaMediaPlayerKit.debug.xcconfig */,
+				8484955C5CF9617F9E6271E6FBFC53FC /* Pods-ConvivaMediaPlayerKit.release.xcconfig */,
+			);
+			name = "Pods-ConvivaMediaPlayerKit";
+			path = "Target Support Files/Pods-ConvivaMediaPlayerKit";
+			sourceTree = "<group>";
+		};
+		B9CC52F6A96214F00B0C5B3E78947403 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D2838F4B226A5B2567EE9F60A997522E /* ConvivaCore.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B9D8DA4A08D4F9D7911D3A45E6CD6A67 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				514E07A44F23519E67646861D32122B5 /* ConvivaAVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C0907984727ADF7C139EF3E8A964DB14 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1EC88D76B09AA1209DF852307C8584C7 /* ConvivaAVFoundation */,
+				4325760F322B525273C1FA25C73961C5 /* ConvivaCore */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				D89477F20FB1DE18A04690586D7808C4 /* Frameworks */,
+				C0907984727ADF7C139EF3E8A964DB14 /* Pods */,
+				415EE9E0132591F07B81127EB1757EFB /* Products */,
+				2B5E243775F7B2BE13399CFDB54D9036 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D89477F20FB1DE18A04690586D7808C4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		699908B9D94871F0438D022E3209BF1B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DFABE4200C76C583CDC59721A18933C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		0A6C21615AC8B6C4696518BC785A4B94 /* Pods-ConvivaMediaPlayerKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 688B51090097E331B7A61AC97FA221D0 /* Build configuration list for PBXNativeTarget "Pods-ConvivaMediaPlayerKit" */;
+			buildPhases = (
+				699908B9D94871F0438D022E3209BF1B /* Headers */,
+				31D892A64CC78FDB015550C5979FB84D /* Sources */,
+				31B0E0C574EFF8B8CD09747213133D2C /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				258C6F5512F326FBB4ABEF3F0B12B10B /* PBXTargetDependency */,
+				6490883F128270C27D570549F5E97A75 /* PBXTargetDependency */,
+			);
+			name = "Pods-ConvivaMediaPlayerKit";
+			productName = "Pods-ConvivaMediaPlayerKit";
+			productReference = B5418DA4AEDAF46136F0599E72DD5633 /* libPods-ConvivaMediaPlayerKit.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		F05B439EBE18C1021656B4B7A3F4039B /* Pods-ConvivaMediaPlayerKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0833BD0B7AC60ECCE882691A1C003BDA /* Build configuration list for PBXNativeTarget "Pods-ConvivaMediaPlayerKitTests" */;
+			buildPhases = (
+				8DFABE4200C76C583CDC59721A18933C /* Headers */,
+				182579F42FE5179C0FC61235DFEC7CE0 /* Sources */,
+				DA5C8A50C7A7ED56C4D5B7949BB9171E /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CBFD2E4B0BD02479D8EDF494AE0BCCD7 /* PBXTargetDependency */,
+			);
+			name = "Pods-ConvivaMediaPlayerKitTests";
+			productName = "Pods-ConvivaMediaPlayerKitTests";
+			productReference = A7288BACA6C277D719A0DBE5D019C2AD /* libPods-ConvivaMediaPlayerKitTests.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = 415EE9E0132591F07B81127EB1757EFB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				69449D1FDE1513B2F0493580FFE4A741 /* ConvivaAVFoundation */,
+				32C232B114B5AF008FBC07D138BC6F09 /* ConvivaCore */,
+				0A6C21615AC8B6C4696518BC785A4B94 /* Pods-ConvivaMediaPlayerKit */,
+				F05B439EBE18C1021656B4B7A3F4039B /* Pods-ConvivaMediaPlayerKitTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		182579F42FE5179C0FC61235DFEC7CE0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E5A004349E4BB67CD46512517D53DF1 /* Pods-ConvivaMediaPlayerKitTests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		31D892A64CC78FDB015550C5979FB84D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B05E4C23A063E94BC884E67EF1D75B10 /* Pods-ConvivaMediaPlayerKit-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		258C6F5512F326FBB4ABEF3F0B12B10B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ConvivaAVFoundation;
+			target = 69449D1FDE1513B2F0493580FFE4A741 /* ConvivaAVFoundation */;
+			targetProxy = EEF59D4EE58B4C9E96C418B8F17F7125 /* PBXContainerItemProxy */;
+		};
+		4EDB132801665F7C1E49112F58FBE16C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ConvivaCore;
+			target = 32C232B114B5AF008FBC07D138BC6F09 /* ConvivaCore */;
+			targetProxy = 7FDCA3EE16F0B284DC6700D2609FBF35 /* PBXContainerItemProxy */;
+		};
+		6490883F128270C27D570549F5E97A75 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ConvivaCore;
+			target = 32C232B114B5AF008FBC07D138BC6F09 /* ConvivaCore */;
+			targetProxy = 6E3013F652AFA2C83DB6BF17A8ED14CC /* PBXContainerItemProxy */;
+		};
+		CBFD2E4B0BD02479D8EDF494AE0BCCD7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-ConvivaMediaPlayerKit";
+			target = 0A6C21615AC8B6C4696518BC785A4B94 /* Pods-ConvivaMediaPlayerKit */;
+			targetProxy = 593661A44C09BC0AFAAB8B13BA4A0DE6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0553DDA6781F44749A6775420C4601C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D2876C25CF1E31E452B7586E60A6CD51 /* Pods-ConvivaMediaPlayerKitTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		18BE8FDD329656010BE5F7311EDB9769 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8484955C5CF9617F9E6271E6FBFC53FC /* Pods-ConvivaMediaPlayerKit.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		56B0B4A91792BF2081284F901BE22A92 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B0A86B4A7891F6EF6FC3DA058399008E /* ConvivaAVFoundation.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8F17DC3A99F99FBAD606CE6963886315 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		916E0404255105F480DC4950B7625F7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		A3F8EDDBB2975E66F462772433B06A82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B0A86B4A7891F6EF6FC3DA058399008E /* ConvivaAVFoundation.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B31A7BC603F70FF77E3AA8A2E9A950DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6C98266C2F9ED00E514C084091EAF534 /* Pods-ConvivaMediaPlayerKit.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CAC8AABB6076C226DD9AB869E6C543C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6FF5FDB812A07CD57616E8D7053BC56A /* Pods-ConvivaMediaPlayerKitTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CB895DD2D40742AC3B5FBCB7E6EAB355 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4DBFF0A553FB760AC1D44D13AABE268 /* ConvivaCore.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D26BC6B75CE1250DCFBA42BAEA58AAF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4DBFF0A553FB760AC1D44D13AABE268 /* ConvivaCore.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		00E3681459AF2A65BD0D0C9A196AA9F0 /* Build configuration list for PBXAggregateTarget "ConvivaCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB895DD2D40742AC3B5FBCB7E6EAB355 /* Debug */,
+				D26BC6B75CE1250DCFBA42BAEA58AAF8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0833BD0B7AC60ECCE882691A1C003BDA /* Build configuration list for PBXNativeTarget "Pods-ConvivaMediaPlayerKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAC8AABB6076C226DD9AB869E6C543C2 /* Debug */,
+				0553DDA6781F44749A6775420C4601C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		24C4DBA5148F35F80E32539CE4FEAD3A /* Build configuration list for PBXAggregateTarget "ConvivaAVFoundation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3F8EDDBB2975E66F462772433B06A82 /* Debug */,
+				56B0B4A91792BF2081284F901BE22A92 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				916E0404255105F480DC4950B7625F7A /* Debug */,
+				8F17DC3A99F99FBAD606CE6963886315 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		688B51090097E331B7A61AC97FA221D0 /* Build configuration list for PBXNativeTarget "Pods-ConvivaMediaPlayerKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B31A7BC603F70FF77E3AA8A2E9A950DB /* Debug */,
+				18BE8FDD329656010BE5F7311EDB9769 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}

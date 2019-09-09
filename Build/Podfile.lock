@@ -1,0 +1,20 @@
+PODS:
+  - ConvivaAVFoundation (3.0.6):
+    - ConvivaCore (= 3.0.5)
+  - ConvivaCore (3.0.5)
+
+DEPENDENCIES:
+  - ConvivaAVFoundation (= 3.0.6)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - ConvivaAVFoundation
+    - ConvivaCore
+
+SPEC CHECKSUMS:
+  ConvivaAVFoundation: 5951485475703992c118982f6ed07df380b3bf05
+  ConvivaCore: 0ec6f83aeece499d256f74244352529f8dc21b4c
+
+PODFILE CHECKSUM: 336a4befb35d570409190b0f30c0c0237291c453
+
+COCOAPODS: 1.7.5
