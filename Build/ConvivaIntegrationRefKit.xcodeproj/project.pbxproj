@@ -40,6 +40,7 @@
 		6FF376372345DF2A00B08B99 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF376362345DF2A00B08B99 /* JavaScriptCore.framework */; };
 		6FF376392345DF3600B08B99 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF376382345DF3600B08B99 /* AVFoundation.framework */; };
 		6FF3763B2345DF3B00B08B99 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF3763A2345DF3B00B08B99 /* AVKit.framework */; };
+		93E9844D372600171DBAFAF2 /* Pods_ConvivaIntegrationRefKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C82FBF713604BF425C5098 /* Pods_ConvivaIntegrationRefKitTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,7 +95,9 @@
 		6FF3763C2345E2F500B08B99 /* ConvivaIntegrationRefKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConvivaIntegrationRefKit.h; sourceTree = "<group>"; };
 		94382F3F6683454F48423AE9 /* Pods-ConvivaMediaPlayerKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConvivaMediaPlayerKitTests.debug.xcconfig"; path = "Target Support Files/Pods-ConvivaMediaPlayerKitTests/Pods-ConvivaMediaPlayerKitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A643953CA3BFD03707E52EFD /* Pods-ConvivaMediaPlayerKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConvivaMediaPlayerKit.release.xcconfig"; path = "Target Support Files/Pods-ConvivaMediaPlayerKit/Pods-ConvivaMediaPlayerKit.release.xcconfig"; sourceTree = "<group>"; };
+		B4C82FBF713604BF425C5098 /* Pods_ConvivaIntegrationRefKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ConvivaIntegrationRefKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD97F0F3B8C2F012091E8156 /* Pods-ConvivaMediaPlayerKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConvivaMediaPlayerKit.debug.xcconfig"; path = "Target Support Files/Pods-ConvivaMediaPlayerKit/Pods-ConvivaMediaPlayerKit.debug.xcconfig"; sourceTree = "<group>"; };
+		C34CEF4686C365A8F9BDB551 /* Pods_ConvivaIntegrationRefKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ConvivaIntegrationRefKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8F118F72106925DB1906CA8 /* Pods-ConvivaIntegrationRefKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConvivaIntegrationRefKit.release.xcconfig"; path = "Target Support Files/Pods-ConvivaIntegrationRefKit/Pods-ConvivaIntegrationRefKit.release.xcconfig"; sourceTree = "<group>"; };
 		FE7E02D074AC6BFBB3D455A3 /* Pods-ConvivaMediaPlayerKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConvivaMediaPlayerKitTests.release.xcconfig"; path = "Target Support Files/Pods-ConvivaMediaPlayerKitTests/Pods-ConvivaMediaPlayerKitTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,6 +120,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				513DFA77231FE30E00F30511 /* ConvivaIntegrationRefKit.framework in Frameworks */,
+				93E9844D372600171DBAFAF2 /* Pods_ConvivaIntegrationRefKitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +136,8 @@
 				6FF376342345DF2100B08B99 /* MediaPlayer.framework */,
 				6FF376322345DF1C00B08B99 /* SystemConfiguration.framework */,
 				6FF376302345DB8200B08B99 /* OoyalaSDK.framework */,
+				C34CEF4686C365A8F9BDB551 /* Pods_ConvivaIntegrationRefKit.framework */,
+				B4C82FBF713604BF425C5098 /* Pods_ConvivaIntegrationRefKitTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

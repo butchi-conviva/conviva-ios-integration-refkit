@@ -14,7 +14,6 @@ public class CVAAVPlayer: NSObject {
     var avPlayer : AVPlayer!
     var avPlayerLayer:AVPlayerLayer?
     var convivaAVPlayerWrapper : ConvivaAVPlayerWrapper!
-    var convivaSDKWrapper : ConvivaSDKWrapper!
 
     var responseHandler:CVAPlayerResponseHandler?;
     var timeObserverToken: Any?
@@ -81,15 +80,9 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
   public func startAssetPlayback(asset:CVAAsset) -> CVAPlayerStatus {
     
     initializeAVPlayer()
-    // AVPlayer
+
     convivaAVPlayerWrapper = ConvivaAVPlayerWrapper(avPlayer: avPlayer!, environment: .testing)
-    // convivaAVPlayerWrapper.initiateSesionWithMetadata(title: "Avengers", useruuid: "50334345", isLive: true, premium: true, matchId: "12345")
-    
-    // SDK
-    convivaSDKWrapper = ConvivaSDKWrapper()
-    convivaSDKWrapper.setupConvivaMonitoring()
-    convivaSDKWrapper.createConvivaSession()
-    convivaSDKWrapper.attachPlayer(player: nil)
+    convivaAVPlayerWrapper.initiateSesionWithMetadata(title: "Avengers", useruuid: "50334345", isLive: true, premium: true, matchId: "12345")
 
     return .success;
   }

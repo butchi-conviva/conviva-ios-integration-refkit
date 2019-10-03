@@ -1,9 +1,13 @@
 # Acknowledgements
 This application makes use of the following third party libraries:
 
-## ConvivaSDK
+## ConvivaAVFoundation
 
 LICENSE.md
+
+## ConvivaCore
+
+Copyright 2018 Conviva
 
 ## OoyalaSDK
 

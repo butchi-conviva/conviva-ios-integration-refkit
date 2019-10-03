@@ -9,9 +9,10 @@
 import Foundation
 
 import UIKit
-import ConvivaSDK
+// import ConvivaSDK
 import AVFoundation
 
+/*
 class ConvivaSDKWrapper : ConvivaBase {
     var client : CISClientProtocol!
     var isInitalised : Bool = false
@@ -224,3 +225,4 @@ class ConvivaSDKWrapper : ConvivaBase {
         }
     }
 }
+*/

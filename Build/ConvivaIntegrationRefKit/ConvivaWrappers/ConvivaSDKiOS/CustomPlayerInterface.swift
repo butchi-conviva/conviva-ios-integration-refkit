@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import ConvivaSDK
+// import ConvivaSDK
 
 class CustomPlayer {
     var videoURL : URL
@@ -29,6 +29,9 @@ class CustomPlayer {
     }
 }
 
+class CustomPlayerInterface {}
+
+/*
 class CustomPlayerInterface {
     var playerStateManager : CISPlayerStateManagerProtocol
     var customPlayer : CustomPlayer
@@ -66,3 +69,4 @@ class CustomPlayerInterface {
         playerStateManager.setBitrateKbps!(newBitrateKbps)
     }
 }
+*/

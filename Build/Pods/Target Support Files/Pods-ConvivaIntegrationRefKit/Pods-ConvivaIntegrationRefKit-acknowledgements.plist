@@ -18,7 +18,17 @@
 			<key>License</key>
 			<string>Commercial</string>
 			<key>Title</key>
-			<string>ConvivaSDK</string>
+			<string>ConvivaAVFoundation</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Copyright 2018 Conviva</string>
+			<key>License</key>
+			<string>Copyright</string>
+			<key>Title</key>
+			<string>ConvivaCore</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>
