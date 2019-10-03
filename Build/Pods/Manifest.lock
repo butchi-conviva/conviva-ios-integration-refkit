@@ -1,20 +1,21 @@
 PODS:
-  - ConvivaAVFoundation (3.0.6):
-    - ConvivaCore (= 3.0.5)
-  - ConvivaCore (3.0.5)
+  - ConvivaSDK (2.141.4)
+  - OoyalaSDK (4.41.0)
 
 DEPENDENCIES:
-  - ConvivaAVFoundation (= 3.0.6)
+  - ConvivaSDK (= 2.141.4)
+  - OoyalaSDK (= 4.41.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - ConvivaAVFoundation
-    - ConvivaCore
+    - ConvivaSDK
+  https://github.com/ooyala/ios-sdk-podspecs.git:
+    - OoyalaSDK
 
 SPEC CHECKSUMS:
-  ConvivaAVFoundation: 5951485475703992c118982f6ed07df380b3bf05
-  ConvivaCore: 0ec6f83aeece499d256f74244352529f8dc21b4c
+  ConvivaSDK: 06ea6c73cf07479d32a44b7068bd8796d1b903c6
+  OoyalaSDK: 188e4b63a719c16c25cdfe2a9b5968c341827061
 
-PODFILE CHECKSUM: 336a4befb35d570409190b0f30c0c0237291c453
+PODFILE CHECKSUM: e6c7313e6dd4b3c77cae2ca2f123f488af70c691
 
 COCOAPODS: 1.7.5

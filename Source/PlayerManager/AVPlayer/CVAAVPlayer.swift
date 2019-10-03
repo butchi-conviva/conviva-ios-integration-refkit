@@ -13,15 +13,17 @@ public class CVAAVPlayer: NSObject {
   
     var avPlayer : AVPlayer!
     var avPlayerLayer:AVPlayerLayer?
-    var convivaWrapper : ConvivaWrapper!
+    var convivaAVPlayerWrapper : ConvivaAVPlayerWrapper!
+    var convivaSDKWrapper : ConvivaSDKWrapper!
+
     var responseHandler:CVAPlayerResponseHandler?;
     var timeObserverToken: Any?
   
   private func initializeAVPlayer() {
     
-    //let videoURL = NSURL(string: "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8")
+    let videoURL = NSURL(string: "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8")
     //let videoURL = NSURL(string: "http://localhost/sample.mp4")
-    let videoURL = NSURL(string: "http://localhost/sample/index.m3u8")
+//    let videoURL = NSURL(string: "http://localhost/sample/index.m3u8")
     
     avPlayer = AVPlayer(url: videoURL! as URL)
     self.avPlayerLayer = AVPlayerLayer(player: avPlayer)
@@ -30,7 +32,7 @@ public class CVAAVPlayer: NSObject {
     addPeriodicTimeObserver();
     
     DispatchQueue.main.async {
-        self.responseHandler?.onPlayerCommandComplete(command: .play, status: .success, info: [kAVPlayerLayer:self.avPlayerLayer]);
+        self.responseHandler?.onPlayerCommandComplete(command: .play, status: .success, info: [kAVPlayerLayer:self.avPlayerLayer as Any]);
     }
   }
   
@@ -79,9 +81,16 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
   public func startAssetPlayback(asset:CVAAsset) -> CVAPlayerStatus {
     
     initializeAVPlayer()
-    convivaWrapper = ConvivaWrapper(avPlayer: avPlayer!, environment: .testing)
-    convivaWrapper.initiateSesionWithMetadata(title: "Avengers", useruuid: "50334345", isLive: true, premium: true, matchId: "12345")
+    // AVPlayer
+    convivaAVPlayerWrapper = ConvivaAVPlayerWrapper(avPlayer: avPlayer!, environment: .testing)
+    // convivaAVPlayerWrapper.initiateSesionWithMetadata(title: "Avengers", useruuid: "50334345", isLive: true, premium: true, matchId: "12345")
     
+    // SDK
+    convivaSDKWrapper = ConvivaSDKWrapper()
+    convivaSDKWrapper.setupConvivaMonitoring()
+    convivaSDKWrapper.createConvivaSession()
+    convivaSDKWrapper.attachPlayer(player: nil)
+
     return .success;
   }
   
@@ -126,12 +135,12 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
       
       let seekTime = CMTime(value: Int64(value), timescale: 1)
       
-        convivaWrapper.seekStart(position: NSInteger(value));
+        // convivaWrapper.seekStart(position: NSInteger(value));
       avplayer.seek(to: seekTime, completionHandler: { (completedSeek) in
         //perhaps do something later here
         
         if true == completedSeek{
-            self.convivaWrapper.seekEnd(position: NSInteger(value));
+            // self.convivaWrapper.seekEnd(position: NSInteger(value));
         }
       })
     }
