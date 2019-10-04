@@ -81,9 +81,12 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
     
     initializeAVPlayer()
 
-    convivaAVPlayerWrapper = ConvivaAVPlayerWrapper(avPlayer: avPlayer!, environment: .testing)
-    convivaAVPlayerWrapper.initiateSesionWithMetadata(title: "Avengers", useruuid: "50334345", isLive: true, premium: true, matchId: "12345")
-
+    convivaAVPlayerWrapper = ConvivaAVPlayerWrapper()
+    
+    let metadata = ["title":"Avengers","useruuid":"50334345","isLive":true,"matchId":"12345"] as [String : Any]
+    convivaAVPlayerWrapper.setupConvivaMonitoring(player: avPlayer, metadata: metadata, environment: Environment.testing)
+    convivaAVPlayerWrapper.createSession()
+    
     return .success;
   }
   
@@ -128,12 +131,12 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
       
       let seekTime = CMTime(value: Int64(value), timescale: 1)
       
-        // convivaWrapper.seekStart(position: NSInteger(value));
+      convivaAVPlayerWrapper.seekStart(position: NSInteger(value));
       avplayer.seek(to: seekTime, completionHandler: { (completedSeek) in
         //perhaps do something later here
         
         if true == completedSeek{
-            // self.convivaWrapper.seekEnd(position: NSInteger(value));
+            self.convivaAVPlayerWrapper.seekEnd(position: NSInteger(value));
         }
       })
     }

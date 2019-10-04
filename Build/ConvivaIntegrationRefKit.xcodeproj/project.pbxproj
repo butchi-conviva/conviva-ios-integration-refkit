@@ -265,8 +265,8 @@
 		6FF3761F2343845400B08B99 /* ConvivaSDKiOS */ = {
 			isa = PBXGroup;
 			children = (
-				6FF376202343845400B08B99 /* CustomPlayerInterface.swift */,
 				6FF376212343845400B08B99 /* ConvivaSDKWrapper.swift */,
+				6FF376202343845400B08B99 /* CustomPlayerInterface.swift */,
 			);
 			path = ConvivaSDKiOS;
 			sourceTree = "<group>";

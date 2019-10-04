@@ -10,39 +10,29 @@ import Foundation
 import UIKit
 import AVFoundation
 import AVKit
-
 import ConvivaCore
 import ConvivaAVFoundation
- 
+
 private let kConviva_Key = Conviva.Credentials.customerKey
 private let kConviva_Gateway_URL = Conviva.Credentials.gatewayURL
 
-class ConvivaAVPlayerWrapper {
-    private let kNOT_APPLICABLE = "N/A"
-    var mainPlayer : AVPlayer!
-    var environment : Environment!
-    var convivaVideoSession : ConvivaLightSession!
-    var convivaMetadata : ConvivaContentInfo!
+class ConvivaAVPlayerWrapper : ConvivaBase {
     
-    init(avPlayer : AVPlayer, environment: Environment) {
-        self.mainPlayer = avPlayer
-        self.environment = environment
-        self.saveConvivaCredentials()
-        self.setupConvivaMonitoring()
-    }
+    private let kNOT_APPLICABLE = "N/A"
+    
+    private var mainPlayer : AVPlayer!
+    private var environment : Environment!
+    private var metadata : [String : Any] = [:]
+    private var convivaVideoSession : ConvivaLightSession!
+    private var convivaMetadata : ConvivaContentInfo!
     
     // MARK: - Conviva setup
-    func saveConvivaCredentials() {
-        UserDefaults.setConvivaGatewayURL(gatewayURL: Conviva.Credentials.gatewayURL)
-        UserDefaults.setConvivaCustomerKey(customerKey: Conviva.Credentials.customerKey)
-    }
     
-    func setupConvivaMonitoring() {
-        let conviva_Key = UserDefaults.getConvivaCustomerKey() ?? kConviva_Key
-        let conviva_Gateway_URL = UserDefaults.getConvivaGatewayURL() ?? kConviva_Gateway_URL
+    func setupConvivaMonitoring(player: Any, metadata: [String : Any], environment : Environment) {
+        saveConvivaCredentials ()
         
         var clientSettings = Dictionary <String, Any>()
-        clientSettings["gatewayUrl"] = conviva_Gateway_URL
+        clientSettings["gatewayUrl"] = kConviva_Gateway_URL
         
         #if DEBUG
         LivePass.toggleTraces(true)
@@ -50,30 +40,35 @@ class ConvivaAVPlayerWrapper {
         LivePass.toggleTraces(false)
         #endif
         
-        LivePass.initWithCustomerKey(conviva_Key, andSettings: clientSettings)
+        LivePass.initWithCustomerKey(kConviva_Key, andSettings: clientSettings)
+        
+        self.mainPlayer = player as? AVPlayer
+        self.environment = environment
+        self.metadata = metadata
     }
     
     func cleanupConvivaMonitoring() {
         LivePass.cleanup()
     }
     
-    // MARK: - Conviva session lifecycle
-    func initiateSesionWithMetadata(title: String?, useruuid : String, isLive : Bool, premium: Bool, matchId: String?) {
-        let customMetadata : [String : Any] = [Conviva.MetadataTagsKeys.matchId : matchId as Any, Conviva.MetadataTagsKeys.premium : premium]
-        let metadata : [String : Any] = [Conviva.MetadataKeys.title : title as Any,
-                                         Conviva.MetadataKeys.useruuid : useruuid,
-                                         Conviva.MetadataKeys.isLive : isLive,
+    // MARK: - ConvivaBase : Session lifecycle functions
+    func createSession() {
+        let customMetadata : [String : Any] = [Conviva.MetadataTagsKeys.matchId : metadata["matchId"] as Any, Conviva.MetadataTagsKeys.premium : metadata["premium"] as Any]
+        
+        let convivaMetadata : [String : Any] = [Conviva.MetadataKeys.title : metadata["title"] as Any,
+                                                Conviva.MetadataKeys.useruuid : metadata["useruuid"] as Any,
+                                                Conviva.MetadataKeys.isLive : metadata["isLive"] as Any,
                                          Conviva.MetadataKeys.customMetadata: customMetadata]
         
-        if let session = LivePass.createSession(withStreamer: self.mainPlayer, andConvivaContentInfo: getContentMetadata(metadata: metadata)) {
+        if let session = LivePass.createSession(withStreamer: self.mainPlayer, andConvivaContentInfo: getContentMetadata(metadata: convivaMetadata)) {
             self.convivaVideoSession = session
         }
         else{
             print("Conviva Error : fail to create session")
         }
     }
-    
-    func cleanupSession(_ sender: AnyObject) {
+
+    func cleanupSession() {
         if  self.convivaVideoSession != nil {
             LivePass.cleanupSession(self.convivaVideoSession)
             self.convivaVideoSession = nil
@@ -92,7 +87,56 @@ class ConvivaAVPlayerWrapper {
         }
     }
     
-    // MARK: - Conviva content metadata methods
+    // MARK: - ConvivaBase : Conviva advanced metadata and events functions
+
+    func sendCustomEvent() {
+        if (convivaVideoSession != nil){
+            self.convivaVideoSession.sendEvent( "Conviva.PodStart", withAttributes: [
+                "podDuration" : "60",
+                "podPosition" : "Pre-roll",
+                "podIndex" : "1",
+                "absoluteIndex" :  "1"
+                ]
+            )
+        }
+    }
+    
+    func sendCustomError() {
+        if (convivaVideoSession != nil){
+            convivaVideoSession.reportError("Fatal Error", errorType: ErrorSeverity.SEVERITY_FATAL)
+        }
+    }
+    
+    func sendCustomWarning() {
+        if (convivaVideoSession != nil){
+            convivaVideoSession.reportError("Warning", errorType: ErrorSeverity.SEVERITY_WARNING)
+        }
+    }
+    
+    func updateContentMetadata() {
+        if (convivaVideoSession != nil){
+            convivaVideoSession.updateContentMetadata(getUpdatedContentMetadata())
+        }
+    }
+    
+    func seekStart(position:NSInteger) {
+        if (convivaVideoSession != nil){
+            convivaVideoSession.setSeekStart(position);
+        }
+    }
+    
+    func seekEnd(position:NSInteger) {
+        if (convivaVideoSession != nil){
+            convivaVideoSession.setSeekEnd(position);
+        }
+    }
+
+    // MARK: - :Private methods - Conviva content metadata 
+    private func saveConvivaCredentials() {
+        UserDefaults.setConvivaGatewayURL(gatewayURL: Conviva.Credentials.gatewayURL)
+        UserDefaults.setConvivaCustomerKey(customerKey: Conviva.Credentials.customerKey)
+    }
+
     private func getContentMetadata(metadata : Dictionary<String, Any>) -> ConvivaContentInfo {
         convivaMetadata = ConvivaContentInfo.createInfoForLightSession(withAssetName: metadata[Conviva.MetadataKeys.title] as? String ) as? ConvivaContentInfo
         convivaMetadata.viewerId = metadata[Conviva.MetadataKeys.useruuid] as? String
@@ -147,48 +191,6 @@ class ConvivaAVPlayerWrapper {
         return updatedCustomTags
     }
     
-    // MARK: - Conviva advanced metadata and events
-    func sendCustomEvent() {
-        if (convivaVideoSession != nil){
-            self.convivaVideoSession.sendEvent( "Conviva.PodStart", withAttributes: [
-                "podDuration" : "60",
-                "podPosition" : "Pre-roll",
-                "podIndex" : "1",
-                "absoluteIndex" :  "1"
-                ]
-            )
-        }
-    }
-    
-    func sendCustomError() {
-        if (convivaVideoSession != nil){
-            convivaVideoSession.reportError("Fatal Error", errorType: ErrorSeverity.SEVERITY_FATAL)
-        }
-    }
-    
-    func sendCustomWarning() {
-        if (convivaVideoSession != nil){
-            convivaVideoSession.reportError("Warning", errorType: ErrorSeverity.SEVERITY_WARNING)
-        }
-    }
-    
-    func updateContentMetadata() {
-        if (convivaVideoSession != nil){
-            convivaVideoSession.updateContentMetadata(getUpdatedContentMetadata())
-        }
-    }
-    
-    func seekStart(position:NSInteger) {
-        if (convivaVideoSession != nil){
-            convivaVideoSession.setSeekStart(position);
-        }
-    }
-    
-    func seekEnd(position:NSInteger) {
-        if (convivaVideoSession != nil){
-            convivaVideoSession.setSeekEnd(position);
-        }
-    }
 }
 
 enum Environment : RawRepresentable {

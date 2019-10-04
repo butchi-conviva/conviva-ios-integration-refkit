@@ -9,10 +9,29 @@
 import Foundation
 
 protocol ConvivaBase {
+    
+    // Conviva Setup
+    func setupConvivaMonitoring(player: Any, metadata: [String : Any], environment : Environment)
+
+    // func setupConvivaMonitoring()
+    func cleanupConvivaMonitoring()
     var customerKey : String {get set}
     var gatewayURL : String {get set}
     var logLevel : Bool {get set}
-    func setupConvivaMonitoring()
+
+    // Conviva Session
+    func createSession()
+    func cleanupSession()
+    func attachPlayer()
+    func detachPlayer()
+    
+    // Conviva Advanced Metadata
+    func sendCustomEvent()
+    func sendCustomError()
+    func sendCustomWarning()
+    func updateContentMetadata()
+    func seekStart(position:NSInteger)
+    func seekEnd(position:NSInteger)
 }
 
 extension ConvivaBase {
@@ -42,4 +61,6 @@ extension ConvivaBase {
             return false
         }
     }
+    
+    
 }

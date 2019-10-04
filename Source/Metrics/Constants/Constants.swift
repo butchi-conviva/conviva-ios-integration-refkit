@@ -24,6 +24,5 @@ struct Conviva {
   struct MetadataTagsKeys {
     static let matchId = "matchId"
     static let premium = "premium"
-
   }
 }
