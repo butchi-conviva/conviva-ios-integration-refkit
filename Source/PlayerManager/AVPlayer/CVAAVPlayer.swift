@@ -13,7 +13,7 @@ public class CVAAVPlayer: NSObject {
   
     var avPlayer : AVPlayer!
     var avPlayerLayer:AVPlayerLayer?
-    var convivaAVPlayerWrapper : ConvivaAVPlayerWrapper!
+    var convivaAVPlayerWrapper : CVAAVPlayerIntegrationRef!
 
     var responseHandler:CVAPlayerResponseHandler?;
     var timeObserverToken: Any?
@@ -80,7 +80,7 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
     
     initializeAVPlayer()
     
-    convivaAVPlayerWrapper = ConvivaAVPlayerWrapper()
+    convivaAVPlayerWrapper = CVAAVPlayerIntegrationRef()
     
     let metadata = ["title":"Avengers","useruuid":"50334345","isLive":true,"matchId":"12345"] as [String : Any]
     convivaAVPlayerWrapper.setupConvivaMonitoring(player: avPlayer, metadata: metadata, environment: Environment.testing)

@@ -16,7 +16,7 @@ import ConvivaAVFoundation
 private let kConviva_Key = Conviva.Credentials.customerKey
 private let kConviva_Gateway_URL = Conviva.Credentials.gatewayURL
 
-class ConvivaAVPlayerWrapper : ConvivaBase {
+class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
     
     private let kNOT_APPLICABLE = "N/A"
     

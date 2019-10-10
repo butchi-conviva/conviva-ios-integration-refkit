@@ -12,12 +12,12 @@ import UIKit
 // import ConvivaSDK
 import AVFoundation
 
-class ConvivaSDKWrapper {
+class CVACustomSDKIntegrationRef {
 //    var mainPlayer : OoyalaPlayer!
 }
 
 /*
-class ConvivaSDKWrapper : ConvivaBase {
+class CVACustomSDKIntegrationRef : CVABaseIntegrationRef {
     var client : CISClientProtocol!
     var isInitalised : Bool = false
     var videoSessionID : Int32!

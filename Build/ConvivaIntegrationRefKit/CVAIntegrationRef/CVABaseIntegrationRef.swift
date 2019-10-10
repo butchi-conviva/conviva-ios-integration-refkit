@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ConvivaBase {
+protocol CVABaseIntegrationRef {
     
     // Conviva Setup
     func setupConvivaMonitoring(player: Any, metadata: [String : Any], environment : Environment)
@@ -34,7 +34,7 @@ protocol ConvivaBase {
     func seekEnd(position:NSInteger)
 }
 
-extension ConvivaBase {
+extension CVABaseIntegrationRef {
     var customerKey : String {
         set {
             customerKey = customerKey
