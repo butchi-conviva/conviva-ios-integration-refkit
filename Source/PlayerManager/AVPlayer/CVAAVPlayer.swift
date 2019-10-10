@@ -64,7 +64,6 @@ public class CVAAVPlayer: NSObject {
     avPlayer.pause();
     avPlayer = nil;
   }
-  
 }
 
 extension CVAAVPlayer : CVAPlayerCommandHandler {
@@ -80,7 +79,7 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
   public func startAssetPlayback(asset:CVAAsset) -> CVAPlayerStatus {
     
     initializeAVPlayer()
-
+    
     convivaAVPlayerWrapper = ConvivaAVPlayerWrapper()
     
     let metadata = ["title":"Avengers","useruuid":"50334345","isLive":true,"matchId":"12345"] as [String : Any]
@@ -116,9 +115,8 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
   }
   
   public func stopAssetPlayback(asset:CVAAsset) -> CVAPlayerStatus {
-
     stopPlayback();
-
+    convivaAVPlayerWrapper.cleanupSession()
     return .success;
   }
   

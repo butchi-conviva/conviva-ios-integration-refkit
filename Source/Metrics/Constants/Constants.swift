@@ -26,3 +26,16 @@ struct Conviva {
     static let premium = "premium"
   }
 }
+
+enum Environment : RawRepresentable {
+    case testing
+    case production
+    
+    typealias RawValue = Bool
+    var rawValue: RawValue {
+        return self == .testing ? true : false
+    }
+    init?(rawValue: RawValue) {
+        self = rawValue == true ? .testing : .production
+    }
+}

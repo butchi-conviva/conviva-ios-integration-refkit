@@ -10,5 +10,6 @@
 #define Header_h
 
 #import <OoyalaSDK/OoyalaSDK.h>
+#import <PSDKLibrary/PSDKLibrary.h>
 
 #endif /* Header_h */
