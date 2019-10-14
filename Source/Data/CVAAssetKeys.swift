@@ -9,11 +9,13 @@
 import Foundation
 
 struct CVAAssetKeys {
-  
-  static let title:String = "title";
-  static let desc:String = "desc";
-  static let callsign:String = "callsign";
-  static let thumbnail:String = "thumbnail";
-  static let playbackURI:String = "playbackURI";
-  
+    
+    static let title:String         = "title";
+    static let desc:String          = "overview";
+    static let callsign:String      = "callsign";
+    static let thumbnail:String     = "poster_path";
+    static let playbackURI:String   = "playbackURI";
+    static let cdn:String           = "cdn";
+    
 }
+
