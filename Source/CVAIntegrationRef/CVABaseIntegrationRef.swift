@@ -11,16 +11,12 @@ import Foundation
 protocol CVABaseIntegrationRef {
     
     // Conviva Setup
-    func setupConvivaMonitoring(player: Any, metadata: [String : Any], environment : Environment)
-
-    // func setupConvivaMonitoring()
-    func cleanupConvivaMonitoring()
-    var customerKey : String {get set}
-    var gatewayURL : String {get set}
+    static func setupConvivaMonitoring()
+    static func cleanupConvivaMonitoring()
     var logLevel : Bool {get set}
-
+    
     // Conviva Session
-    func createSession()
+    func createSession(player: Any, metadata: [String : Any])
     func cleanupSession()
     func attachPlayer()
     func detachPlayer()
@@ -35,24 +31,6 @@ protocol CVABaseIntegrationRef {
 }
 
 extension CVABaseIntegrationRef {
-    var customerKey : String {
-        set {
-            customerKey = customerKey
-        }
-        get {
-            return "1a6d7f0de15335c201e8e9aacbc7a0952f5191d7"
-        }
-    }
-    
-    var gatewayURL : String {
-        set {
-            gatewayURL = gatewayURL
-        }
-        get {
-            return "https://conviva.testonly.conviva.com"
-        }
-    }
-    
     var logLevel : Bool {
         set {
             logLevel = false
@@ -61,6 +39,8 @@ extension CVABaseIntegrationRef {
             return false
         }
     }
-    
+}
+
+protocol CVAAVPlayerEvents {
     
 }
