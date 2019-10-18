@@ -16,12 +16,26 @@ import ConvivaAVFoundation
 private let kConviva_Key = Conviva.Credentials.customerKey
 private let kConviva_Gateway_URL = Conviva.Credentials.gatewayURL
 
-class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {    
-    private let kNOT_APPLICABLE = "N/A"
+class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
     
+    /**
+     The AVPlayer instance which needs to be monitored using Conviva monitoring.
+     */
     private var videoPlayer : AVPlayer!
+    
+    /**
+     The set of metadata values provided by customer will be contained using this. And then, values from metadataDict are mapped to ConvivaContentInfo.
+     */
     private var metadataDict : [String : Any] = [:]
+    
+    /**
+     The ConvivaLightSession instance.
+     */
     private var convivaVideoSession : ConvivaLightSession!
+    
+    /**
+     The ConvivaContentInfo instance.
+     */
     private var convivaMetadata : ConvivaContentInfo!
     
     // MARK: - Conviva setup
@@ -93,7 +107,7 @@ class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
     }
     
     /**
-     Used to deattach the earlier attached streamer instance.
+     Used to detach the earlier attached streamer instance.
      */
     func detachPlayer() {
         if(convivaVideoSession != nil){
@@ -104,7 +118,7 @@ class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
     // MARK: - ConvivaBase : Conviva advanced metadata and events functions
     
     /**
-     Used to send a custom event e.g. PodStart or PodEnd to Conviva.
+     Used to send a custom event e.g. PodStart or PodEnd events to Conviva.
      */
     func sendCustomEvent() {
         if (convivaVideoSession != nil){
