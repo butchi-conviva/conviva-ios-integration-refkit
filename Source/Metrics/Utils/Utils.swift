@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// A class used to keep common utilities functions.
 class Utils {
     /**
      Used to get device identifier.

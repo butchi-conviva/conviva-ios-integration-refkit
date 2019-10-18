@@ -8,17 +8,24 @@
 
 import Foundation
 
+/// A common struct to keep all the constant values which are used in Conviva integration.
 struct Conviva {
+    
+    /// A struct used to store basic Credentials required for Conviva setup.
     struct Credentials {
         static let customerKey = "1a6d7f0de15335c201e8e9aacbc7a0952f5191d7"
         static let gatewayURL = "https://conviva.testonly.conviva.com"
     }
 
+    /// A struct used to store list of playback URLs.
     struct URLs {
         static let devimagesURL = "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8"
     }
 
+    /// A struct used to store list of keys for dictionaries used in the app.
     struct Keys {
+        
+        /// A struct used to store list of keys for ConvivaContentInfo.
         struct ConvivaContentInfo {
             // Ref : https://community.conviva.com/site/global/platforms/ios/av_player/index.gsp#setMetadata
             static let assetName = "assetName"
@@ -33,6 +40,7 @@ struct Conviva {
             static let encodedFramerate = "encodedFramerate"
         }
         
+        /// A struct used to store list of keys which customer can use for  passing Metadata.
         struct Metadata {
             static let title = "assetName"
             static let url = "streamUrl"
@@ -59,7 +67,10 @@ struct Conviva {
         }
     }
 
+    /// A struct used to store list of values for dictionaries used in the app.
     struct Values {
+        
+        /// A struct used to store list of values which customer can use for  passing Metadata.
         struct Metadata {
             static let title = "Avengers"
             static let live    = true
@@ -79,6 +90,7 @@ struct Conviva {
     }
 }
 
+/// A struct used to store list of Environment type.
 enum Environment : RawRepresentable {
     case testing
     case production

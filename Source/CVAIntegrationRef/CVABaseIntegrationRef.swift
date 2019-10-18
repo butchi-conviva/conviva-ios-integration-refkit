@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// A protocol used to keep all methods used for Conviva AVPlayer integration.
 protocol CVABaseIntegrationRef {
     
     // Conviva Setup

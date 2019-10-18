@@ -16,6 +16,7 @@ import ConvivaAVFoundation
 private let kConviva_Key = Conviva.Credentials.customerKey
 private let kConviva_Gateway_URL = Conviva.Credentials.gatewayURL
 
+/// A class used to keep all methods used for Conviva AVPlayer integration.
 class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
     
     /**
