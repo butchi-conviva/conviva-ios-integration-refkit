@@ -16,12 +16,21 @@ public class CVAAVPlayer: NSObject {
     var convivaWrapper : ConvivaWrapper!
     var responseHandler:CVAPlayerResponseHandler?;
     var timeObserverToken: Any?
+    var asset:CVAAsset?
   
   private func initializeAVPlayer() {
     
-    //let videoURL = NSURL(string: "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8")
-    //let videoURL = NSURL(string: "http://localhost/sample.mp4")
-    let videoURL = NSURL(string: "http://localhost/sample/index.m3u8")
+    guard nil != self.asset else {
+        Swift.print("Empty asset info");
+        return;
+    }
+    
+    guard  nil != self.asset?.playbackURI else {
+        Swift.print("Empty asset url");
+        return;
+    }
+    
+    let videoURL = self.asset?.playbackURI;
     
     avPlayer = AVPlayer(url: videoURL! as URL)
     self.avPlayerLayer = AVPlayerLayer(player: avPlayer)
@@ -78,6 +87,7 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
   
   public func startAssetPlayback(asset:CVAAsset) -> CVAPlayerStatus {
     
+    self.asset = asset;
     initializeAVPlayer()
     convivaWrapper = ConvivaWrapper(avPlayer: avPlayer!, environment: .testing)
     convivaWrapper.initiateSesionWithMetadata(title: "Avengers", useruuid: "50334345", isLive: true, premium: true, matchId: "12345")
