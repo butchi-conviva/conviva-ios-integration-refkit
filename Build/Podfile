@@ -1,9 +1,17 @@
 platform :ios, '9.0'
+# source 'https://github.com/ooyala/ios-sdk-podspecs.git'
 
 target 'ConvivaIntegrationRefKit' do
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> af710a8d34c3c7cb15d6b2d95ee2c44245308811
   # Pods for ConvivaIntegrationRefKit
   
   pod 'ConvivaAVFoundation', '3.0.6'
+  # pod 'ConvivaSDK', '2.141.4'
+  pod 'OoyalaSDK', '4.41.0'
 
   target 'ConvivaIntegrationRefKitTests' do
     inherit! :search_paths

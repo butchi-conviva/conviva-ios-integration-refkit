@@ -66,7 +66,6 @@ extension CVAPlayerManager : CVAPlayerResponseHandler {
   
   public func onPlayerCommandComplete(command: CVAPlayerCommand,
                                status: CVAPlayerStatus, info: [AnyHashable : Any]!) {
-    
     switch command {
     case CVAPlayerCommand.play:
         if status == .success {
