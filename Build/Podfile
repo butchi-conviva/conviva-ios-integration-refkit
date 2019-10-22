@@ -3,11 +3,10 @@ platform :ios, '9.0'
 
 target 'ConvivaIntegrationRefKit' do
 
-  use_frameworks!
 
   # Pods for ConvivaIntegrationRefKit
   
-  pod 'ConvivaAVFoundation', '3.0.7'
+  pod 'ConvivaAVFoundation', '3.0.6'
   # pod 'ConvivaSDK', '2.141.4'
   pod 'OoyalaSDK', '4.41.0'
 
