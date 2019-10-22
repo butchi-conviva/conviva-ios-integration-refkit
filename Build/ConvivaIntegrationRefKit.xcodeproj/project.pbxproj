@@ -35,7 +35,6 @@
 		6F5452292355F82C004BBB79 /* CustomPlayerInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5452242355F82C004BBB79 /* CustomPlayerInterface.swift */; };
 		6F54522A2355F82C004BBB79 /* CVACustomSDKIntegrationRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5452252355F82C004BBB79 /* CVACustomSDKIntegrationRef.swift */; };
 		6F54522B2355F82C004BBB79 /* CVAAVPlayerIntegrationRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5452272355F82C004BBB79 /* CVAAVPlayerIntegrationRef.swift */; };
-		6FF3762B2343848800B08B99 /* CVACustomPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3762A2343848700B08B99 /* CVACustomPlayer.swift */; };
 		6FF376332345DF1C00B08B99 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF376322345DF1C00B08B99 /* SystemConfiguration.framework */; };
 		6FF376352345DF2100B08B99 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF376342345DF2100B08B99 /* MediaPlayer.framework */; };
 		6FF376372345DF2A00B08B99 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF376362345DF2A00B08B99 /* JavaScriptCore.framework */; };
@@ -88,7 +87,6 @@
 		6F5452242355F82C004BBB79 /* CustomPlayerInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPlayerInterface.swift; sourceTree = "<group>"; };
 		6F5452252355F82C004BBB79 /* CVACustomSDKIntegrationRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVACustomSDKIntegrationRef.swift; sourceTree = "<group>"; };
 		6F5452272355F82C004BBB79 /* CVAAVPlayerIntegrationRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVAAVPlayerIntegrationRef.swift; sourceTree = "<group>"; };
-		6FF3762A2343848700B08B99 /* CVACustomPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVACustomPlayer.swift; sourceTree = "<group>"; };
 		6FF376302345DB8200B08B99 /* OoyalaSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OoyalaSDK.framework; path = 3rdparty/Ooyala/4.43/OoyalaSDK.framework; sourceTree = "<group>"; };
 		6FF376322345DF1C00B08B99 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6FF376342345DF2100B08B99 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -194,7 +192,6 @@
 		5176E70823262E5E00E1946D /* PlayerManager */ = {
 			isa = PBXGroup;
 			children = (
-				6FF376292343848700B08B99 /* CustomPlayer */,
 				5176E70F23262E5E00E1946D /* AVPlayer */,
 				5176E70923262E5E00E1946D /* CVAPlayerEventListener.swift */,
 				5176E70A23262E5E00E1946D /* CVAPlayerEventNotifier.swift */,
@@ -285,15 +282,6 @@
 				6F5452272355F82C004BBB79 /* CVAAVPlayerIntegrationRef.swift */,
 			);
 			path = CVAAVPlayerIntegrationRef;
-			sourceTree = "<group>";
-		};
-		6FF376292343848700B08B99 /* CustomPlayer */ = {
-			isa = PBXGroup;
-			children = (
-				6FF3762A2343848700B08B99 /* CVACustomPlayer.swift */,
-			);
-			name = CustomPlayer;
-			path = "../../../../../Temp/conviva-ios-reference-app/Source/conviva-ios-integration-refkit/Source/PlayerManager/CustomPlayer";
 			sourceTree = "<group>";
 		};
 		6FF3CDA023587F3B00E5DA89 /* Utils */ = {
@@ -493,7 +481,6 @@
 				5176E72923262E5E00E1946D /* CVAPlayerResponseHandler.swift in Sources */,
 				6F54522A2355F82C004BBB79 /* CVACustomSDKIntegrationRef.swift in Sources */,
 				5176E72D23262E5E00E1946D /* CVAPlayerEvents.swift in Sources */,
-				6FF3762B2343848800B08B99 /* CVACustomPlayer.swift in Sources */,
 				6F5452282355F82C004BBB79 /* CVABaseIntegrationRef.swift in Sources */,
 				5176E73023262E5E00E1946D /* CVAAssetKeys.swift in Sources */,
 				5176E72E23262E5E00E1946D /* CVALiveAsset.swift in Sources */,
