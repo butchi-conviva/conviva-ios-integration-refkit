@@ -14,6 +14,7 @@ FOUNDATION_EXPORT double ConvivaIntegrationRefKitVersionNumber;
 //! Project version string for ConvivaIntegrationRefKit.
 FOUNDATION_EXPORT const unsigned char ConvivaIntegrationRefKitVersionString[];
 
+
 // In this header, you should import all the public headers of your framework using statements like #import <ConvivaIntegrationRefKit/PublicHeader.h>
 
 

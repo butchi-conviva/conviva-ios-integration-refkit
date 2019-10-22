@@ -66,9 +66,6 @@ typedef NS_ENUM(NSInteger, ErrorSeverity) {
 /// @brief Set the current bitrate
 - (void)setBitrate:(int)bitrateKbps;
 
-/// @brief Set the CDN Server IP
-- (void)setCDNServerIP:(NSString *)cdnServerIP;
-
 /// @brief Set the Link Encryption
 - (void)setLinkEncryption:(NSString*)newLinkEncryption;
 

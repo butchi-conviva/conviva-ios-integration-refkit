@@ -14,7 +14,8 @@ import ConvivaCore
 import ConvivaAVFoundation
 
 private let kConviva_Key = Conviva.Credentials.customerKey
-private let kConviva_Gateway_URL = Conviva.Credentials.gatewayURL
+private let kConviva_Gateway_URL_Test = Conviva.Credentials.gatewayURLTest
+private let kConviva_Gateway_URL_Prod = Conviva.Credentials.gatewayURLProd
 
 /// A class used to keep all methods used for Conviva AVPlayer integration.
 class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
@@ -39,52 +40,61 @@ class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
      */
     private var convivaMetadata : ConvivaContentInfo!
     
-    // MARK: - Conviva setup
-    
+    // MARK: Conviva Setup - Functions/variables responsible for Conviva monitoring setup.
+
     /**
      Used to setup Conviva monitoring.
      */
-    static func setupConvivaMonitoring() {
+    static func initialize() {
         saveConvivaCredentials()
         var clientSettings = Dictionary <String, Any>()
-        clientSettings["gatewayUrl"] = kConviva_Gateway_URL
+        
+        #if DEBUG
+        clientSettings[Conviva.Credentials.gatewayURLKey] = kConviva_Gateway_URL_Test
         LivePass.toggleTraces(true)
+        #else
+        clientSettings[Conviva.Credentials.gatewayURLKey] = kConviva_Gateway_URL_Prod
+        LivePass.toggleTraces(true)
+        #endif
         LivePass.initWithCustomerKey(kConviva_Key, andSettings: clientSettings)
     }
     
     /**
      Used to cleanup Conviva monitoring.
      */
-    static func cleanupConvivaMonitoring() {
+    static func cleanup() {
         LivePass.cleanup()
     }
     
-    // MARK: - ConvivaBase : Session lifecycle functions
-    
+    // MARK: Conviva session management - Functions/variables responsible for Conviva session management.
+
     /**
      Used to create a Conviva monitoring session.
-     
      - Parameters:
-        - player: The streamer instance which needs to be monitored
-        - metadata: The initial set of metadata values related to a video playback
+        - player: The streamer instance which needs to be monitored.
+        - metadata: The initial set of metadata values related to a video playback.
+                    If the initial values are not available, this paramter can be nil as well.
+                    If the values need to be updated later, please use updateContentMetadata.
+                    Visit https://community.conviva.com/site/global/platforms/ios/av_player/index.gsp#updateContentMetadata
      */
-    func createSession(player: Any, metadata: [String : Any]) {
+    func createSession(player: Any, metadata: [String : Any]?) {
         self.videoPlayer = player as? AVPlayer
-        self.metadataDict = metadata
+        self.metadataDict = metadata ?? ["" : ""]
 
-        let metadata : [String : Any] = [Conviva.Keys.ConvivaContentInfo.assetName : self.metadataDict[Conviva.Keys.Metadata.title] as Any,
-                                                Conviva.Keys.ConvivaContentInfo.viewerId : self.metadataDict[Conviva.Keys.Metadata.userId] as Any,
-                                                Conviva.Keys.ConvivaContentInfo.playerName : self.metadataDict[Conviva.Keys.Metadata.playerName] as Any,
-                                                Conviva.Keys.ConvivaContentInfo.isLive : self.metadataDict[Conviva.Keys.Metadata.live] as Any,
-                                                Conviva.Keys.ConvivaContentInfo.contentLength : self.metadataDict[Conviva.Keys.Metadata.duration] as Any,
-                                                Conviva.Keys.ConvivaContentInfo.encodedFramerate : self.metadataDict[Conviva.Keys.Metadata.efps] as Any,
-                                                Conviva.Keys.ConvivaContentInfo.tags: self.metadataDict[Conviva.Keys.Metadata.tags] as Any]
+        let metadata : [String : Any] = [
+            Conviva.Keys.ConvivaContentInfo.assetName : self.metadataDict[Conviva.Keys.Metadata.title] as Any,
+            Conviva.Keys.ConvivaContentInfo.viewerId : self.metadataDict[Conviva.Keys.Metadata.userId] as Any,
+            Conviva.Keys.ConvivaContentInfo.playerName : self.metadataDict[Conviva.Keys.Metadata.playerName] as Any,
+            Conviva.Keys.ConvivaContentInfo.isLive : self.metadataDict[Conviva.Keys.Metadata.live] as Any,
+            Conviva.Keys.ConvivaContentInfo.contentLength : self.metadataDict[Conviva.Keys.Metadata.duration] as Any,
+            Conviva.Keys.ConvivaContentInfo.encodedFramerate : self.metadataDict[Conviva.Keys.Metadata.efps] as Any,
+            Conviva.Keys.ConvivaContentInfo.tags: self.metadataDict[Conviva.Keys.Metadata.tags] as Any]
         
         if let session = LivePass.createSession(withStreamer: self.videoPlayer, andConvivaContentInfo: getConvivaContentInfoFromMetadata(metadata)) {
             self.convivaVideoSession = session
         }
         else{
-            print("Conviva Error : failed to create session")
+            print(Conviva.Errors.initializationError)
         }
     }
 
@@ -100,15 +110,23 @@ class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
     
     /**
      Used to attach a streamer instance which can be monitored.
+     - Parameters:
+        - player: The streamer instance which needs to be monitored. For ConvivaAVFounation integration, player must be an AVPlayer instance
      */
-    func attachPlayer() {
-        if(self.videoPlayer != nil && convivaVideoSession != nil){
-            convivaVideoSession.attachStreamer(self.videoPlayer)
+    func attachPlayer(player: Any) {
+        if player is AVPlayer {
+            if(self.videoPlayer != nil && convivaVideoSession != nil){
+                convivaVideoSession.attachStreamer(self.videoPlayer)
+            }
+        }
+        else {
+            print(Conviva.Errors.typeNotAVPlayer)
         }
     }
     
     /**
      Used to detach the earlier attached streamer instance.
+     It should be called when a streamer object has been attached using attachPlayer earlier.
      */
     func detachPlayer() {
         if(convivaVideoSession != nil){
@@ -116,38 +134,51 @@ class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
         }
     }
     
-    // MARK: - ConvivaBase : Conviva advanced metadata and events functions
-    
+    // MARK: Conviva advanced metadata - Functions/variables responsible for managing advanced metadata & events.
+
     /**
      Used to send a custom event e.g. PodStart or PodEnd events to Conviva.
+     You may send a custom Player Insight event that is or is not associated with a monitoring session.
+     - Parameters:
+        - eventName: Event name of type String
+        - eventAttributes: Event Attributes of type Dictionary
      */
-    func sendCustomEvent() {
+    func sendCustomEvent(eventName: String, eventAttributes : [String : String]) {
         if (convivaVideoSession != nil){
-            self.convivaVideoSession.sendEvent( "Conviva.PodStart", withAttributes: [
-                "podDuration" : "60",
-                "podPosition" : "Pre-roll",
-                "podIndex" : "1",
-                "absoluteIndex" :  "1"
-                ]
-            )
+            self.convivaVideoSession.sendEvent(eventName, withAttributes: eventAttributes)
         }
+        
+        /*
+         Example:
+         eventName: "Conviva.PodStart"
+         eventAttributes: [
+            "podDuration" : "60",
+            "podPosition" : "Pre-roll",
+            "podIndex" : "1",
+            "absoluteIndex" :  "1"
+         ]
+         */
     }
     
     /**
      Used to send a custom error to Conviva.
+     - Parameters:
+        - error: An error instance of type Error. The localizedDescription of this error is sent to Conviva.
      */
-    func sendCustomError() {
+    func sendCustomError(error : Error) {
         if (convivaVideoSession != nil){
-            convivaVideoSession.reportError("Fatal Error", errorType: ErrorSeverity.SEVERITY_FATAL)
+            convivaVideoSession.reportError(error.localizedDescription, errorType: ErrorSeverity.SEVERITY_FATAL)
         }
     }
     
     /**
      Used to send a custom warning to Conviva.
+     - Parameters:
+        - warning: An error instance of type Error. The localizedDescription of this error is sent to Conviva.
      */
-    func sendCustomWarning() {
+    func sendCustomWarning(warning : Error) {
         if (convivaVideoSession != nil){
-            convivaVideoSession.reportError("Warning", errorType: ErrorSeverity.SEVERITY_WARNING)
+            convivaVideoSession.reportError(warning.localizedDescription, errorType: ErrorSeverity.SEVERITY_WARNING)
         }
     }
     
@@ -183,17 +214,25 @@ class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
     }
 
     // MARK: - Private methods - Conviva content metadata
+    
+    /**
+     Used to save Conviva credentials (gateway URL and customer key) to UserDefaults.
+     */
     static private func saveConvivaCredentials() {
-        UserDefaults.setConvivaGatewayURL(gatewayURL: Conviva.Credentials.gatewayURL)
+        #if DEBUG
+        UserDefaults.setConvivaGatewayURL(gatewayURL: Conviva.Credentials.gatewayURLTest)
+        #else
+        UserDefaults.setConvivaGatewayURL(gatewayURL: Conviva.Credentials.gatewayURLProd)
+        #endif
         UserDefaults.setConvivaCustomerKey(customerKey: Conviva.Credentials.customerKey)
     }
 
     /**
      Used to map customer provided metadata values to ConvivaContentInfo instance.
      - Parameters:
-        - metadata: A Disctionary containing customer provided metadata
+        - metadata: A Dictionary containing customer provided metadata
      
-     - Returns: Metadata values mapped to ConvivaContentInfo instance
+     - Returns: A ConvivaContentInfo instance which has mapped customer provided metadata values.
      */
     private func getConvivaContentInfoFromMetadata(_ metadata : Dictionary<String, Any>) -> ConvivaContentInfo {
         convivaMetadata = ConvivaContentInfo.createInfoForLightSession(withAssetName: metadataDict[Conviva.Keys.ConvivaContentInfo.assetName] as? String ) as? ConvivaContentInfo
