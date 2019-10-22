@@ -30,10 +30,11 @@ public class CVAPlayerManager: NSObject {
 
 extension CVAPlayerManager : CVAPlayerCmdExecutor {
   
-  public func handleEvent(_ eventName: String!, info: [AnyHashable : Any]!) {
+  public func handleEvent(_ eventName: String!, info: [AnyHashable : Any]?) {
     
     let event = CVAPlayerCommand(rawValue: eventName);
-    let asset = CVAAsset(data:info as! [String:Any]);
+    let assetInfo = info?["asset"] ?? nil;
+    let asset = (nil != assetInfo ) ? CVAAsset(data: assetInfo as? [String:Any]) : CVAAsset(data: nil);
     var status:CVAPlayerStatus = .failed;
     
     if let _ = event{
@@ -49,7 +50,7 @@ extension CVAPlayerManager : CVAPlayerCmdExecutor {
           status = playerCommandHandler.pauseAsset(asset: asset);
         
         case CVAPlayerCommand.seek:
-          status = playerCommandHandler.seekAsset(asset: asset, info : info);
+          status = playerCommandHandler.seekAsset(asset: asset, info : info!);
         
         case CVAPlayerCommand.stop:
           status = playerCommandHandler.stopAssetPlayback(asset: asset);

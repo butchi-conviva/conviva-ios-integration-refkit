@@ -16,6 +16,31 @@ public class CVAAVPlayer: NSObject {
     var asset : CVAAsset!
     var responseHandler:CVAPlayerResponseHandler?;
     var timeObserverToken: Any?
+  
+  private func initializeAVPlayer() {
+    
+    guard nil != self.asset else {
+        Swift.print("Empty asset info");
+        return;
+    }
+    
+    guard  nil != self.asset?.playbackURI else {
+        Swift.print("Empty asset url");
+        return;
+    }
+    
+    let videoURL = self.asset?.playbackURI;
+    
+    avPlayer = AVPlayer(url: videoURL! as URL)
+    self.avPlayerLayer = AVPlayerLayer(player: avPlayer)
+    
+    avPlayer!.play()
+    addPeriodicTimeObserver();
+    
+    DispatchQueue.main.async {
+        self.responseHandler?.onPlayerCommandComplete(command: .play, status: .success, info: [kAVPlayerLayer:self.avPlayerLayer]);
+    }
+  }  
 }
 
 // Following extension implements CVAPlayerCommandHandler functions

@@ -9,22 +9,33 @@
 import Foundation
 
 public class CVAAsset: NSObject {
-  
-  private(set) var title:String?
-  private(set) var desc:String?
-  private(set) var callsign:String?
-  private(set) var thumbnail:String?
-  private(set) var playbackURI:String?
-  
-  init(data:Dictionary<String,Any>) {
-   
-    self.title = (data[CVAAssetKeys.title] as? String) ?? "NA";
-    self.desc = (data[CVAAssetKeys.desc] as? String) ?? "NA";
-    self.callsign = (data[CVAAssetKeys.callsign] as? String) ?? "NA";
-    self.thumbnail = (data[CVAAssetKeys.thumbnail] as? String) ?? "NA";
-    self.playbackURI = (data[CVAAssetKeys.playbackURI] as? String) ?? "NA";
     
-    super.init()
+    //static let mediaURL = NSURL(string: "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8")
+    static let mediaURL = NSURL(string: "http://localhost/sample/index.m3u8")
+    static let defaultCDN = "akamai"
     
-  }
+    private(set) var title:String?
+    private(set) var desc:String?
+    private(set) var callsign:String?
+    private(set) var thumbnail:String?
+    private(set) var playbackURI:NSURL?
+    private(set) var cdn:String?
+    
+    init(data:Dictionary<String,Any>?) {
+        
+        if let actualData = data {
+            
+            self.title = (actualData[CVAAssetKeys.title] as? String) ?? "NA";
+            self.desc = (actualData[CVAAssetKeys.desc] as? String) ?? "NA";
+            self.callsign = (actualData[CVAAssetKeys.callsign] as? String) ?? "NA";
+            self.thumbnail = (actualData[CVAAssetKeys.thumbnail] as? String) ?? "NA";
+            
+            let mediaURLString = (actualData[CVAAssetKeys.playbackURI] as? String);
+            self.playbackURI = (nil != mediaURLString) ? NSURL(string: mediaURLString!) : CVAAsset.mediaURL;
+            
+            self.cdn = (actualData[CVAAssetKeys.cdn] as? String) ?? CVAAsset.defaultCDN;
+        }
+        
+        super.init()
+    }
 }
