@@ -1,11 +1,11 @@
 platform :ios, '9.0'
 
-target 'ConvivaMediaPlayerKit' do
-  # Pods for ConvivaMediaPlayerKit
+target 'ConvivaIntegrationRefKit' do
+  # Pods for ConvivaIntegrationRefKit
   
   pod 'ConvivaAVFoundation', '3.0.6'
 
-  target 'ConvivaMediaPlayerKitTests' do
+  target 'ConvivaIntegrationRefKitTests' do
     inherit! :search_paths
     # Pods for testing
   end
