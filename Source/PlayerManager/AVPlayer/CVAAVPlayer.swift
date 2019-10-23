@@ -9,6 +9,8 @@
 import Foundation
 import AVFoundation
 
+/// A class which is used to implement AVPlayer behaviour. Ideally, this class will not have any Conviva funnctionality in itself and will depend on CVAPlayerManager for the same.
+
 public class CVAAVPlayer: NSObject {
     
     /**
@@ -22,9 +24,9 @@ public class CVAAVPlayer: NSObject {
     var avPlayerLayer : AVPlayerLayer?
     
     /**
-     The CVAAVPlayerIntegrationRef instance which takes care of all Conviva implementation.
+     The CVAAVPlayerManager instance which takes care of all Conviva implementation.
      */
-    var convivaAVPlayerIntegrationRef : CVAAVPlayerIntegrationRef!
+    var avPlayerManager : CVAAVPlayerManagerProtocol!
     
     /**
      The CVAAsset instance which is used to fetch asset info.
@@ -42,10 +44,44 @@ public class CVAAVPlayer: NSObject {
     var timeObserverToken: Any?
     
     /**
-     The CVAAVPlayer class initializer. Conviva initialization should happen here.
+     The CVAAVPlayer class initializer. CVAAVPlayerManager's implementation responsible for Conviva initialization should happen here.
      */
     public override init() {
         super.init()
-        CVAAVPlayerIntegrationRef.initialize()
+
     }
+    
+    /**
+     This function initializes the AVPlayer.
+     */
+    func initializeAVPlayer() {
+        
+        guard nil != self.asset else {
+            Swift.print("Empty asset info");
+            return;
+        }
+        
+        //        guard nil != self.asset?.playbackURI else {
+        //            Swift.print("Empty asset url");
+        //            return;
+        //        }
+        //        let videoURL = self.asset?.playbackURI;
+        
+        let videoURL = NSURL(string: Conviva.URLs.devimagesURL)
+        
+        avPlayer = AVPlayer(url: videoURL! as URL)
+        self.avPlayerLayer = AVPlayerLayer(player: avPlayer)
+        
+        addPeriodicTimeObserver();
+        registerAppStateChangeNotifications()
+        
+        if let avPlayer = avPlayer {
+            registerPlayerNotification(avPlayer)
+        }
+        
+        DispatchQueue.main.async {
+            self.responseHandler?.onPlayerCommandComplete(command: .play, status: .success, info: [kAVPlayerLayer:self.avPlayerLayer as Any]);
+        }
+    }
+
 }

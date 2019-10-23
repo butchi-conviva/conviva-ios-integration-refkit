@@ -75,6 +75,8 @@ struct Conviva {
             static let appBuild = "appBuild"
             static let favouriteTeam = "favouriteTeam"
         }
+        
+        static let infoDictionary = "CFBundleShortVersionString"
     }
 
     /// A struct used to store list of values for dictionaries used in the app.
