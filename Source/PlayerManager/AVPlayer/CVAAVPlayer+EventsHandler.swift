@@ -91,7 +91,7 @@ extension CVAAVPlayer {
      In this situation Conviva session should be cleaned up.
      */
     @objc private func didFinishPlaying(_ sender: Notification) -> Void {
-        convivaAVPlayerIntegrationRef.cleanupSession()
+        avPlayerManager.cleanupSession()
     }
     
     /**
@@ -99,7 +99,7 @@ extension CVAAVPlayer {
      In this situation Conviva session should be cleaned up.
      */
     @objc private func didFailPlaying(_ sender: Notification) -> Void {
-        convivaAVPlayerIntegrationRef.cleanupSession()
+        avPlayerManager.cleanupSession()
     }
     
     /**
@@ -109,11 +109,13 @@ extension CVAAVPlayer {
      */
     @objc private func didChangeAppState(_ sender: Notification) -> Void {
         if (sender.name == UIApplication.didEnterBackgroundNotification) {
-            convivaAVPlayerIntegrationRef.cleanupSession()
+            avPlayerManager.cleanupSession()
         }
         if (sender.name == UIApplication.willEnterForegroundNotification) {
-            convivaAVPlayerIntegrationRef.createSession(player: avPlayer as Any, metadata: getMetadata(asset: self.asset))
-            avPlayer!.play()
+            if avPlayer != nil {
+                avPlayerManager.createSession(player: avPlayer, asset: self.asset)
+                avPlayer?.play()
+            }
         }
     }
     
@@ -124,7 +126,7 @@ extension CVAAVPlayer {
         if keyPath == "rate" {
             if let avPlayer = avPlayer {
                 if avPlayer.rate > 0.01 {
-                    // avPlayer is playing
+                    // avPlayer is playing. Cam 
                 }
                 else{
                     // avPlayer is paused

@@ -9,9 +9,8 @@
 import Foundation
 import AVFoundation
 
-/// A protocol which is used to implement a bridge between AVPlayer and Conviva.
-/// This protocol will contain the function requirements for handling and calling Conviva APIs.
-/// CVAAVPlayer will call these funcitons to interact with Conviva.
+/// A protocol which is used to declare requirements for implementing a bridge between AVPlayer and Conviva.
+/// CVAAVPlayer will call these functions to interact with Conviva.
 
 protocol CVAAVPlayerManagerProtocol {
     /**
@@ -19,56 +18,72 @@ protocol CVAAVPlayerManagerProtocol {
      Initialization of CVAAVPlayerIntegrationRef should happen here.
      */
     init()
-
-    /**
-     The CVAAVPlayerIntegrationRef instance which is used to call all of Conviva's behaviour.
-     */
-    var convivaAVPlayerIntegrationRef : CVAAVPlayerIntegrationRef! {get}
     
     /**
-     This function calls CVAAVPlayerIntegrationRef's createSession function.
+     This function is used to call CVAAVPlayerIntegrationRef's createSession function.
      */
     func createSession(player: AVPlayer?, asset : CVAAsset)
 
     /**
-     This function calls CVAAVPlayerIntegrationRef's cleanupSession function.
+     This function is used to call CVAAVPlayerIntegrationRef's cleanupSession function.
      */
     func cleanupSession()
 
     /**
-     This function calls CVAAVPlayerIntegrationRef's seekStart function.
+     This function is used to call CVAAVPlayerIntegrationRef's seekStart function.
      */
     func seekStart(position:NSInteger)
     
     /**
-     This function calls CVAAVPlayerIntegrationRef's seekEnd function.
+     This function is used to call CVAAVPlayerIntegrationRef's seekEnd function.
      */
     func seekEnd(position:NSInteger)
 }
 
-/// A class which is used to implement CVAPlayerManagerProtocol functions.
+/// A class which is used to implement CVAPlayerManagerProtocol requirements for implementing a bridge between AVPlayer and Conviva.
+/// This class will contain the functional implementation for handling and calling Conviva APIs.
+/// CVAAVPlayer will call these functions to interact with Conviva.
 
 struct CVAAVPlayerManager : CVAAVPlayerManagerProtocol {
     
-    var convivaAVPlayerIntegrationRef: CVAAVPlayerIntegrationRef!
+    /**
+     The CVAAVPlayerIntegrationRef instance which is used to call all of Conviva's behaviour.
+     */
+    var convivaAVPlayerIntegrationRef : CVAAVPlayerIntegrationRef!
 
-    public init() {
+    /**
+     The CVAAVPlayerManager class initializer.
+     Initialization of CVAAVPlayerIntegrationRef should happen here.
+     */
+    init() {
         CVAAVPlayerIntegrationRef.initialize()
         convivaAVPlayerIntegrationRef = CVAAVPlayerIntegrationRef()
     }
     
+    /**
+     This function is used to call CVAAVPlayerIntegrationRef's createSession function.
+     */
     func createSession(player: AVPlayer?, asset : CVAAsset) {
         convivaAVPlayerIntegrationRef.createSession(player: player as Any, metadata: getMetadata(asset: asset))
     }
 
+    /**
+     This function is used to call CVAAVPlayerIntegrationRef's cleanupSession function.
+     */
     func cleanupSession() {
         convivaAVPlayerIntegrationRef.cleanupSession()
     }
 
+    /**
+     This function is used to call CVAAVPlayerIntegrationRef's seekStart function.
+     */
     func seekStart(position:NSInteger) {
         convivaAVPlayerIntegrationRef.seekStart(position: position);
     }
     
+    /**
+     This function is used to call CVAAVPlayerIntegrationRef's seekEnd function.
+     */
     func seekEnd(position:NSInteger) {
         convivaAVPlayerIntegrationRef.seekEnd(position: position);
     }
@@ -101,7 +116,7 @@ extension CVAAVPlayerManager {
                 Conviva.Keys.Metadata.assetID : Conviva.Values.Metadata.assetID,
                 Conviva.Keys.Metadata.carrier : Conviva.Values.Metadata.carrier,
                 Conviva.Keys.Metadata.deviceID : UIDevice.current.identifierForVendor?.uuidString as Any,
-                Conviva.Keys.Metadata.appBuild : Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as Any,
+                Conviva.Keys.Metadata.appBuild : Bundle.main.object(forInfoDictionaryKey: Conviva.Keys.infoDictionary) as Any,
                 Conviva.Keys.Metadata.favouriteTeam : UserDefaults.getFavouriteTeamName() as Any]
     }
 }
