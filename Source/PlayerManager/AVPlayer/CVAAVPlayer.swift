@@ -61,13 +61,13 @@ public class CVAAVPlayer: NSObject {
             return;
         }
         
-        //        guard nil != self.asset?.playbackURI else {
-        //            Swift.print("Empty asset url");
-        //            return;
-        //        }
-        //        let videoURL = self.asset?.playbackURI;
+        guard nil != self.asset?.playbackURI else {
+            Swift.print("Empty asset url");
+            return;
+        }
+        let videoURL = self.asset?.playbackURI;
         
-        let videoURL = NSURL(string: Conviva.URLs.devimagesURL)
+        //let videoURL = NSURL(string: Conviva.URLs.devimagesURL)
         
         avPlayer = AVPlayer(url: videoURL! as URL)
         self.avPlayerLayer = AVPlayerLayer(player: avPlayer)
