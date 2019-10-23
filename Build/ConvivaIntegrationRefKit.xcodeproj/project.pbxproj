@@ -35,7 +35,7 @@
 		6F5452292355F82C004BBB79 /* CustomPlayerInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5452242355F82C004BBB79 /* CustomPlayerInterface.swift */; };
 		6F54522A2355F82C004BBB79 /* CVACustomSDKIntegrationRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5452252355F82C004BBB79 /* CVACustomSDKIntegrationRef.swift */; };
 		6F54522B2355F82C004BBB79 /* CVAAVPlayerIntegrationRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5452272355F82C004BBB79 /* CVAAVPlayerIntegrationRef.swift */; };
-		6F7C6702236040AF009942C1 /* CVAAVPlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C6701236040AF009942C1 /* CVAAVPlayerManager.swift */; };
+		6F7C6702236040AF009942C1 /* CVAPlayerEventsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C6701236040AF009942C1 /* CVAPlayerEventsManager.swift */; };
 		6FF376332345DF1C00B08B99 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF376322345DF1C00B08B99 /* SystemConfiguration.framework */; };
 		6FF376352345DF2100B08B99 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF376342345DF2100B08B99 /* MediaPlayer.framework */; };
 		6FF376372345DF2A00B08B99 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF376362345DF2A00B08B99 /* JavaScriptCore.framework */; };
@@ -90,7 +90,7 @@
 		6F5452242355F82C004BBB79 /* CustomPlayerInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPlayerInterface.swift; sourceTree = "<group>"; };
 		6F5452252355F82C004BBB79 /* CVACustomSDKIntegrationRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVACustomSDKIntegrationRef.swift; sourceTree = "<group>"; };
 		6F5452272355F82C004BBB79 /* CVAAVPlayerIntegrationRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVAAVPlayerIntegrationRef.swift; sourceTree = "<group>"; };
-		6F7C6701236040AF009942C1 /* CVAAVPlayerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVAAVPlayerManager.swift; sourceTree = "<group>"; };
+		6F7C6701236040AF009942C1 /* CVAPlayerEventsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVAPlayerEventsManager.swift; sourceTree = "<group>"; };
 		6FF376302345DB8200B08B99 /* OoyalaSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OoyalaSDK.framework; path = 3rdparty/Ooyala/4.43/OoyalaSDK.framework; sourceTree = "<group>"; };
 		6FF376322345DF1C00B08B99 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6FF376342345DF2100B08B99 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -173,7 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				6F5452212355F82C004BBB79 /* CVAIntegrationRef */,
-				6F7C6700236040AF009942C1 /* CVAPlayerManager */,
+				6F7C6700236040AF009942C1 /* CVAPlayerEventsManager */,
 				5176E70823262E5E00E1946D /* PlayerManager */,
 				513DFA70231FE30E00F30511 /* ConvivaIntegrationRefKit.h */,
 				513DFA71231FE30E00F30511 /* Info.plist */,
@@ -295,13 +295,13 @@
 			path = CVAAVPlayerIntegrationRef;
 			sourceTree = "<group>";
 		};
-		6F7C6700236040AF009942C1 /* CVAPlayerManager */ = {
+		6F7C6700236040AF009942C1 /* CVAPlayerEventsManager */ = {
 			isa = PBXGroup;
 			children = (
-				6F7C6701236040AF009942C1 /* CVAAVPlayerManager.swift */,
+				6F7C6701236040AF009942C1 /* CVAPlayerEventsManager.swift */,
 			);
-			name = CVAPlayerManager;
-			path = ../../Source/CVAPlayerManager;
+			name = CVAPlayerEventsManager;
+			path = ../../Source/CVAPlayerEventsManager;
 			sourceTree = "<group>";
 		};
 		B8A7C77E4680DB5E76B6499A /* Pods */ = {
@@ -481,7 +481,7 @@
 				5176E72C23262E5E00E1946D /* CVAPlayerCmdExecutor.swift in Sources */,
 				5176E73223262E5E00E1946D /* Constants.swift in Sources */,
 				5176E73123262E5E00E1946D /* CVAOnDemandAsset.swift in Sources */,
-				6F7C6702236040AF009942C1 /* CVAAVPlayerManager.swift in Sources */,
+				6F7C6702236040AF009942C1 /* CVAPlayerEventsManager.swift in Sources */,
 				6FF3CDA223587F4700E5DA89 /* Utilities.swift in Sources */,
 				5176E72423262E5E00E1946D /* CVAPlayerConstants.swift in Sources */,
 				5176E72523262E5E00E1946D /* CVAPlayerContentViewProvider.swift in Sources */,

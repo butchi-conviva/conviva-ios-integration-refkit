@@ -91,7 +91,7 @@ extension CVAAVPlayer {
      In this situation Conviva session should be cleaned up.
      */
     @objc private func didFinishPlaying(_ sender: Notification) -> Void {
-        avPlayerManager.cleanupSession()
+        avPlayerManager.didStopPlayback()
     }
     
     /**
@@ -99,21 +99,21 @@ extension CVAAVPlayer {
      In this situation Conviva session should be cleaned up.
      */
     @objc private func didFailPlaying(_ sender: Notification) -> Void {
-        avPlayerManager.cleanupSession()
+        avPlayerManager.didStopPlayback()
     }
     
     /**
      This function is used to implement the behaviour when application switches between Background - Foreground.
      When the app goes to Background, Conviva session should be cleaned up.
-     When the app goes to Foreground, Conviva session should be created.
+     When the app goes to Foreground, a new Conviva session should be created.
      */
     @objc private func didChangeAppState(_ sender: Notification) -> Void {
         if (sender.name == UIApplication.didEnterBackgroundNotification) {
-            avPlayerManager.cleanupSession()
+            avPlayerManager.didEnterBackground()
         }
         if (sender.name == UIApplication.willEnterForegroundNotification) {
             if avPlayer != nil {
-                avPlayerManager.createSession(player: avPlayer, asset: self.asset)
+                avPlayerManager.willEnterForeground(player: avPlayer as Any, assetInfo: self.asset)
                 avPlayer?.play()
             }
         }
@@ -126,10 +126,10 @@ extension CVAAVPlayer {
         if keyPath == "rate" {
             if let avPlayer = avPlayer {
                 if avPlayer.rate > 0.01 {
-                    // avPlayer is playing. Cam 
+                    // avPlayer is playing. Can be used later to update the UI etc.
                 }
                 else{
-                    // avPlayer is paused
+                    // avPlayer is paused. Can be used later to update the UI etc.
                 }
             }
         }
