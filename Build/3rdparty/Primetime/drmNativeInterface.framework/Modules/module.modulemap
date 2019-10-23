@@ -1,4 +1,0 @@
-framework module drmNativeInterface {
-    umbrella header "DRMinterface.h"
-    module * { export * } 
-}

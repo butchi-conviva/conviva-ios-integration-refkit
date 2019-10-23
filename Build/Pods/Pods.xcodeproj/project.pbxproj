@@ -7,15 +7,6 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		2855C12C850AB4D5B2A81AA36D2665EB /* OoyalaSDK */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = D9C8B51DEE6810BF834503448C8532EA /* Build configuration list for PBXAggregateTarget "OoyalaSDK" */;
-			buildPhases = (
-			);
-			dependencies = (
-			);
-			name = OoyalaSDK;
-		};
 		32C232B114B5AF008FBC07D138BC6F09 /* ConvivaCore */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 00E3681459AF2A65BD0D0C9A196AA9F0 /* Build configuration list for PBXAggregateTarget "ConvivaCore" */;
@@ -38,17 +29,17 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		8D0ABABD41ED0F1E8CA76FAA55CB0F95 /* Pods-ConvivaIntegrationRefKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 007A52011D52FCAB717C00E9724F5A67 /* Pods-ConvivaIntegrationRefKit-dummy.m */; };
 		B491D3C6DB670F651E34A3650E3FA149 /* Pods-ConvivaIntegrationRefKitTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6314DC0A19918378839FAD8E230B80DB /* Pods-ConvivaIntegrationRefKitTests-dummy.m */; };
+		CDD100872DFC459911B0D01C38F50DC3 /* Pods-ConvivaIntegrationRefKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 007A52011D52FCAB717C00E9724F5A67 /* Pods-ConvivaIntegrationRefKit-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		699D5B69C01585DFF4B4DE05B0120384 /* PBXContainerItemProxy */ = {
+		42383E57AB0C24423C2AF1E8AB8ECD8D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 2855C12C850AB4D5B2A81AA36D2665EB;
-			remoteInfo = OoyalaSDK;
+			remoteGlobalIDString = 69449D1FDE1513B2F0493580FFE4A741;
+			remoteInfo = ConvivaAVFoundation;
 		};
 		7FDCA3EE16F0B284DC6700D2609FBF35 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -57,7 +48,7 @@
 			remoteGlobalIDString = 32C232B114B5AF008FBC07D138BC6F09;
 			remoteInfo = ConvivaCore;
 		};
-		96CA180925BB1B2516CBE7196427A630 /* PBXContainerItemProxy */ = {
+		B7E2E780282868540E28E30E853FF7F6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -71,35 +62,26 @@
 			remoteGlobalIDString = 5246345DC03BC404AC81CCE8F9B9AF2E;
 			remoteInfo = "Pods-ConvivaIntegrationRefKit";
 		};
-		F68C90FA16955304EEDAC7BA7CA87495 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 69449D1FDE1513B2F0493580FFE4A741;
-			remoteInfo = ConvivaAVFoundation;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		007A52011D52FCAB717C00E9724F5A67 /* Pods-ConvivaIntegrationRefKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ConvivaIntegrationRefKit-dummy.m"; sourceTree = "<group>"; };
-		01EFBBA186DBB5F709C8BD1FF32E5918 /* OoyalaSDK.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = OoyalaSDK.xcconfig; sourceTree = "<group>"; };
 		0F3B41BFBD9C71B95579EA788D42AFD5 /* Pods-ConvivaIntegrationRefKit-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ConvivaIntegrationRefKit-acknowledgements.plist"; sourceTree = "<group>"; };
 		1B281FBB5B5F24F994CCA02BF1510600 /* Pods-ConvivaIntegrationRefKitTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ConvivaIntegrationRefKitTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		246864496908BC814D3E753632491F5F /* Pods-ConvivaIntegrationRefKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ConvivaIntegrationRefKit.release.xcconfig"; sourceTree = "<group>"; };
-		38D252255CE0941089DFE0ED1BA0C2C1 /* ConvivaAVFoundation.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ConvivaAVFoundation.xcconfig; sourceTree = "<group>"; };
 		3D049C66EAB4D7BEDB651AA7B4930382 /* Pods-ConvivaIntegrationRefKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ConvivaIntegrationRefKit.debug.xcconfig"; sourceTree = "<group>"; };
 		43CEA8CC18E0159A8E06A257082290FD /* Pods-ConvivaIntegrationRefKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ConvivaIntegrationRefKitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		45BEAE33F9B3CD13CF84F96A36BB260A /* Pods-ConvivaIntegrationRefKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ConvivaIntegrationRefKitTests.release.xcconfig"; sourceTree = "<group>"; };
 		4623584A43B5191D939ED18AD8514225 /* libPods-ConvivaIntegrationRefKitTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-ConvivaIntegrationRefKitTests.a"; path = "libPods-ConvivaIntegrationRefKitTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5F42294D0D028E7BB8CDF5684AEF5D8B /* OoyalaSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OoyalaSDK.framework; path = "vendor/Ooyala/OoyalaSDK-iOS/OoyalaSDK.framework"; sourceTree = "<group>"; };
+		514E07A44F23519E67646861D32122B5 /* ConvivaAVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ConvivaAVFoundation.framework; path = Framework/iOS/ConvivaAVFoundation.framework; sourceTree = "<group>"; };
 		6314DC0A19918378839FAD8E230B80DB /* Pods-ConvivaIntegrationRefKitTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ConvivaIntegrationRefKitTests-dummy.m"; sourceTree = "<group>"; };
 		74BBF6E5C2610C05E87928FBDD69F9A2 /* Pods-ConvivaIntegrationRefKitTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ConvivaIntegrationRefKitTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		7AE1BF8D6F0CC92F8363A69FB4D485B1 /* libPods-ConvivaIntegrationRefKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-ConvivaIntegrationRefKit.a"; path = "libPods-ConvivaIntegrationRefKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9B1C0BE759DE12B81B79ED932D5DEEE3 /* ConvivaCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ConvivaCore.framework; path = Framework/iOS/ConvivaCore.framework; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		B3EDEEF8F684DAA57FDD80D1F21B6A4D /* ConvivaCore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ConvivaCore.xcconfig; sourceTree = "<group>"; };
+		B0A86B4A7891F6EF6FC3DA058399008E /* ConvivaAVFoundation.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ConvivaAVFoundation.xcconfig; sourceTree = "<group>"; };
 		C0A4083B2CE5F933E2619251AE9CB15C /* Pods-ConvivaIntegrationRefKit-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ConvivaIntegrationRefKit-acknowledgements.markdown"; sourceTree = "<group>"; };
-		D20ACDF05B9EBFE1E437BDBE00BB1852 /* ConvivaAVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ConvivaAVFoundation.framework; path = Framework/iOS/ConvivaAVFoundation.framework; sourceTree = "<group>"; };
+		D2838F4B226A5B2567EE9F60A997522E /* ConvivaCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ConvivaCore.framework; path = Framework/iOS/ConvivaCore.framework; sourceTree = "<group>"; };
+		D4DBFF0A553FB760AC1D44D13AABE268 /* ConvivaCore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ConvivaCore.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +92,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1F90CD20D9A51573F68D309096626823 /* Frameworks */ = {
+		ED60335249EFDA0F92B837D02D71B4D4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -120,14 +102,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		03977200D25C841CA566FDC64826E518 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				5F42294D0D028E7BB8CDF5684AEF5D8B /* OoyalaSDK.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		05750B350E4CC6853D1A43778C055339 /* Pods-ConvivaIntegrationRefKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,43 +115,42 @@
 			path = "Target Support Files/Pods-ConvivaIntegrationRefKit";
 			sourceTree = "<group>";
 		};
-		07DF617C166E982FD51FF51AB004D2B6 /* ConvivaCore */ = {
+		1D9297AF7B558969D2A3566AF6866A1C /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				8EECED662AB3A6A9A435ADEAF389A504 /* Frameworks */,
-				A80216024090EB894E8D21106992D234 /* Support Files */,
+				D4DBFF0A553FB760AC1D44D13AABE268 /* ConvivaCore.xcconfig */,
 			);
-			name = ConvivaCore;
-			path = ConvivaCore;
+			name = "Support Files";
+			path = "../Target Support Files/ConvivaCore";
 			sourceTree = "<group>";
 		};
-		2F0115F8C29379DA6EDD965F19BDBAC1 /* OoyalaSDK */ = {
+		1EC88D76B09AA1209DF852307C8584C7 /* ConvivaAVFoundation */ = {
 			isa = PBXGroup;
 			children = (
-				03977200D25C841CA566FDC64826E518 /* Frameworks */,
-				5134043918DEC1945716ED812F629FBD /* Support Files */,
-			);
-			name = OoyalaSDK;
-			path = OoyalaSDK;
-			sourceTree = "<group>";
-		};
-		3E89D527F7AC35C3FA53CC36E2ABD507 /* ConvivaAVFoundation */ = {
-			isa = PBXGroup;
-			children = (
-				7FDA5B6FDEE0DFAA3BA0CC48CEF06E5C /* Frameworks */,
-				EB2F0BEF1BEFF6AA645D56C72B3C8F89 /* Support Files */,
+				B9D8DA4A08D4F9D7911D3A45E6CD6A67 /* Frameworks */,
+				2949F92CA6C7B2EB4ABE8E00991F48BC /* Support Files */,
 			);
 			name = ConvivaAVFoundation;
 			path = ConvivaAVFoundation;
 			sourceTree = "<group>";
 		};
-		5134043918DEC1945716ED812F629FBD /* Support Files */ = {
+		2949F92CA6C7B2EB4ABE8E00991F48BC /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				01EFBBA186DBB5F709C8BD1FF32E5918 /* OoyalaSDK.xcconfig */,
+				B0A86B4A7891F6EF6FC3DA058399008E /* ConvivaAVFoundation.xcconfig */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/OoyalaSDK";
+			path = "../Target Support Files/ConvivaAVFoundation";
+			sourceTree = "<group>";
+		};
+		4325760F322B525273C1FA25C73961C5 /* ConvivaCore */ = {
+			isa = PBXGroup;
+			children = (
+				B9CC52F6A96214F00B0C5B3E78947403 /* Frameworks */,
+				1D9297AF7B558969D2A3566AF6866A1C /* Support Files */,
+			);
+			name = ConvivaCore;
+			path = ConvivaCore;
 			sourceTree = "<group>";
 		};
 		7C55C38AA4543EFF01A376CE7202E388 /* Targets Support Files */ = {
@@ -187,24 +160,6 @@
 				894F3731E8FE3722A27B57DF23564332 /* Pods-ConvivaIntegrationRefKitTests */,
 			);
 			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		7FDA5B6FDEE0DFAA3BA0CC48CEF06E5C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D20ACDF05B9EBFE1E437BDBE00BB1852 /* ConvivaAVFoundation.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		84A157300CEBE351C0F372592C1776BD /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				3E89D527F7AC35C3FA53CC36E2ABD507 /* ConvivaAVFoundation */,
-				07DF617C166E982FD51FF51AB004D2B6 /* ConvivaCore */,
-				2F0115F8C29379DA6EDD965F19BDBAC1 /* OoyalaSDK */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		894F3731E8FE3722A27B57DF23564332 /* Pods-ConvivaIntegrationRefKitTests */ = {
@@ -220,21 +175,29 @@
 			path = "Target Support Files/Pods-ConvivaIntegrationRefKitTests";
 			sourceTree = "<group>";
 		};
-		8EECED662AB3A6A9A435ADEAF389A504 /* Frameworks */ = {
+		B9CC52F6A96214F00B0C5B3E78947403 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9B1C0BE759DE12B81B79ED932D5DEEE3 /* ConvivaCore.framework */,
+				D2838F4B226A5B2567EE9F60A997522E /* ConvivaCore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A80216024090EB894E8D21106992D234 /* Support Files */ = {
+		B9D8DA4A08D4F9D7911D3A45E6CD6A67 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B3EDEEF8F684DAA57FDD80D1F21B6A4D /* ConvivaCore.xcconfig */,
+				514E07A44F23519E67646861D32122B5 /* ConvivaAVFoundation.framework */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/ConvivaCore";
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C0907984727ADF7C139EF3E8A964DB14 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1EC88D76B09AA1209DF852307C8584C7 /* ConvivaAVFoundation */,
+				4325760F322B525273C1FA25C73961C5 /* ConvivaCore */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
@@ -242,7 +205,7 @@
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				D89477F20FB1DE18A04690586D7808C4 /* Frameworks */,
-				84A157300CEBE351C0F372592C1776BD /* Pods */,
+				C0907984727ADF7C139EF3E8A964DB14 /* Pods */,
 				F81E8F55B4BEE37AE711C7DD587008F8 /* Products */,
 				7C55C38AA4543EFF01A376CE7202E388 /* Targets Support Files */,
 			);
@@ -253,15 +216,6 @@
 			children = (
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		EB2F0BEF1BEFF6AA645D56C72B3C8F89 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				38D252255CE0941089DFE0ED1BA0C2C1 /* ConvivaAVFoundation.xcconfig */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/ConvivaAVFoundation";
 			sourceTree = "<group>";
 		};
 		F81E8F55B4BEE37AE711C7DD587008F8 /* Products */ = {
@@ -283,7 +237,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1DCC176EC1641450E54E04D9BDAEEFC4 /* Headers */ = {
+		311033FACBA28025A4EAD9C1AF362070 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -295,18 +249,17 @@
 /* Begin PBXNativeTarget section */
 		5246345DC03BC404AC81CCE8F9B9AF2E /* Pods-ConvivaIntegrationRefKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E398113C93EAE08F799C8366C9192D74 /* Build configuration list for PBXNativeTarget "Pods-ConvivaIntegrationRefKit" */;
+			buildConfigurationList = 404AF16893D1772BBF0233026BF4185C /* Build configuration list for PBXNativeTarget "Pods-ConvivaIntegrationRefKit" */;
 			buildPhases = (
-				1DCC176EC1641450E54E04D9BDAEEFC4 /* Headers */,
-				B3C7F2F8E0FB27930249C00093BD90DA /* Sources */,
-				1F90CD20D9A51573F68D309096626823 /* Frameworks */,
+				311033FACBA28025A4EAD9C1AF362070 /* Headers */,
+				720504A954698A0215711703699345D9 /* Sources */,
+				ED60335249EFDA0F92B837D02D71B4D4 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				FB7DF7CDAE4BFBC431618BA2BED075F4 /* PBXTargetDependency */,
-				E15EC4EEE76289343337FBE1CAC8CE4B /* PBXTargetDependency */,
-				3556B51E99035D46BD7E7E965468649F /* PBXTargetDependency */,
+				E4317416F62EEBA5A6D3FE8FF94A7D47 /* PBXTargetDependency */,
+				F676D6C7AE85CA9D61743112E44EC952 /* PBXTargetDependency */,
 			);
 			name = "Pods-ConvivaIntegrationRefKit";
 			productName = "Pods-ConvivaIntegrationRefKit";
@@ -354,7 +307,6 @@
 			targets = (
 				69449D1FDE1513B2F0493580FFE4A741 /* ConvivaAVFoundation */,
 				32C232B114B5AF008FBC07D138BC6F09 /* ConvivaCore */,
-				2855C12C850AB4D5B2A81AA36D2665EB /* OoyalaSDK */,
 				5246345DC03BC404AC81CCE8F9B9AF2E /* Pods-ConvivaIntegrationRefKit */,
 				95B3D1D37F5D4E673483511BB0222FC4 /* Pods-ConvivaIntegrationRefKitTests */,
 			);
@@ -362,6 +314,14 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		720504A954698A0215711703699345D9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDD100872DFC459911B0D01C38F50DC3 /* Pods-ConvivaIntegrationRefKit-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9368EEF9CFEC9940D507EE854356C605 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -370,23 +330,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B3C7F2F8E0FB27930249C00093BD90DA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8D0ABABD41ED0F1E8CA76FAA55CB0F95 /* Pods-ConvivaIntegrationRefKit-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3556B51E99035D46BD7E7E965468649F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = OoyalaSDK;
-			target = 2855C12C850AB4D5B2A81AA36D2665EB /* OoyalaSDK */;
-			targetProxy = 699D5B69C01585DFF4B4DE05B0120384 /* PBXContainerItemProxy */;
-		};
 		4EDB132801665F7C1E49112F58FBE16C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = ConvivaCore;
@@ -399,21 +345,43 @@
 			target = 5246345DC03BC404AC81CCE8F9B9AF2E /* Pods-ConvivaIntegrationRefKit */;
 			targetProxy = C63DF02581A4BBB102164B820F9C2A6E /* PBXContainerItemProxy */;
 		};
-		E15EC4EEE76289343337FBE1CAC8CE4B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = ConvivaCore;
-			target = 32C232B114B5AF008FBC07D138BC6F09 /* ConvivaCore */;
-			targetProxy = 96CA180925BB1B2516CBE7196427A630 /* PBXContainerItemProxy */;
-		};
-		FB7DF7CDAE4BFBC431618BA2BED075F4 /* PBXTargetDependency */ = {
+		E4317416F62EEBA5A6D3FE8FF94A7D47 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = ConvivaAVFoundation;
 			target = 69449D1FDE1513B2F0493580FFE4A741 /* ConvivaAVFoundation */;
-			targetProxy = F68C90FA16955304EEDAC7BA7CA87495 /* PBXContainerItemProxy */;
+			targetProxy = 42383E57AB0C24423C2AF1E8AB8ECD8D /* PBXContainerItemProxy */;
+		};
+		F676D6C7AE85CA9D61743112E44EC952 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ConvivaCore;
+			target = 32C232B114B5AF008FBC07D138BC6F09 /* ConvivaCore */;
+			targetProxy = B7E2E780282868540E28E30E853FF7F6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		0E46759EC0A6CF4F94825B405BEAFD9E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 246864496908BC814D3E753632491F5F /* Pods-ConvivaIntegrationRefKit.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		1CF3E38AC51A7F7B038BF37534B508DC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 43CEA8CC18E0159A8E06A257082290FD /* Pods-ConvivaIntegrationRefKitTests.debug.xcconfig */;
@@ -457,26 +425,30 @@
 			};
 			name = Release;
 		};
-		47857C9BDAACB2CDF3567839AC4C37E2 /* Release */ = {
+		32F450CDAADB6B4CBA22BB4FBFF0217B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 01EFBBA186DBB5F709C8BD1FF32E5918 /* OoyalaSDK.xcconfig */;
+			baseConfigurationReference = 3D049C66EAB4D7BEDB651AA7B4930382 /* Pods-ConvivaIntegrationRefKit.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 			};
-			name = Release;
+			name = Debug;
 		};
 		56B0B4A91792BF2081284F901BE22A92 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 38D252255CE0941089DFE0ED1BA0C2C1 /* ConvivaAVFoundation.xcconfig */;
+			baseConfigurationReference = B0A86B4A7891F6EF6FC3DA058399008E /* ConvivaAVFoundation.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -617,7 +589,7 @@
 		};
 		A3F8EDDBB2975E66F462772433B06A82 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 38D252255CE0941089DFE0ED1BA0C2C1 /* ConvivaAVFoundation.xcconfig */;
+			baseConfigurationReference = B0A86B4A7891F6EF6FC3DA058399008E /* ConvivaAVFoundation.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -631,31 +603,9 @@
 			};
 			name = Debug;
 		};
-		C9FC90475C9AC926B00B4D67EF7BCD44 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 246864496908BC814D3E753632491F5F /* Pods-ConvivaIntegrationRefKit.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MACH_O_TYPE = staticlib;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
 		CB895DD2D40742AC3B5FBCB7E6EAB355 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B3EDEEF8F684DAA57FDD80D1F21B6A4D /* ConvivaCore.xcconfig */;
+			baseConfigurationReference = D4DBFF0A553FB760AC1D44D13AABE268 /* ConvivaCore.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -671,7 +621,7 @@
 		};
 		D26BC6B75CE1250DCFBA42BAEA58AAF8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B3EDEEF8F684DAA57FDD80D1F21B6A4D /* ConvivaCore.xcconfig */;
+			baseConfigurationReference = D4DBFF0A553FB760AC1D44D13AABE268 /* ConvivaCore.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -685,43 +635,6 @@
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
-		};
-		DDDFBBE78D1ACE0FE02CF5A1A5220FAA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 01EFBBA186DBB5F709C8BD1FF32E5918 /* OoyalaSDK.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		FE4255A2B5D2F2392811121FD12E39B0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3D049C66EAB4D7BEDB651AA7B4930382 /* Pods-ConvivaIntegrationRefKit.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MACH_O_TYPE = staticlib;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
@@ -744,6 +657,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		404AF16893D1772BBF0233026BF4185C /* Build configuration list for PBXNativeTarget "Pods-ConvivaIntegrationRefKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				32F450CDAADB6B4CBA22BB4FBFF0217B /* Debug */,
+				0E46759EC0A6CF4F94825B405BEAFD9E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -753,29 +675,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D9C8B51DEE6810BF834503448C8532EA /* Build configuration list for PBXAggregateTarget "OoyalaSDK" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DDDFBBE78D1ACE0FE02CF5A1A5220FAA /* Debug */,
-				47857C9BDAACB2CDF3567839AC4C37E2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		DCF62EBAE14BB9078C7F8B1D7115B5A3 /* Build configuration list for PBXNativeTarget "Pods-ConvivaIntegrationRefKitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1CF3E38AC51A7F7B038BF37534B508DC /* Debug */,
 				25018B14169576EAF80938124A08F1A0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E398113C93EAE08F799C8366C9192D74 /* Build configuration list for PBXNativeTarget "Pods-ConvivaIntegrationRefKit" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FE4255A2B5D2F2392811121FD12E39B0 /* Debug */,
-				C9FC90475C9AC926B00B4D67EF7BCD44 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
