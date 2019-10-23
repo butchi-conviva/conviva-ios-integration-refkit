@@ -172,9 +172,9 @@
 		513DFA6F231FE30E00F30511 /* ConvivaIntegrationRefKit */ = {
 			isa = PBXGroup;
 			children = (
-				6F5452212355F82C004BBB79 /* CVAIntegrationRef */,
+				6F5452212355F82C004BBB79 /* ConvivaIntegration */,
 				6F7C6700236040AF009942C1 /* CVAPlayerManager */,
-				5176E70823262E5E00E1946D /* PlayerManager */,
+				5176E70823262E5E00E1946D /* Playback */,
 				513DFA70231FE30E00F30511 /* ConvivaIntegrationRefKit.h */,
 				513DFA71231FE30E00F30511 /* Info.plist */,
 			);
@@ -190,7 +190,7 @@
 			path = ConvivaIntegrationRefKitTests;
 			sourceTree = "<group>";
 		};
-		5176E70823262E5E00E1946D /* PlayerManager */ = {
+		5176E70823262E5E00E1946D /* Playback */ = {
 			isa = PBXGroup;
 			children = (
 				5176E70F23262E5E00E1946D /* AVPlayer */,
@@ -206,8 +206,8 @@
 				5176E71423262E5E00E1946D /* CVAPlayerCmdExecutor.swift */,
 				5176E71623262E5E00E1946D /* CVAPlayerEvents.swift */,
 			);
-			name = PlayerManager;
-			path = ../../Source/PlayerManager;
+			name = Playback;
+			path = ../../Source/Playback;
 			sourceTree = "<group>";
 		};
 		5176E70F23262E5E00E1946D /* AVPlayer */ = {
@@ -231,7 +231,7 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		6F1C6B78235F2008002E5DDA /* CVACommon */ = {
+		6F1C6B78235F2008002E5DDA /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				5176E71723262E5E00E1946D /* Data */,
@@ -239,7 +239,7 @@
 				6F1C6B7A235F2035002E5DDA /* Constants */,
 				6F1C6B7B235F2041002E5DDA /* Extensions */,
 			);
-			path = CVACommon;
+			path = Common;
 			sourceTree = "<group>";
 		};
 		6F1C6B79235F2025002E5DDA /* Utilities */ = {
@@ -266,33 +266,33 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		6F5452212355F82C004BBB79 /* CVAIntegrationRef */ = {
+		6F5452212355F82C004BBB79 /* ConvivaIntegration */ = {
 			isa = PBXGroup;
 			children = (
 				6F5452222355F82C004BBB79 /* CVABaseIntegrationRef.swift */,
-				6F5452262355F82C004BBB79 /* CVAAVPlayerIntegrationRef */,
-				6F5452232355F82C004BBB79 /* CVACustomSDKIntegrationRef */,
-				6F1C6B78235F2008002E5DDA /* CVACommon */,
+				6F5452262355F82C004BBB79 /* AVPlayerIntegration */,
+				6F5452232355F82C004BBB79 /* CustomSDKIntegration */,
+				6F1C6B78235F2008002E5DDA /* Common */,
 			);
-			name = CVAIntegrationRef;
-			path = ../../Source/CVAIntegrationRef;
+			name = ConvivaIntegration;
+			path = ../../Source/ConvivaIntegration;
 			sourceTree = "<group>";
 		};
-		6F5452232355F82C004BBB79 /* CVACustomSDKIntegrationRef */ = {
+		6F5452232355F82C004BBB79 /* CustomSDKIntegration */ = {
 			isa = PBXGroup;
 			children = (
 				6F5452242355F82C004BBB79 /* CustomPlayerInterface.swift */,
 				6F5452252355F82C004BBB79 /* CVACustomSDKIntegrationRef.swift */,
 			);
-			path = CVACustomSDKIntegrationRef;
+			path = CustomSDKIntegration;
 			sourceTree = "<group>";
 		};
-		6F5452262355F82C004BBB79 /* CVAAVPlayerIntegrationRef */ = {
+		6F5452262355F82C004BBB79 /* AVPlayerIntegration */ = {
 			isa = PBXGroup;
 			children = (
 				6F5452272355F82C004BBB79 /* CVAAVPlayerIntegrationRef.swift */,
 			);
-			path = CVAAVPlayerIntegrationRef;
+			path = AVPlayerIntegration;
 			sourceTree = "<group>";
 		};
 		6F7C6700236040AF009942C1 /* CVAPlayerManager */ = {
