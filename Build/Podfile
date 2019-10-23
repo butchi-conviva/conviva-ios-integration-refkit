@@ -6,7 +6,7 @@ target 'ConvivaIntegrationRefKit' do
   
   pod 'ConvivaAVFoundation', '3.0.6'
   # pod 'ConvivaSDK', '2.141.4'
-  pod 'OoyalaSDK', '4.41.0'
+  # pod 'OoyalaSDK', '4.41.0'
 
   target 'ConvivaIntegrationRefKitTests' do
     inherit! :search_paths
