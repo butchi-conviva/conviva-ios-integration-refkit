@@ -9,51 +9,74 @@
 import Foundation
 import AVFoundation
 
-/// A protocol which is used to declare requirements for implementing a bridge between AVPlayer and Conviva.
-/// CVAAVPlayer will call these functions to interact with Conviva.
+/// A protocol which is used to declare requirements for listening to callbacks from the player and making required Conviva calls.
+/// Player manager classes like CVAAVPlayer etc will call these functions to interact with Conviva.
 
-protocol CVAAVPlayerManagerProtocol {
+protocol CVAPlayerEventsManagerProtocol {
     /**
      The CVAAVPlayerManager class initializer.
-     Initialization of CVAAVPlayerIntegrationRef should happen here.
+     Initialization of Integration Reference classes like CVAAVPlayerIntegrationRef etc should happen here.
      */
     init()
     
     /**
+     This function will be called when player starts playback.
      This function is used to call CVAAVPlayerIntegrationRef's createSession function.
+     - Parameters:
+        - player: The player instance which has started the playback.
+        - assetInfo: The CVAAsset instance which contains metadata information.
      */
-    func createSession(player: AVPlayer?, asset : CVAAsset)
+    func didStartPlayback(player: Any, assetInfo : CVAAsset)
 
     /**
+     This function will be called when player stops playback.
      This function is used to call CVAAVPlayerIntegrationRef's cleanupSession function.
      */
-    func cleanupSession()
+    func didStopPlayback()
 
     /**
+     This function will be called when player starts seeking.
      This function is used to call CVAAVPlayerIntegrationRef's seekStart function.
      */
-    func seekStart(position:NSInteger)
+    func didSeekFrom(position:NSInteger)
     
     /**
+     This function will be called when player stops seeking.
      This function is used to call CVAAVPlayerIntegrationRef's seekEnd function.
      */
-    func seekEnd(position:NSInteger)
-}
-
-/// A class which is used to implement CVAPlayerManagerProtocol requirements for implementing a bridge between AVPlayer and Conviva.
-/// This class will contain the functional implementation for handling and calling Conviva APIs.
-/// CVAAVPlayer will call these functions to interact with Conviva.
-
-struct CVAAVPlayerManager : CVAAVPlayerManagerProtocol {
+    func didSeekTo(position:NSInteger)
     
     /**
-     The CVAAVPlayerIntegrationRef instance which is used to call all of Conviva's behaviour.
+     This function will be called when application enters background.
+     This function is used to call CVAAVPlayerIntegrationRef's cleanupSession function.
+     */
+    func didEnterBackground()
+
+    /**
+     This function will be called when application enters foreground.
+     This function is used to call CVAAVPlayerIntegrationRef's createSession function.
+     - Parameters:
+        - player: The player instance which has started the playback.
+        - assetInfo: The CVAAsset instance which contains metadata information.
+     */
+    func willEnterForeground(player: Any, assetInfo : CVAAsset)
+
+}
+
+/// A class which is used to implement CVAPlayerManagerProtocol requirements for listening to callbacks from the player and making required Conviva calls.
+/// This class will contain the functional implementation for handling and calling Conviva APIs.
+/// Player manager classes like CVAAVPlayer etc will call these functions to interact with Conviva.
+
+struct CVAPlayerEventsManager : CVAPlayerEventsManagerProtocol {
+    
+    /**
+     The CVAAVPlayerIntegrationRef instance which is used to call all of Conviva AVPlayer library's behaviour.
      */
     var convivaAVPlayerIntegrationRef : CVAAVPlayerIntegrationRef!
 
     /**
      The CVAAVPlayerManager class initializer.
-     Initialization of CVAAVPlayerIntegrationRef should happen here.
+     Initialization of Integration Reference classes like CVAAVPlayerIntegrationRef etc should happen here.
      */
     init() {
         CVAAVPlayerIntegrationRef.initialize()
@@ -61,36 +84,59 @@ struct CVAAVPlayerManager : CVAAVPlayerManagerProtocol {
     }
     
     /**
+     This function will be called when player starts playback.
      This function is used to call CVAAVPlayerIntegrationRef's createSession function.
+     - Parameters:
+        - player: The player instance which has started the playback
+        - assetInfo: The CVAAsset instance which contains metadata information.
      */
-    func createSession(player: AVPlayer?, asset : CVAAsset) {
-        convivaAVPlayerIntegrationRef.createSession(player: player as Any, metadata: getMetadata(asset: asset))
+    func didStartPlayback(player: Any, assetInfo : CVAAsset) {
+        convivaAVPlayerIntegrationRef.createSession(player: player, metadata: getMetadata(asset: assetInfo))
     }
 
     /**
      This function is used to call CVAAVPlayerIntegrationRef's cleanupSession function.
      */
-    func cleanupSession() {
+    func didStopPlayback() {
         convivaAVPlayerIntegrationRef.cleanupSession()
     }
-
+    
     /**
      This function is used to call CVAAVPlayerIntegrationRef's seekStart function.
      */
-    func seekStart(position:NSInteger) {
+    func didSeekFrom(position:NSInteger) {
         convivaAVPlayerIntegrationRef.seekStart(position: position);
     }
     
     /**
      This function is used to call CVAAVPlayerIntegrationRef's seekEnd function.
      */
-    func seekEnd(position:NSInteger) {
+    func didSeekTo(position:NSInteger) {
         convivaAVPlayerIntegrationRef.seekEnd(position: position);
+    }
+    
+    /**
+     This function will be called when application enters background.
+     This function is used to call CVAAVPlayerIntegrationRef's cleanupSession function.
+     */
+    func didEnterBackground() {
+        convivaAVPlayerIntegrationRef.cleanupSession()
+    }
+
+    /**
+     This function will be called when application enters foreground.
+     This function is used to call CVAAVPlayerIntegrationRef's createSession function.
+     - Parameters:
+        - player: The player instance which has started the playback.
+        - assetInfo: The CVAAsset instance which contains metadata information.
+     */
+    func willEnterForeground(player: Any, assetInfo : CVAAsset) {
+        convivaAVPlayerIntegrationRef.createSession(player: player, metadata: getMetadata(asset: assetInfo))
     }
 }
 
 /// An extension of class CVAAVPlayerManager which is used to provide basic objects which are used in Conviva calls.
-extension CVAAVPlayerManager {
+extension CVAPlayerEventsManager {
     /**
      This function prepares the Metadata values which will be lated passed to Conviva.
      */

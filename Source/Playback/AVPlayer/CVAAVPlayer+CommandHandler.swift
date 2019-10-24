@@ -31,10 +31,10 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
         self.asset = asset
         initializeAVPlayer()
         
-        avPlayerManager = CVAAVPlayerManager()
+        avPlayerManager = CVAPlayerEventsManager()
 
         if avPlayer != nil {
-            avPlayerManager.createSession(player: avPlayer, asset: self.asset)
+            avPlayerManager.didStartPlayback(player: avPlayer as Any, assetInfo: self.asset)
             avPlayer?.play()
         }
 
@@ -71,7 +71,7 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
      */
     public func stopAssetPlayback(asset:CVAAsset) -> CVAPlayerStatus {
         stopPlayback();
-        avPlayerManager.cleanupSession()
+        avPlayerManager.didStopPlayback()
         return .success;
     }
     
@@ -106,10 +106,10 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
             let value = Float64(value) * totalSeconds
             let seekTime = CMTime(value: Int64(value), timescale: 1)
             
-            avPlayerManager.seekStart(position: NSInteger(value));
+            avPlayerManager.didSeekFrom(position: NSInteger(value));
             avplayer.seek(to: seekTime, completionHandler: { (completedSeek) in
                 if true == completedSeek{
-                    self.avPlayerManager.seekEnd(position: NSInteger(value));
+                    self.avPlayerManager.didSeekTo(position: NSInteger(value));
                 }
             })
         }
