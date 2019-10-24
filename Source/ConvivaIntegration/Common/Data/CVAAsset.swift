@@ -10,8 +10,8 @@ import Foundation
 
 public class CVAAsset: NSObject {
     
-    static let mediaURL = NSURL(string: "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8")
-//    static let mediaURL = NSURL(string: "http://localhost/sample/index.m3u8")
+//    static let mediaURL = NSURL(string: "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8")
+    static let mediaURL = NSURL(string: "http://localhost/sample/index.m3u8")
     static let defaultCDN = "akamai"
     
     private(set) var title:String?
