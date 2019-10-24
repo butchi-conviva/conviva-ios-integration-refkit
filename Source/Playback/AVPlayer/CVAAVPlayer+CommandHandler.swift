@@ -34,7 +34,7 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
         avPlayerManager = CVAPlayerEventsManager()
 
         if avPlayer != nil {
-            avPlayerManager.didStartPlayback(player: avPlayer as Any, assetInfo: self.asset)
+            avPlayerManager.willStartPlayback(player: avPlayer as Any, assetInfo: self.asset)
             avPlayer?.play()
         }
 
@@ -106,7 +106,7 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
             let value = Float64(value) * totalSeconds
             let seekTime = CMTime(value: Int64(value), timescale: 1)
             
-            avPlayerManager.didSeekFrom(position: NSInteger(value));
+            avPlayerManager.willSeekFrom(position: NSInteger(value));
             avplayer.seek(to: seekTime, completionHandler: { (completedSeek) in
                 if true == completedSeek{
                     self.avPlayerManager.didSeekTo(position: NSInteger(value));

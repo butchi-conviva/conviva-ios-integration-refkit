@@ -16,6 +16,9 @@ struct CVAAssetKeys {
     static let thumbnail:String     = "poster_path";
     static let playbackURI:String   = "playbackURI";
     static let cdn:String           = "cdn";
-    
+    static let live                 = "isLive";
+    static let duration             = "contentLength";
+    static let efps                 = "encodedFramerate";
+    static let contenid             = "id";
 }
 

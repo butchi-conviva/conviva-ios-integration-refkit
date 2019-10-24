@@ -20,13 +20,13 @@ protocol CVAPlayerEventsManagerProtocol {
     init()
     
     /**
-     This function will be called when player starts playback.
+     This function will be called when player is going to start playback.
      This function is used to call CVAAVPlayerIntegrationRef's createSession function.
      - Parameters:
         - player: The player instance which has started the playback.
         - assetInfo: The CVAAsset instance which contains metadata information.
      */
-    func didStartPlayback(player: Any, assetInfo : CVAAsset)
+    func willStartPlayback(player: Any, assetInfo : CVAAsset)
 
     /**
      This function will be called when player stops playback.
@@ -38,7 +38,7 @@ protocol CVAPlayerEventsManagerProtocol {
      This function will be called when player starts seeking.
      This function is used to call CVAAVPlayerIntegrationRef's seekStart function.
      */
-    func didSeekFrom(position:NSInteger)
+    func willSeekFrom(position:NSInteger)
     
     /**
      This function will be called when player stops seeking.
@@ -84,13 +84,13 @@ struct CVAPlayerEventsManager : CVAPlayerEventsManagerProtocol {
     }
     
     /**
-     This function will be called when player starts playback.
+     This function will be called when player is going to start playback.
      This function is used to call CVAAVPlayerIntegrationRef's createSession function.
      - Parameters:
         - player: The player instance which has started the playback
         - assetInfo: The CVAAsset instance which contains metadata information.
      */
-    func didStartPlayback(player: Any, assetInfo : CVAAsset) {
+    func willStartPlayback(player: Any, assetInfo : CVAAsset) {
         convivaAVPlayerIntegrationRef.createSession(player: player, metadata: getMetadata(asset: assetInfo))
     }
 
@@ -104,7 +104,7 @@ struct CVAPlayerEventsManager : CVAPlayerEventsManagerProtocol {
     /**
      This function is used to call CVAAVPlayerIntegrationRef's seekStart function.
      */
-    func didSeekFrom(position:NSInteger) {
+    func willSeekFrom(position:NSInteger) {
         convivaAVPlayerIntegrationRef.seekStart(position: position);
     }
     
@@ -141,12 +141,12 @@ extension CVAPlayerEventsManager {
      This function prepares the Metadata values which will be lated passed to Conviva.
      */
     func getMetadata(asset : CVAAsset) -> [String : Any] {
-        return [Conviva.Keys.Metadata.title : Conviva.Values.Metadata.title,
+        return [Conviva.Keys.Metadata.title : asset.title ?? "Default Asset",
                 Conviva.Keys.Metadata.userId : Conviva.Values.Metadata.userId,
                 Conviva.Keys.Metadata.playerName : Conviva.Values.Metadata.playerName,
-                Conviva.Keys.Metadata.live : Conviva.Values.Metadata.live,
-                Conviva.Keys.Metadata.duration : Conviva.Values.Metadata.duration,
-                Conviva.Keys.Metadata.efps : Conviva.Values.Metadata.efps,
+                Conviva.Keys.Metadata.live : asset.islive,
+                Conviva.Keys.Metadata.duration : asset.duration,
+                Conviva.Keys.Metadata.efps : asset.efps,
                 Conviva.Keys.Metadata.tags : getCustomTags() as NSMutableDictionary] as [String : Any]
     }
     

@@ -20,6 +20,10 @@ public class CVAAsset: NSObject {
     private(set) var thumbnail:String?
     private(set) var playbackURI:NSURL?
     private(set) var cdn:String?
+    private(set) var  islive:Bool = false;
+    private(set) var  duration:Int = 1 * 60 * 60;
+    private(set) var  efps:Int = 30;
+    private(set) var  contentid:Int64 = 30;
     
     init(data:Dictionary<String,Any>?) {
         
@@ -34,6 +38,8 @@ public class CVAAsset: NSObject {
             self.playbackURI = (nil != mediaURLString) ? NSURL(string: mediaURLString!) : CVAAsset.mediaURL;
             
             self.cdn = (actualData[CVAAssetKeys.cdn] as? String) ?? CVAAsset.defaultCDN;
+            self.contentid = (actualData[CVAAssetKeys.contenid] as? Int64) ?? 0;
+            
         }
         
         super.init()
