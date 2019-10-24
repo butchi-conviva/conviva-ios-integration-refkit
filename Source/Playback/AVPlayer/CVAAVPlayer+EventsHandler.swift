@@ -91,7 +91,7 @@ extension CVAAVPlayer {
      In this situation Conviva session should be cleaned up.
      */
     @objc private func didFinishPlaying(_ sender: Notification) -> Void {
-        avPlayerManager.didStopPlayback()
+        playerEventManager.didStopPlayback()
     }
     
     /**
@@ -99,7 +99,7 @@ extension CVAAVPlayer {
      In this situation Conviva session should be cleaned up.
      */
     @objc private func didFailPlaying(_ sender: Notification) -> Void {
-        avPlayerManager.didStopPlayback()
+        playerEventManager.didStopPlayback()
     }
     
     /**
@@ -109,11 +109,11 @@ extension CVAAVPlayer {
      */
     @objc private func didChangeAppState(_ sender: Notification) -> Void {
         if (sender.name == UIApplication.didEnterBackgroundNotification) {
-            avPlayerManager.didEnterBackground()
+            playerEventManager.didEnterBackground()
         }
         if (sender.name == UIApplication.willEnterForegroundNotification) {
             if avPlayer != nil {
-                avPlayerManager.willEnterForeground(player: avPlayer as Any, assetInfo: self.asset)
+                playerEventManager.willEnterForeground(player: avPlayer as Any, assetInfo: self.asset)
                 avPlayer?.play()
             }
         }

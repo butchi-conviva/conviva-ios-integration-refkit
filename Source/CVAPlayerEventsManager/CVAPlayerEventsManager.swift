@@ -27,6 +27,23 @@ protocol CVAPlayerEventsManagerProtocol {
         - assetInfo: The CVAAsset instance which contains metadata information.
      */
     func willStartPlayback(player: Any, assetInfo : CVAAsset)
+    
+    /**
+     This function will be called when player  starts playback.
+     - Parameters:
+        - player: The player instance which has started the playback.
+        - assetInfo: The CVAAsset instance which contains metadata information.
+     */
+    func didStartPlayback(player: Any, assetInfo : CVAAsset)
+    
+    /**
+     This function will be called when player  failed to play the content.
+     This function is used to call CVAAVPlayerIntegrationRef's cleanupSession function.
+     - Parameters:
+        - player: The player instance which has started the playback.
+        - assetInfo: The CVAAsset instance which contains metadata information.
+     */
+    func didFailPlayback(player: Any,error:Error, assetInfo : CVAAsset)
 
     /**
      This function will be called when player stops playback.
@@ -45,6 +62,12 @@ protocol CVAPlayerEventsManagerProtocol {
      This function is used to call CVAAVPlayerIntegrationRef's seekEnd function.
      */
     func didSeekTo(position:NSInteger)
+    
+    /**
+     This function will be called when player failed to seek.
+     This function is used to call CVAAVPlayerIntegrationRef's seekEnd function.
+     */
+    func didFailSeekTo(position:NSInteger)
     
     /**
      This function will be called when application enters background.
@@ -93,6 +116,27 @@ struct CVAPlayerEventsManager : CVAPlayerEventsManagerProtocol {
     func willStartPlayback(player: Any, assetInfo : CVAAsset) {
         convivaAVPlayerIntegrationRef.createSession(player: player, metadata: getMetadata(asset: assetInfo))
     }
+    
+    /**
+     This function will be called when player  starts playback.
+     - Parameters:
+        - player: The player instance which has started the playback.
+        - assetInfo: The CVAAsset instance which contains metadata information.
+     */
+    func didStartPlayback(player: Any, assetInfo : CVAAsset) {
+        
+    }
+    
+    /**
+     This function will be called when player  failed to play the content.
+     This function is used to call CVAAVPlayerIntegrationRef's cleanupSession function.
+     - Parameters:
+        - player: The player instance which has started the playback.
+        - assetInfo: The CVAAsset instance which contains metadata information.
+     */
+    func didFailPlayback(player: Any,error:Error, assetInfo : CVAAsset) {
+        convivaAVPlayerIntegrationRef.cleanupSession()
+    }
 
     /**
      This function is used to call CVAAVPlayerIntegrationRef's cleanupSession function.
@@ -113,6 +157,14 @@ struct CVAPlayerEventsManager : CVAPlayerEventsManagerProtocol {
      */
     func didSeekTo(position:NSInteger) {
         convivaAVPlayerIntegrationRef.seekEnd(position: position);
+    }
+    
+    /**
+     This function will be called when player failed to seek.
+     This function is used to call CVAAVPlayerIntegrationRef's seekEnd function.
+     */
+    func didFailSeekTo(position:NSInteger) {
+        
     }
     
     /**
