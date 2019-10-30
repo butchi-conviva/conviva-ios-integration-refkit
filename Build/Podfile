@@ -1,7 +1,8 @@
-#platform :ios, '9.0'
+
 # source 'https://github.com/ooyala/ios-sdk-podspecs.git'
 
 target 'ConvivaIntegrationRefKit' do
+
   # Pods for ConvivaIntegrationRefKit
   
   pod 'ConvivaAVFoundation', '3.0.6'
@@ -16,6 +17,7 @@ target 'ConvivaIntegrationRefKit' do
 end
 
 target 'ConvivaIntegrationRefKit-tvOS' do
+
   # Pods for ConvivaIntegrationRefKit-tvOS
   
   pod 'ConvivaAVFoundation', '3.0.6'
