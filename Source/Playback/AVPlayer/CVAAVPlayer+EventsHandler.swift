@@ -67,16 +67,20 @@ extension CVAAVPlayer {
      This function is used to add AVPlayer Background - Foreground notifications.
      */
     func registerAppStateChangeNotifications() {
+        #if os(iOS)
         NotificationCenter.default.addObserver(self, selector:#selector(didChangeAppState(_:)) , name: UIApplication.didEnterBackgroundNotification, object:nil)
         NotificationCenter.default.addObserver(self, selector:#selector(didChangeAppState(_:)) , name:UIApplication.willEnterForegroundNotification, object:nil)
+        #endif
     }
     
     /**
      This function is used to removed the earlier added AVPlayer Background - Foreground notifications.
      */
     private func deRegisterAppStateChangeNotifications() {
+        #if os(iOS)
         NotificationCenter.default.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
+        #endif
     }
     
     /**
@@ -108,6 +112,7 @@ extension CVAAVPlayer {
      When the app goes to Foreground, a new Conviva session should be created.
      */
     @objc private func didChangeAppState(_ sender: Notification) -> Void {
+        #if os(iOS)
         if (sender.name == UIApplication.didEnterBackgroundNotification) {
             playerEventManager.didEnterBackground()
         }
@@ -117,6 +122,7 @@ extension CVAAVPlayer {
                 avPlayer?.play()
             }
         }
+        #endif
     }
     
     /**

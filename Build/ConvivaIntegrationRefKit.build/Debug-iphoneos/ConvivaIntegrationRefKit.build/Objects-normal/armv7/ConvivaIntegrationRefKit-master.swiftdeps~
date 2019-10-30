@@ -1,0 +1,23 @@
+version: "Apple Swift version 5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
+options: "5f392b3d49380778f08cd68c69bf83c9"
+build_time: [1571142603, 109165000]
+inputs:
+  "/Users/bpeddi/Source/conviva/react-native/conviva-ios-reference-app/Source/conviva-ios-integration-refkit/Source/Metrics/ConvivaWrapper.swift": [1570787528, 942789278]
+  "/Users/bpeddi/Source/conviva/react-native/conviva-ios-reference-app/Source/conviva-ios-integration-refkit/Source/PlayerManager/CVAPlayerCmdExecutor.swift": [1570625988, 518710776]
+  "/Users/bpeddi/Source/conviva/react-native/conviva-ios-reference-app/Source/conviva-ios-integration-refkit/Source/Metrics/Constants/Constants.swift": [1570787528, 942371217]
+  "/Users/bpeddi/Source/conviva/react-native/conviva-ios-reference-app/Source/conviva-ios-integration-refkit/Source/Data/CVAOnDemandAsset.swift": [1570625988, 516738990]
+  "/Users/bpeddi/Source/conviva/react-native/conviva-ios-reference-app/Source/conviva-ios-integration-refkit/Source/PlayerManager/CVAPlayerConstants.swift": [1570625988, 518928132]
+  "/Users/bpeddi/Source/conviva/react-native/conviva-ios-reference-app/Source/conviva-ios-integration-refkit/Source/PlayerManager/CVAPlayerContentViewProvider.swift": [1570625988, 519077955]
+  "/Users/bpeddi/Source/conviva/react-native/conviva-ios-reference-app/Source/conviva-ios-integration-refkit/Source/PlayerManager/CVAPlayerCommandHandler.swift": [1570625988, 518828487]
+  "/Users/bpeddi/Source/conviva/react-native/conviva-ios-reference-app/Source/conviva-ios-integration-refkit/Source/PlayerManager/AVPlayer/CVAAVPlayer.swift": [1571046543, 677308845]
+  "/Users/bpeddi/Source/conviva/react-native/conviva-ios-reference-app/Source/conviva-ios-integration-refkit/Source/PlayerManager/CVAPlayerEventManager.swift": [1570625988, 519350825]
+  "/Users/bpeddi/Source/conviva/react-native/conviva-ios-reference-app/Source/conviva-ios-integration-refkit/Source/PlayerManager/CVAPlayerManager.swift": [1571051240, 557130695]
+  "/Users/bpeddi/Source/conviva/react-native/conviva-ios-reference-app/Source/conviva-ios-integration-refkit/Source/PlayerManager/CVAPlayerResponseHandler.swift": [1570625988, 519970855]
+  "/Users/bpeddi/Source/conviva/react-native/conviva-ios-reference-app/Source/conviva-ios-integration-refkit/Source/PlayerManager/CVAPlayerEvents.swift": [1570625988, 519682911]
+  "/Users/bpeddi/Source/conviva/react-native/conviva-ios-reference-app/Source/conviva-ios-integration-refkit/Source/Data/CVAAssetKeys.swift": [1571051675, 324131404]
+  "/Users/bpeddi/Source/conviva/react-native/conviva-ios-reference-app/Source/conviva-ios-integration-refkit/Source/Data/CVALiveAsset.swift": [1570625988, 516571171]
+  "/Users/bpeddi/Source/conviva/react-native/conviva-ios-reference-app/Source/conviva-ios-integration-refkit/Source/PlayerManager/CVAPlayerEventNotifier.swift": [1570625988, 519574187]
+  "/Users/bpeddi/Source/conviva/react-native/conviva-ios-reference-app/Source/conviva-ios-integration-refkit/Source/PlayerManager/CVAPlayerEventListener.swift": [1570625988, 519211936]
+  "/Users/bpeddi/Source/conviva/react-native/conviva-ios-reference-app/Source/conviva-ios-integration-refkit/Source/PlayerManager/CVAAVPlayerView.swift": [1570625988, 518611782]
+  "/Users/bpeddi/Source/conviva/react-native/conviva-ios-reference-app/Source/conviva-ios-integration-refkit/Source/Metrics/Extensions/UserDefaults+Extension.swift": [1570625988, 517862879]
+  "/Users/bpeddi/Source/conviva/react-native/conviva-ios-reference-app/Source/conviva-ios-integration-refkit/Source/Data/CVAAsset.swift": [1571051738, 563678824]

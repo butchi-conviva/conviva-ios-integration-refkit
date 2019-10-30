@@ -1,0 +1,13 @@
+{
+  'version': 0,
+  'case-sensitive': 'false',
+  'roots': [{
+    'type': 'directory',
+    'name': "/Users/bpeddi/Source/conviva/react-native/conviva-ios-reference-app/Source/conviva-ios-integration-refkit/build/Debug-iphoneos/ConvivaIntegrationRefKit.framework/Modules"
+    'contents': [{
+      'type': 'file',
+      'name': "module.modulemap",
+      'external-contents': "/Users/bpeddi/Source/conviva/react-native/conviva-ios-reference-app/Source/conviva-ios-integration-refkit/build/ConvivaIntegrationRefKit.build/Debug-iphoneos/ConvivaIntegrationRefKit.build/unextended-module.modulemap",
+    }]
+  }]
+}

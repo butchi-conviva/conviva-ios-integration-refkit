@@ -206,6 +206,11 @@ extension CVAPlayerEventsManager {
      This function prepares the Metadata's tags values which will be lated passed to Conviva.
      */
     func getCustomTags() -> NSMutableDictionary {
+        #if os(ios)
+        let deviceID = UIDevice.current.identifierForVendor?.uuidString
+        #else
+        let deviceID = ""
+        #endif
         return [Conviva.Keys.Metadata.matchId : Conviva.Values.Metadata.matchId,
                 Conviva.Keys.Metadata.productType : Conviva.Values.Metadata.productType,
                 Conviva.Keys.Metadata.playerVendor : Conviva.Values.Metadata.playerVendor,
@@ -213,7 +218,7 @@ extension CVAPlayerEventsManager {
                 Conviva.Keys.Metadata.product : Conviva.Values.Metadata.product,
                 Conviva.Keys.Metadata.assetID : Conviva.Values.Metadata.assetID,
                 Conviva.Keys.Metadata.carrier : Conviva.Values.Metadata.carrier,
-                Conviva.Keys.Metadata.deviceID : UIDevice.current.identifierForVendor?.uuidString as Any,
+                Conviva.Keys.Metadata.deviceID : deviceID as Any,
                 Conviva.Keys.Metadata.appBuild : Bundle.main.object(forInfoDictionaryKey: Conviva.Keys.infoDictionary) as Any,
                 Conviva.Keys.Metadata.favouriteTeam : UserDefaults.getFavouriteTeamName() as Any]
     }

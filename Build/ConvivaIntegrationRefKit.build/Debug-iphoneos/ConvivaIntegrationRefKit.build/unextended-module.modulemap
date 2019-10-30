@@ -1,0 +1,10 @@
+framework module ConvivaIntegrationRefKit {
+  umbrella header "ConvivaIntegrationRefKit.h"
+
+  export *
+  module * { export * }
+}
+
+module ConvivaIntegrationRefKit.__Swift {
+    exclude header "ConvivaIntegrationRefKit-Swift.h"
+}
