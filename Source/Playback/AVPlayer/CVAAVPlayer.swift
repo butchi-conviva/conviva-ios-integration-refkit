@@ -83,5 +83,15 @@ public class CVAAVPlayer: NSObject {
             self.responseHandler?.onPlayerCommandComplete(command: .play, status: .success, info: [kAVPlayerLayer:self.avPlayerLayer as Any]);
         }
     }
+    
+    func destroyAVPlayer() {
+        
+        removePeriodicTimeObserver();
+        deRegisterAppStateChangeNotifications();
+        
+        if let avPlayer = avPlayer {
+            deRegisterPlayerNotification(avPlayer)
+        }
+    }
 
 }

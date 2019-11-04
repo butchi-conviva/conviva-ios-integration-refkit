@@ -11,4 +11,6 @@ import Foundation
 public enum CVAPlayerEvent : String {
   case onPlayHeadChange = "onPlayHeadChange"
   case onPlayerStateChange = "onPlayerStateChange"
+  case onPlayerdidFinishPlaying = "onPlayerdidFinishPlaying"
+  case onPlayerdidFailPlaying = "onPlayerdidFailPlaying"
 }
