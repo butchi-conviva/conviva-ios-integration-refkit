@@ -5,7 +5,8 @@ target 'ConvivaIntegrationRefKit' do
 
   # Pods for ConvivaIntegrationRefKit
   
-  pod 'ConvivaAVFoundation', '3.0.6'
+  pod 'ConvivaAVFoundation','3.0.7'
+
   # pod 'ConvivaSDK', '2.141.4'
   # pod 'OoyalaSDK', '4.41.0'
 
@@ -20,7 +21,8 @@ target 'ConvivaIntegrationRefKit-tvOS' do
 
   # Pods for ConvivaIntegrationRefKit-tvOS
   
-  pod 'ConvivaAVFoundation', '3.0.6'
+  pod 'ConvivaAVFoundation','3.0.7'
+
   # pod 'ConvivaSDK', '2.141.4'
   # pod 'OoyalaSDK', '4.41.0'
 
