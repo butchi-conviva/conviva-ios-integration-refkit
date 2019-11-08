@@ -8,6 +8,7 @@
 
 import Foundation
 import AVFoundation
+import CoreTelephony
 
 /// An extension of class CVAAVPlayer which is used to implement AVPlayer's Notifications and events.
 
@@ -126,6 +127,32 @@ extension CVAAVPlayer {
     }
     
     /**
+     This function is used to implement the behaviour when there is a change in cellular status of the application.
+     */
+    func handleCallStateChange() {
+        if let callCenter = self.callCenter {
+            callCenter.callEventHandler = { call in
+                switch call.callState {
+                case CTCallStateIncoming:
+                    self.playerEventManager.didEnterBackground()
+                case CTCallStateDialing:
+                    self.playerEventManager.didEnterBackground()
+                case CTCallStateConnected:
+                    // During connected calls, no action of Conviva as the earlier session was already ended and a new session will be created when the call is disconnected. No monoting or session lifecycle during call is happening.
+                    print(#function, call.callState)
+                case CTCallStateDisconnected:
+                    if self.avPlayer != nil {
+                        self.playerEventManager.willEnterForeground(player: self.avPlayer as Any, assetInfo: self.asset)
+                        self.avPlayer?.play()
+                    }
+                default:
+                    print(#function, call.callState)
+                }
+            }
+        }
+    }
+    
+    /**
      This function is the  observer for AVPlayer's rate property.
      */
     override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -147,7 +174,6 @@ extension CVAAVPlayer {
     func stopPlayback() {
         removePeriodicTimeObserver();
         deRegisterAppStateChangeNotifications()
-
         if let avPlayer = avPlayer {
             deRegisterPlayerNotification(avPlayer)
             avPlayer.pause();
