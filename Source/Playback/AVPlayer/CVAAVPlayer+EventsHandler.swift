@@ -38,7 +38,7 @@ extension CVAAVPlayer {
     /**
      This function is used to remove the earlier added periodic time observer on AVPlayer.
      */
-    private func removePeriodicTimeObserver() {
+    func removePeriodicTimeObserver() {
         if let timeObserverToken = timeObserverToken {
             if let avPlayer = avPlayer {
                 avPlayer.removeTimeObserver(timeObserverToken)
@@ -52,7 +52,14 @@ extension CVAAVPlayer {
      */
     func registerPlayerNotification(_ player: AVPlayer) {
         NotificationCenter.default.addObserver(self, selector:#selector(didFinishPlaying(_:)) , name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object:player.currentItem)
+        
         NotificationCenter.default.addObserver(self, selector:#selector(didFailPlaying(_:)) , name:NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object:player.currentItem)
+        
+        NotificationCenter.default.addObserver(self, selector:#selector(didFailPlaying(_:)) , name:NSNotification.Name.AVPlayerItemNewErrorLogEntry, object:player.currentItem)
+        
+        // Add observer for AVPlayer status and AVPlayerItem status
+        self.avPlayer?.addObserver(self, forKeyPath: #keyPath(AVPlayer.status), options: [.new, .initial], context: nil)
+        self.avPlayer?.addObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem.status), options:[.new, .initial], context: nil)
     }
     
     /**
@@ -60,7 +67,13 @@ extension CVAAVPlayer {
      */
     func deRegisterPlayerNotification(_ player: AVPlayer) {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem)
+        
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: player.currentItem)
+        
+        NotificationCenter.default.removeObserver(self, name:NSNotification.Name.AVPlayerItemNewErrorLogEntry, object:player.currentItem)
+        
+        self.avPlayer?.removeObserver(self, forKeyPath: #keyPath(AVPlayer.status))
+        self.avPlayer?.removeObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem.status))
     }
     
     /**
@@ -76,7 +89,7 @@ extension CVAAVPlayer {
     /**
      This function is used to removed the earlier added AVPlayer Background - Foreground notifications.
      */
-    private func deRegisterAppStateChangeNotifications() {
+    func deRegisterAppStateChangeNotifications() {
         #if os(iOS)
         NotificationCenter.default.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
@@ -96,6 +109,8 @@ extension CVAAVPlayer {
      */
     @objc private func didFinishPlaying(_ sender: Notification) -> Void {
         playerEventManager.didStopPlayback()
+        
+        self.responseHandler?.onPlayerEvent(event:.onPlayerdidFinishPlaying, info: [:])
     }
     
     /**
@@ -104,6 +119,8 @@ extension CVAAVPlayer {
      */
     @objc private func didFailPlaying(_ sender: Notification) -> Void {
         playerEventManager.didStopPlayback()
+        
+        self.responseHandler?.onPlayerEvent(event:.onPlayerdidFailPlaying, info: [:])
     }
     
     /**
@@ -137,6 +154,20 @@ extension CVAAVPlayer {
                 else{
                     // avPlayer is paused. Can be used later to update the UI etc.
                 }
+            }
+        }
+        
+        if keyPath == #keyPath(AVPlayer.currentItem.status) {
+            let newStatus: AVPlayerItem.Status
+            if let newStatusAsNumber = change?[NSKeyValueChangeKey.newKey] as? NSNumber {
+                newStatus = AVPlayerItem.Status(rawValue: newStatusAsNumber.intValue)!
+            } else {
+                newStatus = .unknown
+            }
+            if newStatus == .failed {
+                
+                self.responseHandler?.onPlayerEvent(event:.onPlayerdidFailPlaying, info: [:])
+                NSLog("Error: \(String(describing: self.avPlayer?.currentItem?.error?.localizedDescription)), error: \(String(describing: self.avPlayer?.currentItem?.error))")
             }
         }
     }
