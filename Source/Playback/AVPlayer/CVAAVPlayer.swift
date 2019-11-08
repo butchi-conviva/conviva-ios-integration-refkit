@@ -82,7 +82,7 @@ public class CVAAVPlayer: NSObject {
         /// This will be useful to capture scenarios like DRM and processing/parsing m3u8 files.
         let asset = AVURLAsset(url: videoURL! as URL)
         let queue = DispatchQueue(label: "com.conviva.queue")
-        asset.resourceLoader.setDelegate(self as AVAssetResourceLoaderDelegate , queue: queue)
+        asset.resourceLoader.setDelegate(self as! AVAssetResourceLoaderDelegate , queue: queue)
         let playerItem = AVPlayerItem(asset: asset)
         
         avPlayer = AVPlayer(playerItem: playerItem)
@@ -99,6 +99,16 @@ public class CVAAVPlayer: NSObject {
         
         DispatchQueue.main.async {
             self.responseHandler?.onPlayerCommandComplete(command: .play, status: .success, info: [kAVPlayerLayer:self.avPlayerLayer as Any]);
+        }
+    }
+    
+    func destroyAVPlayer() {
+        
+        removePeriodicTimeObserver();
+        deRegisterAppStateChangeNotifications();
+        
+        if let avPlayer = avPlayer {
+            deRegisterPlayerNotification(avPlayer)
         }
     }
 }

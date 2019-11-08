@@ -9,17 +9,25 @@
 import Foundation
 
 public protocol CVAPlayerCommandHandler : class {
-  
-  var playerResponseHandler:CVAPlayerResponseHandler? { get set };
-  
-  func startAssetPlayback(asset:CVAAsset) -> CVAPlayerStatus;
-  
-  func playAsset(asset:CVAAsset) -> CVAPlayerStatus;
-  
-  func pauseAsset(asset:CVAAsset) -> CVAPlayerStatus;
-  
-  func seekAsset(asset:CVAAsset, info : [AnyHashable : Any]) -> CVAPlayerStatus;
-  
-  func stopAssetPlayback(asset:CVAAsset) -> CVAPlayerStatus;
-  
+    
+    var playerResponseHandler:CVAPlayerResponseHandler? { get set };
+    
+    func startAssetPlayback(asset:CVAAsset) -> CVAPlayerStatus;
+    
+    func playAsset(asset:CVAAsset) -> CVAPlayerStatus;
+    
+    func pauseAsset(asset:CVAAsset) -> CVAPlayerStatus;
+    
+    func seekAsset(asset:CVAAsset, info : [AnyHashable : Any]) -> CVAPlayerStatus;
+    
+    func skipfwdAsset(asset:CVAAsset, info : [AnyHashable : Any]?) -> CVAPlayerStatus;
+    
+    func skipbwdAsset(asset:CVAAsset, info : [AnyHashable : Any]?) -> CVAPlayerStatus;
+    
+    func replayAsset(asset:CVAAsset, info : [AnyHashable : Any]?) -> CVAPlayerStatus;
+    
+    func stopAssetPlayback(asset:CVAAsset) -> CVAPlayerStatus;
+    
+    func retryAssetPlayback(asset:CVAAsset,info : [AnyHashable : Any]?) -> CVAPlayerStatus;
+    
 }
