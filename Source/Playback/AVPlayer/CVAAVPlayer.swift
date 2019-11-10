@@ -8,7 +8,6 @@
 
 import Foundation
 import AVFoundation
-import CoreTelephony
 
 /// A class which is used to implement AVPlayer behaviour. Ideally, this class will not have any Conviva funnctionality in itself and will depend on CVAPlayerManager for the same.
 
@@ -45,19 +44,16 @@ public class CVAAVPlayer: NSObject {
     var timeObserverToken: Any?
     
     /**
-     The CTCallCenter instance
+     The AVAudioSession instance
      */
-    var callCenter : CTCallCenter?
+     var avAudioSession : AVAudioSession?
     
     /**
      The CVAAVPlayer class initializer. CVAAVPlayerManager's implementation responsible for Conviva initialization should happen here.
      */
     public override init() {
         super.init()
-        #if os(iOS)
-        callCenter = CTCallCenter()
-        handleCallStateChange()
-        #endif
+        avAudioSession = AVAudioSession.sharedInstance()
     }
     
     /**
@@ -82,7 +78,7 @@ public class CVAAVPlayer: NSObject {
         /// This will be useful to capture scenarios like DRM and processing/parsing m3u8 files.
         let asset = AVURLAsset(url: videoURL! as URL)
         let queue = DispatchQueue(label: "com.conviva.queue")
-        asset.resourceLoader.setDelegate(self as! AVAssetResourceLoaderDelegate , queue: queue)
+        asset.resourceLoader.setDelegate(self as? AVAssetResourceLoaderDelegate , queue: queue)
         let playerItem = AVPlayerItem(asset: asset)
         
         avPlayer = AVPlayer(playerItem: playerItem)
@@ -93,6 +89,7 @@ public class CVAAVPlayer: NSObject {
         
         addPeriodicTimeObserver();
         registerAppStateChangeNotifications()
+        registerAudioInterruptionNotifications()
         if let avPlayer = avPlayer {
             registerPlayerNotification(avPlayer)
         }
