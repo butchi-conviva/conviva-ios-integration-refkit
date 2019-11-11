@@ -44,11 +44,16 @@ public class CVAAVPlayer: NSObject {
     var timeObserverToken: Any?
     
     /**
+     The AVAudioSession instance
+     */
+     var avAudioSession : AVAudioSession?
+    
+    /**
      The CVAAVPlayer class initializer. CVAAVPlayerManager's implementation responsible for Conviva initialization should happen here.
      */
     public override init() {
         super.init()
-
+        avAudioSession = AVAudioSession.sharedInstance()
     }
     
     /**
@@ -65,16 +70,26 @@ public class CVAAVPlayer: NSObject {
             Swift.print("Empty asset url");
             return;
         }
+        
         let videoURL = self.asset?.playbackURI;
+        //  avPlayer = AVPlayer(url: videoURL! as URL)
+
+        /// The AVAssetResourceLoader's delegate is set to use methods that allow us to handle resource loading requests.
+        /// This will be useful to capture scenarios like DRM and processing/parsing m3u8 files.
+        let asset = AVURLAsset(url: videoURL! as URL)
+        let queue = DispatchQueue(label: "com.conviva.queue")
+        asset.resourceLoader.setDelegate(self as? AVAssetResourceLoaderDelegate , queue: queue)
+        let playerItem = AVPlayerItem(asset: asset)
         
-        //let videoURL = NSURL(string: Conviva.URLs.devimagesURL)
-        
-        avPlayer = AVPlayer(url: videoURL! as URL)
+        avPlayer = AVPlayer(playerItem: playerItem)
+
+        print(#function, videoURL as Any)
+
         self.avPlayerLayer = AVPlayerLayer(player: avPlayer)
         
         addPeriodicTimeObserver();
         registerAppStateChangeNotifications()
-        
+        registerAudioInterruptionNotifications()
         if let avPlayer = avPlayer {
             registerPlayerNotification(avPlayer)
         }
@@ -93,5 +108,4 @@ public class CVAAVPlayer: NSObject {
             deRegisterPlayerNotification(avPlayer)
         }
     }
-
 }
