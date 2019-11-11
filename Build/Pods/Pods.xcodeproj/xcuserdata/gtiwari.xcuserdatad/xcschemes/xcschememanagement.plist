@@ -4,33 +4,45 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>ConvivaAVFoundation.xcscheme</key>
+		<key>ConvivaAVFoundation-iOS.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>0</integer>
 		</dict>
-		<key>ConvivaCore.xcscheme</key>
+		<key>ConvivaAVFoundation-tvOS.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
+		</dict>
+		<key>ConvivaCore-iOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>ConvivaCore-tvOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ConvivaIntegrationRefKit-tvOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ConvivaIntegrationRefKit-tvOSTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-ConvivaIntegrationRefKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 		<key>Pods-ConvivaIntegrationRefKitTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>

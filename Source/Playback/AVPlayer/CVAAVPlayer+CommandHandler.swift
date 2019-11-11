@@ -24,7 +24,7 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
     /**
      This function is called when player is initially loaded.
      - Parameters:
-     - asset: An instance of CVAAsset.
+        - asset: An instance of CVAAsset.
      - Returns: An instance of CVAPlayerStatus.
      */
     public func startAssetPlayback(asset : CVAAsset) -> CVAPlayerStatus {
@@ -44,7 +44,7 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
     /**
      This function is called when playback is started.
      - Parameters:
-     - asset: An instance of CVAAsset.
+        - asset: An instance of CVAAsset.
      - Returns: An instance of CVAPlayerStatus.
      */
     public func playAsset(asset:CVAAsset) -> CVAPlayerStatus {
@@ -56,7 +56,7 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
     /**
      This function is called when playback is paused.
      - Parameters:
-     - asset: An instance of CVAAsset.
+        - asset: An instance of CVAAsset.
      - Returns: An instance of CVAPlayerStatus.
      */
     public func pauseAsset(asset:CVAAsset) -> CVAPlayerStatus {
@@ -67,7 +67,7 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
     /**
      This function is called when playback is stopped.
      - Parameters:
-     - asset: An instance of CVAAsset.
+        - asset: An instance of CVAAsset.
      - Returns: An instance of CVAPlayerStatus.
      */
     public func stopAssetPlayback(asset:CVAAsset) -> CVAPlayerStatus {
@@ -79,7 +79,7 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
     /**
      This function is called when playback is rerequested after failure.
      - Parameters:
-     - asset: An instance of CVAAsset.
+        - asset: An instance of CVAAsset.
      - Returns: An instance of CVAPlayerStatus.
      */
     public func retryAssetPlayback(asset:CVAAsset,info : [AnyHashable : Any]?) -> CVAPlayerStatus {
@@ -91,7 +91,7 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
     /**
     This function is called when user requested for replay.
     - Parameters:
-    - asset: An instance of CVAAsset.
+     - asset: An instance of CVAAsset.
     - Returns: An instance of CVAPlayerStatus.
     */
     public func replayAsset(asset:CVAAsset, info : [AnyHashable : Any]?) -> CVAPlayerStatus {
@@ -108,8 +108,8 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
     /**
      This function is called when player's seekbar is seeked.
      - Parameters:
-     - asset: An instance of CVAAsset.
-     - info: A dictionary containing seek information.
+        - asset: An instance of CVAAsset.
+        - info: A dictionary containing seek information.
      - Returns: An instance of CVAPlayerStatus.
      */
     public func seekAsset(asset:CVAAsset, info : [AnyHashable : Any]) -> CVAPlayerStatus {
@@ -125,8 +125,8 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
     /**
      This function performs fast forward player by 10 secs.
      - Parameters:
-     - asset: An instance of CVAAsset.
-     - info: A dictionary containing seek information.
+        - asset: An instance of CVAAsset.
+        - info: A dictionary containing seek information.
      - Returns: An instance of CVAPlayerStatus.
      */
     public func skipfwdAsset(asset:CVAAsset, info : [AnyHashable : Any]?) -> CVAPlayerStatus {
@@ -147,8 +147,8 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
     /**
      This function performs fast backward player by 10 secs.
      - Parameters:
-     - asset: An instance of CVAAsset.
-     - info: A dictionary containing seek information.
+        - asset: An instance of CVAAsset.
+        - info: A dictionary containing seek information.
      - Returns: An instance of CVAPlayerStatus.
      */
     public func skipbwdAsset(asset:CVAAsset, info : [AnyHashable : Any]?) -> CVAPlayerStatus {
@@ -169,8 +169,8 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
     /**
      This function is used to translate player provided seek value.
      - Parameters:
-     - avplayer: An instance of AVPlayer where content was seeked.
-     - value: Value of seek in Float
+        - avplayer: An instance of AVPlayer where content was seeked.
+        - value: Value of seek in Float
      */
     private func seek (avplayer : AVPlayer, value: Float) {
         
@@ -187,8 +187,8 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
     /**
      This function is used to perform seek to desired time
      - Parameters:
-     - avplayer: An instance of AVPlayer where content was seeked.
-     - toTime: CMTime
+        - avplayer: An instance of AVPlayer where content was seeked.
+        - toTime: CMTime
      */
     private func seekplayer(avPlayer:AVPlayer,toTime:CMTime,completionHandler:(() -> Void)? = nil) {
         
