@@ -14,9 +14,9 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "69449D1FDE1513B2F0493580FFE4A741"
-               BuildableName = "ConvivaAVFoundation"
-               BlueprintName = "ConvivaAVFoundation"
+               BlueprintIdentifier = "F9177ED6C9E2D8FD2D9C992178FC39C9"
+               BuildableName = "libPods-ConvivaIntegrationRefKit-tvOS.a"
+               BlueprintName = "Pods-ConvivaIntegrationRefKit-tvOS"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

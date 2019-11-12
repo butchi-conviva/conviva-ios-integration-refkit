@@ -8,7 +8,6 @@
 
 import Foundation
 import AVFoundation
-import CoreTelephony
 
 /// An extension of class CVAAVPlayer which is used to implement AVPlayer's Notifications and events.
 
@@ -182,7 +181,7 @@ extension CVAAVPlayer {
                 // Capture interruption start scenarios here. For example:
                 // 1. when the incoming call starts
                 // 2. when the alarm notification shows up
-                self.playerEventManager.didEnterBackground()
+                self.playerEventManager.didReceiveAudioInterruption()
             case .ended:
                 // Capture interruption end scenarios here. For example:
                 // 1. when the incoming call ends unanswered
@@ -190,7 +189,7 @@ extension CVAAVPlayer {
                 // 3. when the incoming call is answered by the user and completes
                 // 4. when the alarm notification is dismissed by the user
                 if self.avPlayer != nil {
-                    self.playerEventManager.willEnterForeground(player: self.avPlayer as Any, assetInfo: self.asset)
+                    self.playerEventManager.didFinishAudioInterruption(player: self.avPlayer as Any, assetInfo: self.asset)
                     self.avPlayer?.play()
                 }
             }

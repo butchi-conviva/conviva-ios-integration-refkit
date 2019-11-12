@@ -84,6 +84,20 @@ protocol CVAPlayerEventsManagerProtocol {
      */
     func willEnterForeground(player: Any, assetInfo : CVAAsset)
 
+    /**
+     This function will be called when AVPlayer receives an audio interruption.
+     This function is used to call CVAAVPlayerIntegrationRef's cleanupSession function.
+     */
+    func didReceiveAudioInterruption()
+    
+    /**
+     This function will be called when audio interruption is finished.
+     This function is used to call CVAAVPlayerIntegrationRef's createSession function.
+     - Parameters:
+        - player: The player instance which has started the playback.
+        - assetInfo: The CVAAsset instance which contains metadata information.
+     */
+    func didFinishAudioInterruption(player: Any, assetInfo : CVAAsset)
 }
 
 /// A class which is used to implement CVAPlayerManagerProtocol requirements for listening to callbacks from the player and making required Conviva calls.
@@ -185,6 +199,25 @@ struct CVAPlayerEventsManager : CVAPlayerEventsManagerProtocol {
     func willEnterForeground(player: Any, assetInfo : CVAAsset) {
         convivaAVPlayerIntegrationRef.createSession(player: player, metadata: getMetadata(asset: assetInfo))
     }
+    
+    /**
+     This function will be called when AVPlayer receives an audio interruption.
+     This function is used to call CVAAVPlayerIntegrationRef's cleanupSession function.
+     */
+    func didReceiveAudioInterruption() {
+        convivaAVPlayerIntegrationRef.cleanupSession()
+    }
+    
+    /**
+     This function will be called when audio interruption is finished.
+     This function is used to call CVAAVPlayerIntegrationRef's createSession function.
+     - Parameters:
+        - player: The player instance which has started the playback.
+        - assetInfo: The CVAAsset instance which contains metadata information.
+     */
+    func didFinishAudioInterruption(player: Any, assetInfo : CVAAsset) {
+        convivaAVPlayerIntegrationRef.createSession(player: player, metadata: getMetadata(asset: assetInfo))
+    }
 }
 
 /// An extension of class CVAAVPlayerManager which is used to provide basic objects which are used in Conviva calls.
@@ -206,7 +239,7 @@ extension CVAPlayerEventsManager {
      This function prepares the Metadata's tags values which will be lated passed to Conviva.
      */
     func getCustomTags() -> NSMutableDictionary {
-        #if os(ios)
+        #if os(iOS)
         let deviceID = UIDevice.current.identifierForVendor?.uuidString
         #else
         let deviceID = ""

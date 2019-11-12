@@ -1,3 +1,4 @@
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/ConvivaAVFoundation/Framework/tvOS" "${PODS_ROOT}/ConvivaCore/Framework/tvOS"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 OTHER_LDFLAGS = $(inherited) -framework "AVFoundation" -framework "CoreMedia" -framework "MobileCoreServices" -framework "SystemConfiguration"
 PODS_BUILD_DIR = ${BUILD_DIR}
