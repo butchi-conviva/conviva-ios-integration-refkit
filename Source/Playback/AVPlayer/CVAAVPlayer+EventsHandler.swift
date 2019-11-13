@@ -124,7 +124,7 @@ extension CVAAVPlayer {
     @objc private func didFinishPlaying(_ sender: Notification) -> Void {
         playerEventManager.didStopPlayback()
         
-        self.responseHandler?.onPlayerEvent(event:.onPlayerdidFinishPlaying, info: [:])
+        self.responseHandler?.onPlayerEvent(event:.onContentPlayDidFinish, info: [:])
     }
     
     /**
@@ -134,7 +134,7 @@ extension CVAAVPlayer {
     @objc private func didFailPlaying(_ sender: Notification) -> Void {
         playerEventManager.didStopPlayback()
         
-        self.responseHandler?.onPlayerEvent(event:.onPlayerdidFailPlaying, info: [:])
+        self.responseHandler?.onPlayerEvent(event:.onContentPlayDidFail, info: [:])
     }
     
     /**
@@ -249,7 +249,7 @@ extension CVAAVPlayer {
             }
             if newStatus == .failed {
                 
-                self.responseHandler?.onPlayerEvent(event:.onPlayerdidFailPlaying, info: [:])
+                self.responseHandler?.onPlayerEvent(event:.onContentPlayDidFail, info: [:])
                 NSLog("Error: \(String(describing: self.avPlayer?.currentItem?.error?.localizedDescription)), error: \(String(describing: self.avPlayer?.currentItem?.error))")
             }
         }
