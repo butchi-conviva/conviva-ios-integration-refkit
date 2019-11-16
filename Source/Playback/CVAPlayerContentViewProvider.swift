@@ -12,3 +12,7 @@ import UIKit
 @objc public protocol CVAPlayerContentViewProvider {
     func playerContentView() -> UIView;
 }
+
+@objc public protocol CVAAdViewProvider {
+    func adView() -> CVAAdView
+}

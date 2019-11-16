@@ -24,6 +24,16 @@ public class CVAAVPlayer: NSObject {
     var avPlayerLayer : AVPlayerLayer?
     
     /**
+     The CVAAdView instance which will be passed to application UI and Google IMA for ad playback.
+     */
+    var cvaAdView : CVAAdView?
+
+    /**
+     The CVAGoogleIMAHandler instance which handles GoogleIMA functionality be passed to application UI and Google IMA for ad playback.
+     */
+    var cvaGoogleIMA : CVAGoogleIMAHandler?
+    
+    /**
      The CVAAVPlayerManager instance which takes care of all Conviva implementation.
      */
     var playerEventManager : CVAPlayerEventsManagerProtocol!
@@ -95,7 +105,9 @@ public class CVAAVPlayer: NSObject {
         }
         
         DispatchQueue.main.async {
-            self.responseHandler?.onPlayerCommandComplete(command: .play, status: .success, info: [kAVPlayerLayer:self.avPlayerLayer as Any]);
+//            self.responseHandler?.onPlayerCommandComplete(command: .play, status: .success, info: [kAVPlayerLayer:self.avPlayerLayer as Any]);
+            
+            self.responseHandler?.onPlayerCommandComplete(command: .play, status: .success, info: [kGoogleIMAAdView : self.cvaAdView as Any]);
         }
     }
     
