@@ -30,3 +30,5 @@ public enum CVAPlayerStatus {
 let playbackPosition = "playbackPosition";
 let totalContentDuration = "totalContentDuration";
 let kAVPlayerLayer = "kAVPlayerLayer";
+
+let kGoogleIMAAdView = "kGoogleIMAAdView";

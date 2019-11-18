@@ -34,9 +34,11 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
         playerEventManager = CVAPlayerEventsManager()
         
         if avPlayer != nil {
-            playerEventManager.willStartPlayback(player: avPlayer as Any, assetInfo: self.asset)
-            avPlayer?.play()
+            // playerEventManager.willStartPlayback(player: avPlayer as Any, assetInfo: self.asset)
+            // avPlayer?.play()
         }
+        
+        startAdPlayback(asset: asset)
         
         return .success;
     }

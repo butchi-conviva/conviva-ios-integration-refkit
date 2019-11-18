@@ -10,7 +10,7 @@ import Foundation
 
 public class CVAAsset: NSObject {
     
-    static let mediaURL = NSURL(string: Conviva.URLs.sampleLocalURL)
+    static let mediaURL = NSURL(string: Conviva.URLs.devimagesURL)
 //    static let mediaURL = NSURL(string: Conviva.URLs.encryptedURL1)
 //    static let mediaURL = NSURL(string: Conviva.URLs.encryptedURL2)
 //    static let mediaURL = NSURL(string: Conviva.URLs.encryptedURL3)
