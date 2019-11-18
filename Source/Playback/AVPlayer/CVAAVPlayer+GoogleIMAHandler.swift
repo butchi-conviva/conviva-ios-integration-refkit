@@ -39,8 +39,9 @@ extension CVAAVPlayer {
     
     // Request ad from GoogleIMA
     func requestGoogleIMAAd(asset: CVAAsset) {
-        if let cvaGoogleIMA = cvaGoogleIMA {
-            cvaGoogleIMA.requestAdsWithTag(Conviva.GoogleIMAAdTags.kSkippableTag, view: cvaAdView!)
+        if let cvaGoogleIMA = cvaGoogleIMA,
+            let avPlayer = avPlayer {
+            cvaGoogleIMA.requestAdsWithTag(Conviva.GoogleIMAAdTags.kSkippableTag, view: cvaAdView!, avPlayer: avPlayer)
         }
         
         self.responseHandler?.onPlayerEvent(event:.onAdLoading, info: [:])

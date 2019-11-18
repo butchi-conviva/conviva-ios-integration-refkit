@@ -11,12 +11,16 @@ import GoogleInteractiveMediaAds
 
 /// A class used to keep all methods required for Google IMA setup and notifications handling.
 
-public class CVAGoogleIMAHandler : NSObject {
+public class CVAGoogleIMAHandler : NSObject, AVPictureInPictureControllerDelegate {
     
     // IMA SDK handles.
     var adsLoader: IMAAdsLoader!
     var adsManager: IMAAdsManager?
     
+    // PiP objects.
+    var pictureInPictureController: AVPictureInPictureController?
+    var pictureInPictureProxy: IMAPictureInPictureProxy?
+
     // Tracking for play/pause.
     var isAdPlayback = false
 
@@ -46,16 +50,28 @@ public class CVAGoogleIMAHandler : NSObject {
 
         // Set Conviva as the ads loader delegate.
         adsLoader.delegate = cvaGoogleIMAIntegrationRef.setConvivaAdsLoaderDelegate(delegate: self) as? IMAAdsLoaderDelegate
+        
+        setUpPiP()
     }
 
+    // Initialize the content player and load content.
+    func setUpPiP() {
+        // Set ourselves up for PiP.
+        pictureInPictureProxy = IMAPictureInPictureProxy(avPictureInPictureControllerDelegate: self);
+        pictureInPictureController = AVPictureInPictureController(playerLayer: AVPlayerLayer());
+        if (pictureInPictureController != nil) {
+            pictureInPictureController!.delegate = pictureInPictureProxy;
+        }
+    }
+    
     // Request ads for provided tag.
-    func requestAdsWithTag(_ adTagUrl: String!, view: CVAAdView) {
+    func requestAdsWithTag(_ adTagUrl: String!, view: CVAAdView, avPlayer : AVPlayer) {
         // Create an ad request with our ad tag, display container, and optional user context.
         let request = IMAAdsRequest(
             adTagUrl: adTagUrl,
             adDisplayContainer: createAdDisplayContainer(view: view),
-            avPlayerVideoDisplay: nil,
-            pictureInPictureProxy: nil,
+            avPlayerVideoDisplay: IMAAVPlayerVideoDisplay(avPlayer: avPlayer),
+            pictureInPictureProxy: pictureInPictureProxy,
             userContext: nil)
         adsLoader.requestAds(with: request)
     }
@@ -72,10 +88,9 @@ extension CVAGoogleIMAHandler : IMAAdsLoaderDelegate {
         self.adsManager = adsLoadedData.adsManager;
         
         // Set Conviva as the ads manager delegate.
-        self.adsManager?.delegate = cvaGoogleIMAIntegrationRef.setConvivaAdsLoaderDelegate(delegate: self) as? IMAAdsManagerDelegate & NSObjectProtocol
+        self.adsManager?.delegate = cvaGoogleIMAIntegrationRef.setConvivaAdsManagerDelegate(delegate: self) as? IMAAdsManagerDelegate & NSObjectProtocol
         
         let adsRenderingSettings = IMAAdsRenderingSettings()
-        // adsRenderingSettings.webOpenerPresentingController = self
         
         // Initialize the ads manager.
         adsManager!.initialize(with: adsRenderingSettings)

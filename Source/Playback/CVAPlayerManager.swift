@@ -86,16 +86,17 @@ extension CVAPlayerManager : CVAPlayerResponseHandler {
         switch command {
         case CVAPlayerCommand.play:
             if status == .success {
+                let contentView = self.playerContentViewProvider.playerContentView();
+
                 if let avPlayerLayer = info[kAVPlayerLayer] as? AVPlayerLayer {
-                    let contentView = self.playerContentViewProvider.playerContentView();
                     avPlayerLayer.frame = contentView.bounds;
                     avPlayerLayer.removeFromSuperlayer();
                     contentView.layer.insertSublayer(avPlayerLayer, at:UInt32(contentView.layer.sublayers?.count ?? 0) )
                     Swift.print("command \(command) status \(status) info \(info) contentView.bounds \(contentView.bounds)");
                 }
                 
-                if let adView = info[kGoogleIMAAdView] as? CVAAdView {
-                    let contentView = self.adViewProvider.adView();
+                else if let adView = info[kGoogleIMAAdView] as? CVAAdView {
+//                    let contentView = self.adViewProvider.adView();
                     adView.frame = contentView.bounds;
                     adView.layer.removeFromSuperlayer();
                     contentView.layer.insertSublayer(adView.layer, at:UInt32(contentView.layer.sublayers?.count ?? 0) )

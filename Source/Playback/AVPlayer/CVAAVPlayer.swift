@@ -82,13 +82,12 @@ public class CVAAVPlayer: NSObject {
         }
         
         let videoURL = self.asset?.playbackURI;
-        //  avPlayer = AVPlayer(url: videoURL! as URL)
-
+        
         /// The AVAssetResourceLoader's delegate is set to use methods that allow us to handle resource loading requests.
         /// This will be useful to capture scenarios like DRM and processing/parsing m3u8 files.
         let asset = AVURLAsset(url: videoURL! as URL)
         let queue = DispatchQueue(label: "com.conviva.queue")
-        asset.resourceLoader.setDelegate(self as? AVAssetResourceLoaderDelegate , queue: queue)
+        asset.resourceLoader.setDelegate(self, queue: queue)
         let playerItem = AVPlayerItem(asset: asset)
         
         avPlayer = AVPlayer(playerItem: playerItem)
