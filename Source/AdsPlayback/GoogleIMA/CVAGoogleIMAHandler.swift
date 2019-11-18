@@ -25,7 +25,6 @@ public class CVAGoogleIMAHandler : NSObject {
 
     public override init() {
         super.init()
-
         setUpIMA()
     }
     
@@ -38,9 +37,12 @@ public class CVAGoogleIMAHandler : NSObject {
         if (adsManager != nil) {
             adsManager!.destroy()
         }
-        adsLoader.contentComplete()
+        
         let settings = IMASettings()
-        settings.enableBackgroundPlayback = true
+        settings.enableBackgroundPlayback = true;
+        adsLoader = IMAAdsLoader(settings: settings)
+
+        // adsLoader.contentComplete()
 
         // Set Conviva as the ads loader delegate.
         adsLoader.delegate = cvaGoogleIMAIntegrationRef.setConvivaAdsLoaderDelegate(delegate: self) as? IMAAdsLoaderDelegate
