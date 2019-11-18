@@ -9,34 +9,6 @@
 import Foundation
 
 public enum CVAPlayerEvent : String {
-
-    case onPlayHeadChange          = "onPlayHeadChange"
-    case onPlayerStateChange       = "onPlayerStateChange"
-    case onPlayerdidFinishPlaying  = "onPlayerdidFinishPlaying"
-    case onPlayerdidFailPlaying     = "onPlayerdidFailPlaying"
-
-    case onAdLoading                =   "onAdLoading"
-    case onAdLoadDidFail            =   "onAdLoadDidFail"
-    case onAdPlayDidStart           =   "onAdPlayDidStart"
-    case onAdPlayDidFail            =   "onAdPlayDidFail"
-    case onAdPlayDidFinish          =   "onAdPlayDidFinish"
-     
-     public static let allValues =
-     
-     [onPlayHeadChange.rawValue,
-     onPlayerStateChange.rawValue,
-     onPlayerdidFinishPlaying.rawValue,
-     onPlayerdidFailPlaying.rawValue,
-     
-     onAdLoading.rawValue,
-     onAdLoadDidFail.rawValue,
-     onAdPlayDidStart.rawValue,
-     onAdPlayDidFail.rawValue,
-     onAdPlayDidFinish.rawValue];
-
-    /*
-
-
     case onContentLoading           =   "onContentLoading"
     case onContentLoadDidFail       =   "onContentLoadDidFail"
     case onContentPlayDidStart      =   "onContentPlayDidStart"
@@ -63,7 +35,4 @@ public enum CVAPlayerEvent : String {
          onAdPlayDidStart.rawValue,
          onAdPlayDidFail.rawValue,
          onAdPlayDidFinish.rawValue];
-
-     */
-
 }
