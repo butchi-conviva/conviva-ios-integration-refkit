@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol CVAGoogleIMACommandHandler : class {
+public protocol CVAAdCommandHandler : class {
     // var adResponseHandler:CVAPlayerResponseHandler? { get set };
     
     func startAdPlayback(asset:CVAAsset)

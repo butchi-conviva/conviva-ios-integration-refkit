@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension CVAAVPlayer : CVAGoogleIMACommandHandler {
+extension CVAAVPlayer : CVAAdCommandHandler {
     
     public func startAdPlayback(asset: CVAAsset) {
         setUpAdView()

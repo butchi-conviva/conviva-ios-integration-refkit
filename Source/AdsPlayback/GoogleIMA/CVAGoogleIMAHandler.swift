@@ -10,6 +10,7 @@ import Foundation
 import GoogleInteractiveMediaAds
 
 /// A class used to keep all methods required for Google IMA setup and notifications handling.
+
 public class CVAGoogleIMAHandler : NSObject {
     
     // IMA SDK handles.

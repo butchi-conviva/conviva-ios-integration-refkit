@@ -62,8 +62,8 @@
 		6F1C6B77235F1DDE002E5DDA /* CVAAVPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1C6B76235F1DDE002E5DDA /* CVAAVPlayer.swift */; };
 		6F465313237C1EF500F7ED98 /* CVAGoogleIMAHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F465310237C1EF500F7ED98 /* CVAGoogleIMAHandler.swift */; };
 		6F465314237C1EF500F7ED98 /* CVAGoogleIMAHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F465310237C1EF500F7ED98 /* CVAGoogleIMAHandler.swift */; };
-		6F46531B237C1F3D00F7ED98 /* CVAGoogleIMACommandHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46531A237C1F3D00F7ED98 /* CVAGoogleIMACommandHandler.swift */; };
-		6F46531C237C1F3D00F7ED98 /* CVAGoogleIMACommandHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46531A237C1F3D00F7ED98 /* CVAGoogleIMACommandHandler.swift */; };
+		6F46531B237C1F3D00F7ED98 /* CVAAdCommandHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46531A237C1F3D00F7ED98 /* CVAAdCommandHandler.swift */; };
+		6F46531C237C1F3D00F7ED98 /* CVAAdCommandHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46531A237C1F3D00F7ED98 /* CVAAdCommandHandler.swift */; };
 		6F46531E237C1FFB00F7ED98 /* CVAAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46531D237C1FFB00F7ED98 /* CVAAdView.swift */; };
 		6F46531F237C1FFB00F7ED98 /* CVAAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46531D237C1FFB00F7ED98 /* CVAAdView.swift */; };
 		6F4ED8BE2379799D00F49963 /* CVAAVPlayer+AssetResourceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4ED8BD2379799D00F49963 /* CVAAVPlayer+AssetResourceLoader.swift */; };
@@ -75,6 +75,7 @@
 		6F54522B2355F82C004BBB79 /* CVAAVPlayerIntegrationRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5452272355F82C004BBB79 /* CVAAVPlayerIntegrationRef.swift */; };
 		6F95DE04237E90F7005B4BA8 /* CVAAVPlayer+GoogleIMAHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F95DE03237E90F7005B4BA8 /* CVAAVPlayer+GoogleIMAHandler.swift */; };
 		6F95DE07237EA345005B4BA8 /* CVAGoogleIMAIntegrationRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F95DE06237EA345005B4BA8 /* CVAGoogleIMAIntegrationRef.swift */; };
+		6F95DE0923828859005B4BA8 /* CVAGoogleIMA+CommandHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F95DE0823828858005B4BA8 /* CVAGoogleIMA+CommandHandler.swift */; };
 		6FF376332345DF1C00B08B99 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF376322345DF1C00B08B99 /* SystemConfiguration.framework */; };
 		6FF376352345DF2100B08B99 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF376342345DF2100B08B99 /* MediaPlayer.framework */; };
 		6FF376372345DF2A00B08B99 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF376362345DF2A00B08B99 /* JavaScriptCore.framework */; };
@@ -145,7 +146,7 @@
 		6F1C6B76235F1DDE002E5DDA /* CVAAVPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVAAVPlayer.swift; sourceTree = "<group>"; };
 		6F24B94B234B245100F4361A /* PSDKLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PSDKLibrary.framework; path = 3rdparty/Primetime/PSDKLibrary.framework; sourceTree = "<group>"; };
 		6F465310237C1EF500F7ED98 /* CVAGoogleIMAHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVAGoogleIMAHandler.swift; sourceTree = "<group>"; };
-		6F46531A237C1F3D00F7ED98 /* CVAGoogleIMACommandHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVAGoogleIMACommandHandler.swift; sourceTree = "<group>"; };
+		6F46531A237C1F3D00F7ED98 /* CVAAdCommandHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVAAdCommandHandler.swift; sourceTree = "<group>"; };
 		6F46531D237C1FFB00F7ED98 /* CVAAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVAAdView.swift; sourceTree = "<group>"; };
 		6F4ED8BD2379799D00F49963 /* CVAAVPlayer+AssetResourceLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CVAAVPlayer+AssetResourceLoader.swift"; sourceTree = "<group>"; };
 		6F4ED8C2237AFBE700F49963 /* GoogleInteractiveMediaAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleInteractiveMediaAds.framework; path = "Pods/GoogleAds-IMA-iOS-SDK/GoogleInteractiveMediaAds.framework"; sourceTree = "<group>"; };
@@ -156,6 +157,7 @@
 		6F5902E5A4BB3AA6245AC568 /* Pods-ConvivaIntegrationRefKit-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConvivaIntegrationRefKit-tvOS.release.xcconfig"; path = "Target Support Files/Pods-ConvivaIntegrationRefKit-tvOS/Pods-ConvivaIntegrationRefKit-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		6F95DE03237E90F7005B4BA8 /* CVAAVPlayer+GoogleIMAHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CVAAVPlayer+GoogleIMAHandler.swift"; sourceTree = "<group>"; };
 		6F95DE06237EA345005B4BA8 /* CVAGoogleIMAIntegrationRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVAGoogleIMAIntegrationRef.swift; sourceTree = "<group>"; };
+		6F95DE0823828858005B4BA8 /* CVAGoogleIMA+CommandHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CVAGoogleIMA+CommandHandler.swift"; sourceTree = "<group>"; };
 		6FF376302345DB8200B08B99 /* OoyalaSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OoyalaSDK.framework; path = 3rdparty/Ooyala/4.43/OoyalaSDK.framework; sourceTree = "<group>"; };
 		6FF376322345DF1C00B08B99 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6FF376342345DF2100B08B99 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -394,8 +396,9 @@
 			isa = PBXGroup;
 			children = (
 				6F46531D237C1FFB00F7ED98 /* CVAAdView.swift */,
-				6F46531A237C1F3D00F7ED98 /* CVAGoogleIMACommandHandler.swift */,
+				6F46531A237C1F3D00F7ED98 /* CVAAdCommandHandler.swift */,
 				6F465310237C1EF500F7ED98 /* CVAGoogleIMAHandler.swift */,
+				6F95DE0823828858005B4BA8 /* CVAGoogleIMA+CommandHandler.swift */,
 			);
 			path = GoogleIMA;
 			sourceTree = "<group>";
@@ -736,7 +739,7 @@
 				510FBB70236997C6005BC13C /* CVAOnDemandAsset.swift in Sources */,
 				6F4ED8BF2379799D00F49963 /* CVAAVPlayer+AssetResourceLoader.swift in Sources */,
 				510FBB71236997C6005BC13C /* Utilities.swift in Sources */,
-				6F46531C237C1F3D00F7ED98 /* CVAGoogleIMACommandHandler.swift in Sources */,
+				6F46531C237C1F3D00F7ED98 /* CVAAdCommandHandler.swift in Sources */,
 				510FBB72236997C6005BC13C /* Constants.swift in Sources */,
 				510FBB73236997C6005BC13C /* UserDefaults+Extension.swift in Sources */,
 				510FBB75236997C6005BC13C /* CVAAVPlayer.swift in Sources */,
@@ -780,8 +783,9 @@
 				5176E72523262E5E00E1946D /* CVAPlayerContentViewProvider.swift in Sources */,
 				5176E72A23262E5E00E1946D /* CVAPlayerCommandHandler.swift in Sources */,
 				6F4ED8BE2379799D00F49963 /* CVAAVPlayer+AssetResourceLoader.swift in Sources */,
+				6F95DE0923828859005B4BA8 /* CVAGoogleIMA+CommandHandler.swift in Sources */,
 				5176E72823262E5E00E1946D /* CVAAVPlayer+CommandHandler.swift in Sources */,
-				6F46531B237C1F3D00F7ED98 /* CVAGoogleIMACommandHandler.swift in Sources */,
+				6F46531B237C1F3D00F7ED98 /* CVAAdCommandHandler.swift in Sources */,
 				5176E72723262E5E00E1946D /* CVAPlayerEventManager.swift in Sources */,
 				5176E72623262E5E00E1946D /* CVAPlayerManager.swift in Sources */,
 				5176E72923262E5E00E1946D /* CVAPlayerResponseHandler.swift in Sources */,

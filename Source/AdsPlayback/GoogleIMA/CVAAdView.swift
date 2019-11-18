@@ -9,11 +9,18 @@
 import Foundation
 import UIKit
 
+/// A class which is used to provide a view for ad playback. This view will be passed to Ad managers for ads playback.
+
 @objc(CVAAdView)
 
 public class CVAAdView : UIView {
     private(set) var adView : UIView?
     
+    /**
+     The CVAAdView class initializer. This initializer initializes CVAAdView class with provieded UIView instance.
+     - Parameters:
+        - adView: Provided instance of UIView
+     */
     public init(adView : UIView) {
         self.adView = adView;
         super.init(frame: CGRect.zero);
@@ -22,6 +29,11 @@ public class CVAAdView : UIView {
         self.layer.addSublayer((self.adView?.layer)!);
     }
     
+    /**
+     The CVAAdView class initializer. This initializer initializes CVAAdView class with provieded frame.
+     - Parameters:
+         - frame: Provided instance of CGRect
+     */
     public override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -30,12 +42,18 @@ public class CVAAdView : UIView {
         fatalError("init(coder:) has not been implemented. Please use init(avPlayerLayer:)")
     }
     
+    /**
+     Tells the view that its window object changed.
+     */
     override public func didMoveToWindow() {
         super.didMoveToWindow()
         self.backgroundColor = .black
         self.adView?.frame = self.bounds;
     }
-    
+
+    /**
+     Tells the view that its superview changed.
+     */
     override public func didMoveToSuperview() {
         super.didMoveToSuperview()
         self.backgroundColor = .black
