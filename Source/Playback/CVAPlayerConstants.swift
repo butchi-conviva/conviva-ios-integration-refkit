@@ -22,6 +22,12 @@ public enum CVAPlayerCommand : String {
     
 }
 
+public enum CVAAdPlayerCommand : String {
+    case start = "start"
+    case skip = "skip"
+    case stop = "stop"
+}
+
 public enum CVAPlayerStatus {
     case failed
     case success
@@ -30,5 +36,6 @@ public enum CVAPlayerStatus {
 let playbackPosition = "playbackPosition";
 let totalContentDuration = "totalContentDuration";
 let kAVPlayerLayer = "kAVPlayerLayer";
-
 let kGoogleIMAAdView = "kGoogleIMAAdView";
+
+

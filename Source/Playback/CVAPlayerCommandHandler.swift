@@ -10,6 +10,8 @@ import Foundation
 
 public protocol CVAPlayerCommandHandler : class {
     
+    var contentPlayer: Any? { get }
+    
     var playerResponseHandler:CVAPlayerResponseHandler? { get set };
     
     func startAssetPlayback(asset:CVAAsset) -> CVAPlayerStatus;

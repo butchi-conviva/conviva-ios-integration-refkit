@@ -104,9 +104,8 @@ public class CVAAVPlayer: NSObject {
         }
         
         DispatchQueue.main.async {
-//            self.responseHandler?.onPlayerCommandComplete(command: .play, status: .success, info: [kAVPlayerLayer:self.avPlayerLayer as Any]);
+            self.responseHandler?.onPlayerCommandComplete(command: .play, status: .success, info: [kAVPlayerLayer:self.avPlayerLayer as Any]);
             
-            self.responseHandler?.onPlayerCommandComplete(command: .play, status: .success, info: [kGoogleIMAAdView : self.cvaAdView as Any]);
         }
     }
     
