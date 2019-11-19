@@ -25,7 +25,7 @@ class CVAGoogleIMAIntegrationRef : IMAAdsLoaderDelegate, IMAAdsManagerDelegate {
     var contentPlayer : Any?
     var adIndex : Int?
     var podDuration : Int?
-    var adBreak : Int?
+    var adBreak : Int = 0
     var podPosition : String?
     var isContentPaused : Bool?
 
@@ -186,7 +186,7 @@ class CVAGoogleIMAIntegrationRef : IMAAdsLoaderDelegate, IMAAdsManagerDelegate {
      *  @param adsLoadedData the IMAAdsLoadedData instance containing ad data
      */
     public func adsLoader(_ loader: IMAAdsLoader!, adsLoadedWith adsLoadedData: IMAAdsLoadedData!) {
-        
+        print("#Conviva : adsLoader adsLoadedWith")
         /// 1. Insert Conviva related code.
         /// No Conviva action required at this step.
         
@@ -203,7 +203,8 @@ class CVAGoogleIMAIntegrationRef : IMAAdsLoaderDelegate, IMAAdsManagerDelegate {
      *  @param adErrorData the IMAAdLoadingErrorData instance with error information
      */
     public func adsLoader(_ loader: IMAAdsLoader!, failedWith adErrorData: IMAAdLoadingErrorData!) {
-        
+        print("#Conviva : adsLoader adErrorData")
+
         /// 1. Insert Conviva related code.
         
         let error : IMAAdError = adErrorData.adError
@@ -232,10 +233,16 @@ class CVAGoogleIMAIntegrationRef : IMAAdsLoaderDelegate, IMAAdsManagerDelegate {
      *  @param event      the IMAAdEvent received
      */
     public func adsManager(_ adsManager: IMAAdsManager!, didReceive event: IMAAdEvent!) {
-        
+        print("#Conviva : adsManager didReceive event : \(String(describing: event.typeString!))")
+
         /// 1. Insert Conviva related code.
         
+        guard event.ad != nil else {
+            return
+        }
+        
         let adInfo : IMAAd = event.ad
+        
         let podInfo : IMAAdPodInfo = adInfo.adPodInfo
         
         switch event.type {
@@ -280,6 +287,9 @@ class CVAGoogleIMAIntegrationRef : IMAAdsLoaderDelegate, IMAAdsManagerDelegate {
             dict["c3.ad.isSlate"] = "false"
             
             let metadata : ConvivaContentInfo = ConvivaContentInfo.createInfoForLightSession(withAssetName: adInfo.adTitle) as! ConvivaContentInfo
+            
+            print("#Conviva : Conviva Asset Name : \(adInfo.adTitle ?? "Conviva Google IMA Session")")
+
             metadata.contentLength = Int(adInfo.duration)
             metadata.streamUrl = "adtag_url"
             
@@ -374,7 +384,8 @@ class CVAGoogleIMAIntegrationRef : IMAAdsLoaderDelegate, IMAAdsManagerDelegate {
      *  @param error      the IMAAdError received
      */
     public func adsManager(_ adsManager: IMAAdsManager!, didReceive error: IMAAdError!) {
-        
+        print("#Conviva : adsManager didReceive error")
+
         /// 1. Insert Conviva related code.
 
         let errorType = error.type
@@ -405,7 +416,7 @@ class CVAGoogleIMAIntegrationRef : IMAAdsLoaderDelegate, IMAAdsManagerDelegate {
         /// 1. Insert Conviva related code.
 
         detachPlayer()
-        self.adBreak = self.adBreak! + 1;
+        self.adBreak = self.adBreak + 1;
         self.isContentPaused = true;
         if(self.contentSession != nil) {
             var podStartAttributes : [String : Any] = [:]
