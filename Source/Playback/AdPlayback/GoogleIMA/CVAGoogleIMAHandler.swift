@@ -22,13 +22,21 @@ public class CVAGoogleIMAHandler : NSObject, AVPictureInPictureControllerDelegat
     var pictureInPictureProxy: IMAPictureInPictureProxy?
 
     // Content player handles.
-    var contentPlayer: AVPlayer?
+    var contentPlayer: AVPlayer? ;
 
     // Tracking for play/pause.
     var isAdPlayback = false
 
     // CVAGoogleIMAIntegrationRef instance
     let cvaGoogleIMAIntegrationRef = CVAGoogleIMAIntegrationRef()
+
+    var adContainerView:CVAAdView? = nil;
+    /**
+     The CVAPlayerResponseHandler instance
+     */
+    var responseHandler : CVAAdResponseHandler?;
+    
+    public var dataSource:CVAAdDataSource?
 
     public override init() {
         super.init()
@@ -106,7 +114,7 @@ extension CVAGoogleIMAHandler : IMAAdsLoaderDelegate {
         
         print("Error loading ads: \(adErrorData.adError.message ?? "s")")
         isAdPlayback = false
-        // contentPlayer!.play()
+         contentPlayer!.play()
     }
 }
 
@@ -116,6 +124,9 @@ extension CVAGoogleIMAHandler : IMAAdsManagerDelegate {
         print("AdsManager event \(event.typeString!)")
         switch (event.type) {
         case IMAAdEventType.LOADED:
+            self.responseHandler?.onAdCommandComplete(command: .start, status: .success, info: [kGoogleIMAAdView : self.adContainerView as Any]);
+            
+            self.responseHandler?.onAdEvent(event: .onAdPlayDidStart,info: [:]);
             adsManager.start()
             break
         case IMAAdEventType.PAUSE:
@@ -143,23 +154,23 @@ extension CVAGoogleIMAHandler : IMAAdsManagerDelegate {
         print("AdsManager error: \(String(describing: error.message))")
         isAdPlayback = false
         
-        /* TBD
+        // TBD
         if let contentPlayer = contentPlayer {
             contentPlayer.play()
             cvaGoogleIMAIntegrationRef.attachPlayer(streamer: contentPlayer)
         }
-        */
+        
     }
     
     public func adsManagerDidRequestContentPause(_ adsManager: IMAAdsManager!) {
         // The SDK is going to play ads, so pause the content.
         isAdPlayback = true
-        // contentPlayer!.pause()
+        contentPlayer!.pause()
     }
     
     public func adsManagerDidRequestContentResume(_ adsManager: IMAAdsManager!) {
         // The SDK is done playing ads (at least for now), so resume the content.
         isAdPlayback = false
-        // contentPlayer!.play()
+        contentPlayer!.play()
     }
 }

@@ -36,3 +36,11 @@ public enum CVAPlayerEvent : String {
          onAdPlayDidFail.rawValue,
          onAdPlayDidFinish.rawValue];
 }
+
+//public enum CVAAdPlayerEvent : String {
+//    case onAdLoading                =   "onAdLoading"
+//    case onAdLoaded                 =   "onAdLoaded"
+//    case onAdStart                  =   "onAdStart"
+//    case onAdStop                   =   "onAdStop"
+//    case onAdComplete               =   "onAdComplete"
+//}

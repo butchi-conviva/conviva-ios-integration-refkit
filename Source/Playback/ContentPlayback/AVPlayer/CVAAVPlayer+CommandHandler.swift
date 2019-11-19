@@ -12,12 +12,19 @@ import AVFoundation
 /// An extension of class CVAAVPlayer which is used to implement CVAPlayerCommandHandler functions.
 
 extension CVAAVPlayer : CVAPlayerCommandHandler {
+   
     public var playerResponseHandler: CVAPlayerResponseHandler? {
         get {
             return responseHandler;
         }
         set {
             responseHandler = newValue;
+        }
+    }
+    
+    public var contentPlayer: Any? {
+        get {
+            return self.avPlayer;
         }
     }
     
@@ -35,10 +42,8 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
         
         if avPlayer != nil {
              playerEventManager.willStartPlayback(player: avPlayer as Any, assetInfo: self.asset)
-            // avPlayer?.play()
+             avPlayer?.play()
         }
-        
-        startAdPlayback(asset: asset)
         
         return .success;
     }

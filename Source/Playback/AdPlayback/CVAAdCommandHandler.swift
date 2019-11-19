@@ -11,8 +11,10 @@ import Foundation
 public protocol CVAAdCommandHandler : class {
     // var adResponseHandler:CVAPlayerResponseHandler? { get set };
     
-    func startAdPlayback(asset:CVAAsset)
+    var dataSource:CVAAdDataSource? { get set }
     
-    func stopAdPlayback(asset:CVAAsset) -> CVAPlayerStatus
+    func startAdPlayback(asset:CVAAdAsset) -> CVAPlayerStatus
+    
+    func stopAdPlayback(asset:CVAAdAsset) -> CVAPlayerStatus
     
 }
