@@ -16,16 +16,12 @@ public class CVAPlayerManager: NSObject {
     var playerEventManager:CVAPlayerEventManager;
     var playerContentViewProvider:CVAPlayerContentViewProvider
     
-    var adViewProvider : CVAAdViewProvider
-    
-    public init(playerWithCmdHandler:CVAPlayerCommandHandler,playerEventManager:CVAPlayerEventManager,playerContentViewProvider:CVAPlayerContentViewProvider, adViewProvider:CVAAdViewProvider) {
+    public init(playerWithCmdHandler:CVAPlayerCommandHandler,playerEventManager:CVAPlayerEventManager,playerContentViewProvider:CVAPlayerContentViewProvider) {
         
         self.playerCommandHandler = playerWithCmdHandler;
         self.playerEventManager = playerEventManager;
         self.playerContentViewProvider = playerContentViewProvider;
         
-        self.adViewProvider = adViewProvider;
-
         super.init();
         
         playerCommandHandler.playerResponseHandler = self;
@@ -96,10 +92,8 @@ extension CVAPlayerManager : CVAPlayerResponseHandler {
                 }
                 
                 else if let adView = info[kGoogleIMAAdView] as? CVAAdView {
-//                    let contentView = self.adViewProvider.adView();
                     adView.frame = contentView.bounds;
-                    adView.layer.removeFromSuperlayer();
-                    contentView.layer.insertSublayer(adView.layer, at:UInt32(contentView.layer.sublayers?.count ?? 0) )
+                    contentView.addSubview(adView)
                 }
             }
         default:

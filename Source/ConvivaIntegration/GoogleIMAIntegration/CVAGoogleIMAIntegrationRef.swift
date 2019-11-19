@@ -235,12 +235,13 @@ class CVAGoogleIMAIntegrationRef : IMAAdsLoaderDelegate, IMAAdsManagerDelegate {
     public func adsManager(_ adsManager: IMAAdsManager!, didReceive event: IMAAdEvent!) {
         print("#Conviva : adsManager didReceive event : \(String(describing: event.typeString!))")
 
-        /// 1. Insert Conviva related code.
-        
-        guard event.ad != nil else {
+        // When IMAAdEventType.ALL_ADS_COMPLETED, event.ad is coming nil.
+        // Following guard condition is done to avoid a crash.
+        guard event.type != IMAAdEventType.ALL_ADS_COMPLETED else {
             return
         }
         
+        /// 1. Insert Conviva related code.
         let adInfo : IMAAd = event.ad
         
         let podInfo : IMAAdPodInfo = adInfo.adPodInfo
