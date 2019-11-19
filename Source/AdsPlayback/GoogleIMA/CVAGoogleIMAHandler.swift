@@ -21,6 +21,9 @@ public class CVAGoogleIMAHandler : NSObject, AVPictureInPictureControllerDelegat
     var pictureInPictureController: AVPictureInPictureController?
     var pictureInPictureProxy: IMAPictureInPictureProxy?
 
+    // Content player handles.
+    var contentPlayer: AVPlayer?
+
     // Tracking for play/pause.
     var isAdPlayback = false
 
@@ -67,6 +70,8 @@ public class CVAGoogleIMAHandler : NSObject, AVPictureInPictureControllerDelegat
     // Request ads for provided tag.
     func requestAdsWithTag(_ adTagUrl: String!, view: CVAAdView, avPlayer : AVPlayer) {
         // Create an ad request with our ad tag, display container, and optional user context.
+        
+        contentPlayer = avPlayer
         let request = IMAAdsRequest(
             adTagUrl: adTagUrl,
             adDisplayContainer: createAdDisplayContainer(view: view),
@@ -119,6 +124,14 @@ extension CVAGoogleIMAHandler : IMAAdsManagerDelegate {
         case IMAAdEventType.RESUME:
             print("Resumed. Show pause button")
             break
+        case IMAAdEventType.COMPLETE:
+            
+            if let contentPlayer = contentPlayer {
+                contentPlayer.play()
+                cvaGoogleIMAIntegrationRef.attachPlayer(streamer: contentPlayer)
+            }
+
+            print("Resume content")
         default:
             break
         }
