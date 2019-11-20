@@ -10,4 +10,5 @@ import Foundation
 
 public protocol CVAAdDataSource {
     var contentPlayer: Any? { get }
+    var contentView: UIView? {get}
 }

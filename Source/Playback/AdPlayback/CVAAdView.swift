@@ -14,20 +14,20 @@ import UIKit
 @objc(CVAAdView)
 
 public class CVAAdView : UIView {
-    private(set) var adView : UIView?
-    
-    /**
-     The CVAAdView class initializer. This initializer initializes CVAAdView class with provieded UIView instance.
-     - Parameters:
-        - adView: Provided instance of UIView
-     */
-    public init(adView : UIView) {
-        self.adView = adView;
-        super.init(frame: CGRect.zero);
-        
-        self.adView!.frame = self.bounds
-        self.layer.addSublayer((self.adView?.layer)!);
-    }
+//    private(set) var adView : UIView?
+//
+//    /**
+//     The CVAAdView class initializer. This initializer initializes CVAAdView class with provieded UIView instance.
+//     - Parameters:
+//        - adView: Provided instance of UIView
+//     */
+//    public init(adView : UIView) {
+//        self.adView = adView;
+//        super.init(frame: CGRect.zero);
+//
+//        self.adView!.frame = self.bounds
+//        self.layer.addSublayer((self.adView?.layer)!);
+//    }
     
     /**
      The CVAAdView class initializer. This initializer initializes CVAAdView class with provieded frame.
@@ -47,8 +47,8 @@ public class CVAAdView : UIView {
      */
     override public func didMoveToWindow() {
         super.didMoveToWindow()
-        self.backgroundColor = .black
-        self.adView?.frame = self.bounds;
+        self.backgroundColor = .clear
+        //self.adView?.frame = self.bounds;
     }
 
     /**
@@ -56,7 +56,7 @@ public class CVAAdView : UIView {
      */
     override public func didMoveToSuperview() {
         super.didMoveToSuperview()
-        self.backgroundColor = .black
-        self.adView?.frame = self.bounds;
+        self.backgroundColor = .clear
+        //self.adView?.frame = self.bounds;
     }
 }
