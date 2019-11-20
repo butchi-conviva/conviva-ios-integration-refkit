@@ -9,7 +9,8 @@
 import Foundation
 
 public protocol CVAAdCommandHandler : class {
-    // var adResponseHandler:CVAPlayerResponseHandler? { get set };
+    
+    var responseHandler:CVAAdResponseHandler? { get set };
     
     var dataSource:CVAAdDataSource? { get set }
     

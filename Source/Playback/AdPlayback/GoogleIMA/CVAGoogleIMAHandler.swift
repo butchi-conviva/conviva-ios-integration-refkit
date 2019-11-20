@@ -34,13 +34,13 @@ public class CVAGoogleIMAHandler : NSObject, AVPictureInPictureControllerDelegat
     /**
      The CVAPlayerResponseHandler instance
      */
-    var responseHandler : CVAAdResponseHandler?;
+    public var responseHandler : CVAAdResponseHandler?;
     
     public var dataSource:CVAAdDataSource?
 
     public override init() {
         super.init()
-        setUpIMA()
+        //setUpIMA()
     }
     
     // Initialize AdsLoader.
@@ -124,6 +124,7 @@ extension CVAGoogleIMAHandler : IMAAdsManagerDelegate {
         print("AdsManager event \(event.typeString!)")
         switch (event.type) {
         case IMAAdEventType.LOADED:
+            print("Ad Loaded. ")
             self.responseHandler?.onAdCommandComplete(command: .start, status: .success, info: [kGoogleIMAAdView : self.adContainerView as Any]);
             
             self.responseHandler?.onAdEvent(event: .onAdPlayDidStart,info: [:]);
@@ -141,6 +142,7 @@ extension CVAGoogleIMAHandler : IMAAdsManagerDelegate {
                 contentPlayer.play()
                 cvaGoogleIMAIntegrationRef.attachPlayer(streamer: contentPlayer)
             }
+            self.responseHandler?.onAdEvent(event: .onAdPlayDidFinish,info: [:]);
 
             print("Resume content")
         default:

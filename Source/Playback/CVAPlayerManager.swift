@@ -33,6 +33,7 @@ public class CVAPlayerManager: NSObject {
         
         playerCommandHandler.playerResponseHandler = self;
         adCommandHandler.dataSource = self;
+        adCommandHandler.responseHandler = self;
     }
 }
 
@@ -62,9 +63,12 @@ extension CVAPlayerManager : CVAPlayerCmdExecutor {
                 status = playerCommandHandler.startAssetPlayback(asset: asset);
                 status = playerCommandHandler.pauseAsset(asset: asset);
                 
-                if let _ = self.currentAdAsset {
-                    status = adCommandHandler.startAdPlayback(asset: self.currentAdAsset!)
-                }
+               // DispatchQueue.main.asyncAfter(deadline: .now() + 5.0)  {
+                    if let _ = self.currentAdAsset {
+                        status = self.adCommandHandler.startAdPlayback(asset: self.currentAdAsset!)
+                    }
+                //}
+               
                 
             case CVAPlayerCommand.play:
                 status = playerCommandHandler.playAsset(asset: asset);
@@ -76,6 +80,9 @@ extension CVAPlayerManager : CVAPlayerCmdExecutor {
                 status = playerCommandHandler.seekAsset(asset: asset, info : info!);
                 
             case CVAPlayerCommand.stop:
+                if let _ = self.currentAdAsset {
+                    status = self.adCommandHandler.stopAdPlayback(asset: self.currentAdAsset!)
+                }
                 status = playerCommandHandler.stopAssetPlayback(asset: asset);
                 
             case CVAPlayerCommand.skipbwd:
@@ -162,6 +169,12 @@ extension CVAPlayerManager : CVAAdDataSource {
     public var contentPlayer: Any? {
         get {
             return self.playerCommandHandler.contentPlayer;
+        }
+    }
+    
+    public var contentView: UIView? {
+        get {
+            return self.playerContentViewProvider.playerContentView();
         }
     }
 

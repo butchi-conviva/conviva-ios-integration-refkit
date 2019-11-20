@@ -15,6 +15,7 @@ extension CVAGoogleIMAHandler : CVAAdCommandHandler {
     
     public func startAdPlayback(asset:CVAAdAsset) -> CVAPlayerStatus {
         
+        setUpIMA()
         setUpAdView()
         
         requestGoogleIMAAd(asset: asset)
@@ -23,6 +24,14 @@ extension CVAGoogleIMAHandler : CVAAdCommandHandler {
     }
     
     public func stopAdPlayback(asset:CVAAdAsset) -> CVAPlayerStatus {
+        
+        if (adsLoader != nil) {
+            adsLoader = nil
+        }
+        
+        if (adsManager != nil) {
+            adsManager!.destroy()
+        }
         
         return .success;
     }
@@ -34,6 +43,7 @@ extension CVAGoogleIMAHandler : CVAAdCommandHandler {
         self.adContainerView = CVAAdView()
         self.adContainerView?.frame = CGRect(x: 0, y: 0, width: screenRect.size.width, height: screenRect.size.height)
         self.adContainerView?.backgroundColor = UIColor.red
+        self.dataSource?.contentView?.addSubview(self.adContainerView!);
     }
     
     // Request ad from GoogleIMA
