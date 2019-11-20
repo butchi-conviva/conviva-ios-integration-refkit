@@ -39,12 +39,12 @@ protocol CVABaseIntegrationRef {
                     If the initial values are not available, this paramter can be nil as well.
                     If the values need to be updated later, please use updateContentMetadata.
      */
-    func createSession(player: Any, metadata: [String : Any]?)
+    func createContentSession(player: Any, metadata: [String : Any]?)
     
     /**
      Used to cleanup a Conviva monitoring session.
      */
-    func cleanupSession()
+    func cleanupContentSession()
 
     /**
      Used to attach a streamer instance which can be monitored.

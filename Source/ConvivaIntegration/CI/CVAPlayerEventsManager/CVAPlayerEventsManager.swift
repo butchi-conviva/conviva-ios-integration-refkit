@@ -128,7 +128,7 @@ struct CVAPlayerEventsManager : CVAPlayerEventsManagerProtocol {
         - assetInfo: The CVAAsset instance which contains metadata information.
      */
     func willStartPlayback(player: Any, assetInfo : CVAAsset) {
-        convivaAVPlayerIntegrationRef.createSession(player: player, metadata: getMetadata(asset: assetInfo))
+        convivaAVPlayerIntegrationRef.createContentSession(player: player, metadata: assetInfo.getMetadata(asset: assetInfo))
     }
     
     /**
@@ -149,14 +149,14 @@ struct CVAPlayerEventsManager : CVAPlayerEventsManagerProtocol {
         - assetInfo: The CVAAsset instance which contains metadata information.
      */
     func didFailPlayback(player: Any,error:Error, assetInfo : CVAAsset) {
-        convivaAVPlayerIntegrationRef.cleanupSession()
+        convivaAVPlayerIntegrationRef.cleanupContentSession()
     }
 
     /**
      This function is used to call CVAAVPlayerIntegrationRef's cleanupSession function.
      */
     func didStopPlayback() {
-        convivaAVPlayerIntegrationRef.cleanupSession()
+        convivaAVPlayerIntegrationRef.cleanupContentSession()
     }
     
     /**
@@ -186,7 +186,7 @@ struct CVAPlayerEventsManager : CVAPlayerEventsManagerProtocol {
      This function is used to call CVAAVPlayerIntegrationRef's cleanupSession function.
      */
     func didEnterBackground() {
-        convivaAVPlayerIntegrationRef.cleanupSession()
+        convivaAVPlayerIntegrationRef.cleanupContentSession()
     }
 
     /**
@@ -197,7 +197,7 @@ struct CVAPlayerEventsManager : CVAPlayerEventsManagerProtocol {
         - assetInfo: The CVAAsset instance which contains metadata information.
      */
     func willEnterForeground(player: Any, assetInfo : CVAAsset) {
-        convivaAVPlayerIntegrationRef.createSession(player: player, metadata: getMetadata(asset: assetInfo))
+        convivaAVPlayerIntegrationRef.createContentSession(player: player, metadata: assetInfo.getMetadata(asset: assetInfo))
     }
     
     /**
@@ -205,7 +205,7 @@ struct CVAPlayerEventsManager : CVAPlayerEventsManagerProtocol {
      This function is used to call CVAAVPlayerIntegrationRef's cleanupSession function.
      */
     func didReceiveAudioInterruption() {
-        convivaAVPlayerIntegrationRef.cleanupSession()
+        convivaAVPlayerIntegrationRef.cleanupContentSession()
     }
     
     /**
@@ -216,43 +216,7 @@ struct CVAPlayerEventsManager : CVAPlayerEventsManagerProtocol {
         - assetInfo: The CVAAsset instance which contains metadata information.
      */
     func didFinishAudioInterruption(player: Any, assetInfo : CVAAsset) {
-        convivaAVPlayerIntegrationRef.createSession(player: player, metadata: getMetadata(asset: assetInfo))
+        convivaAVPlayerIntegrationRef.createContentSession(player: player, metadata: assetInfo.getMetadata(asset: assetInfo))
     }
 }
 
-/// An extension of class CVAAVPlayerManager which is used to provide basic objects which are used in Conviva calls.
-extension CVAPlayerEventsManager {
-    /**
-     This function prepares the Metadata values which will be lated passed to Conviva.
-     */
-    func getMetadata(asset : CVAAsset) -> [String : Any] {
-        return [Conviva.Keys.Metadata.title : asset.title ?? "Default Asset",
-                Conviva.Keys.Metadata.userId : Conviva.Values.Metadata.userId,
-                Conviva.Keys.Metadata.playerName : Conviva.Values.Metadata.playerName,
-                Conviva.Keys.Metadata.live : asset.islive,
-                Conviva.Keys.Metadata.duration : asset.duration,
-                Conviva.Keys.Metadata.efps : asset.efps,
-                Conviva.Keys.Metadata.tags : getCustomTags() as NSMutableDictionary] as [String : Any]
-    }
-    
-    /**
-     This function prepares the Metadata's tags values which will be lated passed to Conviva.
-     */
-    func getCustomTags() -> NSMutableDictionary {
-        #if os(iOS)
-        let deviceID = UIDevice.current.identifierForVendor?.uuidString
-        #else
-        let deviceID = ""
-        #endif
-        return [Conviva.Keys.Metadata.matchId : Conviva.Values.Metadata.matchId,
-                Conviva.Keys.Metadata.productType : Conviva.Values.Metadata.productType,
-                Conviva.Keys.Metadata.playerVendor : Conviva.Values.Metadata.playerVendor,
-                Conviva.Keys.Metadata.playerVersion : Conviva.Values.Metadata.playerVersion,
-                Conviva.Keys.Metadata.product : Conviva.Values.Metadata.product,
-                Conviva.Keys.Metadata.assetID : Conviva.Values.Metadata.assetID,
-                Conviva.Keys.Metadata.carrier : Conviva.Values.Metadata.carrier,
-                Conviva.Keys.Metadata.deviceID : deviceID as Any,
-                Conviva.Keys.Metadata.appBuild : Bundle.main.object(forInfoDictionaryKey: Conviva.Keys.infoDictionary) as Any,
-                Conviva.Keys.Metadata.favouriteTeam : UserDefaults.getFavouriteTeamName() as Any]
-    }
-}
