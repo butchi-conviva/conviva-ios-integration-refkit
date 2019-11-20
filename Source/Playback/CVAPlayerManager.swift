@@ -64,7 +64,7 @@ extension CVAPlayerManager : CVAPlayerCmdExecutor {
                 
                 if let _ = self.currentAdAsset,
                     let _ = self.currentAsset {
-                    status = adCommandHandler.startAdPlayback(asset: self.currentAsset!, adAsset: self.currentAdAsset!)
+                    status = adCommandHandler.startAdPlayback(adAsset: self.currentAdAsset!)
                 }
                 
             case CVAPlayerCommand.play:

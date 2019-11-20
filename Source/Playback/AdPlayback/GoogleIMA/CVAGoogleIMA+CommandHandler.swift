@@ -13,11 +13,11 @@ import AVKit
 
 extension CVAGoogleIMAHandler : CVAAdCommandHandler {
     
-    public func startAdPlayback(asset: CVAAsset, adAsset:CVAAdAsset) -> CVAPlayerStatus {
+    public func startAdPlayback(adAsset:CVAAdAsset) -> CVAPlayerStatus {
         
         setUpAdView()
         
-        startAdRequest(asset: asset, adAsset: adAsset)
+        startAdRequest(adAsset: adAsset)
         
         return .success;
     }
@@ -33,7 +33,7 @@ extension CVAGoogleIMAHandler : CVAAdCommandHandler {
         - asset: The CVAAsset instance. Contains information about content.
         - adAsset: The CVAAdAsset instance. Contains information about ad.
      */
-    func startAdRequest(asset: CVAAsset, adAsset: CVAAdAsset) {
+    func startAdRequest(adAsset: CVAAdAsset) {
         
         let player = self.dataSource?.contentPlayer;
                 
