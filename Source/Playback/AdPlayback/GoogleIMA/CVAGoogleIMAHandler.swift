@@ -22,7 +22,7 @@ public class CVAGoogleIMAHandler : NSObject, AVPictureInPictureControllerDelegat
     var pictureInPictureProxy: IMAPictureInPictureProxy?
 
     // Content player handles.
-    var contentPlayer: AVPlayer? ;
+    var contentPlayer: AVPlayer?
 
     // Tracking for play/pause.
     var isAdPlayback = false
@@ -73,30 +73,14 @@ public class CVAGoogleIMAHandler : NSObject, AVPictureInPictureControllerDelegat
         if (pictureInPictureController != nil) {
             pictureInPictureController!.delegate = pictureInPictureProxy;
         }
-    }
-    
-    // Request ads for provided tag.
-    func requestAdsWithTag(_ adTagUrl: String!, view: CVAAdView, avPlayer : AVPlayer) {
-        // Create an ad request with our ad tag, display container, and optional user context.
-        
-        contentPlayer = avPlayer
-        let request = IMAAdsRequest(
-            adTagUrl: adTagUrl,
-            adDisplayContainer: createAdDisplayContainer(view: view),
-            avPlayerVideoDisplay: IMAAVPlayerVideoDisplay(avPlayer: avPlayer),
-            pictureInPictureProxy: pictureInPictureProxy,
-            userContext: nil)
-        adsLoader.requestAds(with: request)
-    }
-
-    func createAdDisplayContainer(view: CVAAdView) -> IMAAdDisplayContainer {
-        return IMAAdDisplayContainer(adContainer: view, companionSlots: nil)
-    }
+    }    
 }
 
 extension CVAGoogleIMAHandler : IMAAdsLoaderDelegate {
     // IMAAdsLoaderDelegate methods
     public func adsLoader(_ loader: IMAAdsLoader!, adsLoadedWith adsLoadedData: IMAAdsLoadedData!) {
+        print("#Conviva: loader adsLoadedWith: \(String(describing: adsLoadedData))")
+
         // Grab the instance of the IMAAdsManager
         self.adsManager = adsLoadedData.adsManager;
         
@@ -112,16 +96,19 @@ extension CVAGoogleIMAHandler : IMAAdsLoaderDelegate {
     public func adsLoader(_ loader: IMAAdsLoader!, failedWith adErrorData: IMAAdLoadingErrorData!) {
         // Something went wrong loading ads. Log the error and play the content.
         
-        print("Error loading ads: \(adErrorData.adError.message ?? "s")")
+        print("#Conviva: Error loading ads: \(adErrorData.adError.message ?? "s")")
         isAdPlayback = false
-         contentPlayer!.play()
+        
+        if let contentPlayer = contentPlayer {
+            contentPlayer.play()
+        }
     }
 }
 
 extension CVAGoogleIMAHandler : IMAAdsManagerDelegate {
     // IMAAdsManagerDelegate methods
     public func adsManager(_ adsManager: IMAAdsManager!, didReceive event: IMAAdEvent!) {
-        print("AdsManager event \(event.typeString!)")
+        print("#Conviva: AdsManager event \(event.typeString!)")
         switch (event.type) {
         case IMAAdEventType.LOADED:
             self.responseHandler?.onAdCommandComplete(command: .start, status: .success, info: [kGoogleIMAAdView : self.adContainerView as Any]);
@@ -139,7 +126,8 @@ extension CVAGoogleIMAHandler : IMAAdsManagerDelegate {
             
             if let contentPlayer = contentPlayer {
                 contentPlayer.play()
-                cvaGoogleIMAIntegrationRef.attachPlayer(streamer: contentPlayer)
+                cvaGoogleIMAIntegrationRef.attachPlayer(player: contentPlayer)
+                cvaGoogleIMAIntegrationRef.adEnd()
             }
 
             print("Resume content")
@@ -151,13 +139,14 @@ extension CVAGoogleIMAHandler : IMAAdsManagerDelegate {
     public func adsManager(_ adsManager: IMAAdsManager!, didReceive error: IMAAdError!) {
         // Something went wrong with the ads manager after ads were loaded. Log the error and play the
         // content.
-        print("AdsManager error: \(String(describing: error.message))")
+        print("#Conviva: AdsManager error: \(String(describing: error.message))")
         isAdPlayback = false
         
         // TBD
         if let contentPlayer = contentPlayer {
             contentPlayer.play()
-            cvaGoogleIMAIntegrationRef.attachPlayer(streamer: contentPlayer)
+            cvaGoogleIMAIntegrationRef.attachPlayer(player: contentPlayer)
+            cvaGoogleIMAIntegrationRef.adEnd()
         }
         
     }

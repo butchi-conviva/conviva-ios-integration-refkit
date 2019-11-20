@@ -9,15 +9,15 @@
 import Foundation
 import AVKit
 
-/// An extension of class CVAAVPlayer which is used to implement CVAAdCommandHandler functions.
+/// An extension of class CVAGoogleIMAHandler which is used to implement CVAAdCommandHandler functions.
 
 extension CVAGoogleIMAHandler : CVAAdCommandHandler {
     
-    public func startAdPlayback(asset:CVAAdAsset) -> CVAPlayerStatus {
+    public func startAdPlayback(asset: CVAAsset, adAsset:CVAAdAsset) -> CVAPlayerStatus {
         
         setUpAdView()
         
-        requestGoogleIMAAd(asset: asset)
+        startAdRequest(asset: asset, adAsset: adAsset)
         
         return .success;
     }
@@ -27,24 +27,62 @@ extension CVAGoogleIMAHandler : CVAAdCommandHandler {
         return .success;
     }
     
+    // Request ad from GoogleIMA
+    func startAdRequest(asset: CVAAsset, adAsset: CVAAdAsset) {
+        
+        let player = self.dataSource?.contentPlayer;
+                
+        if let _ = player , let avPlayer = player as? AVPlayer {
+            
+            setUpContentPlayer(contentPlayer: player as! AVPlayer)
+
+            var imaTag = ""
+            
+            switch adAsset.type {
+            case .preroll :
+                imaTag = Conviva.GoogleIMAAdTags.kPrerollTag
+            case .postroll :
+                imaTag = Conviva.GoogleIMAAdTags.kPostrollTag
+            default :
+                imaTag = Conviva.GoogleIMAAdTags.kPrerollTag
+            }
+            
+            self.requestAds(imaTag, view: adContainerView!)
+            self.responseHandler?.onAdEvent(event:.onAdLoading, info: [:])
+        }
+    }
+}
+
+extension CVAGoogleIMAHandler {
     // Initialize CVAAdView
-    func setUpAdView() {
+    private func setUpAdView() {
         
         let screenRect = UIScreen.main.bounds
         self.adContainerView = CVAAdView()
         self.adContainerView?.frame = CGRect(x: 0, y: 0, width: screenRect.size.width, height: screenRect.size.height)
         self.adContainerView?.backgroundColor = UIColor.red
     }
-    
-    // Request ad from GoogleIMA
-    func requestGoogleIMAAd(asset: CVAAdAsset) {
-        
-        let player = self.dataSource?.contentPlayer;
-        
-        if let _ = player , let avPlayer = player as? AVPlayer {
-            self.requestAdsWithTag(Conviva.GoogleIMAAdTags.kPrerollTag, view: adContainerView!, avPlayer: avPlayer)
-            self.responseHandler?.onAdEvent(event:.onAdLoading, info: [:])
-        }
-        
+
+    private func setUpContentPlayer(contentPlayer : AVPlayer) {
+        self.contentPlayer = contentPlayer
     }
+    
+    // Request ads for provided tag.
+    private func requestAds(_ adTagUrl: String!, view: CVAAdView) {
+        // Create an ad request with Google IMA's ad tag, display container, and optional user context.
+        if contentPlayer == self.contentPlayer {
+            let request = IMAAdsRequest(
+                adTagUrl: adTagUrl,
+                adDisplayContainer: createAdDisplayContainer(view: view),
+                avPlayerVideoDisplay: IMAAVPlayerVideoDisplay(avPlayer: self.contentPlayer),
+                pictureInPictureProxy: pictureInPictureProxy,
+                userContext: nil)
+            adsLoader.requestAds(with: request)
+        }
+    }
+    
+    private func createAdDisplayContainer(view: CVAAdView) -> IMAAdDisplayContainer {
+        return IMAAdDisplayContainer(adContainer: view, companionSlots: nil)
+    }
+
 }

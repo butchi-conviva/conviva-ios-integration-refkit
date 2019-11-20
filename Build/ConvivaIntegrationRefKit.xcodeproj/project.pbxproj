@@ -328,8 +328,8 @@
 		516B66BF2383F3D900B40CDD /* GoogleIMA */ = {
 			isa = PBXGroup;
 			children = (
-				6F95DE0823828858005B4BA8 /* CVAGoogleIMA+CommandHandler.swift */,
 				6F465310237C1EF500F7ED98 /* CVAGoogleIMAHandler.swift */,
+				6F95DE0823828858005B4BA8 /* CVAGoogleIMA+CommandHandler.swift */,
 			);
 			path = GoogleIMA;
 			sourceTree = "<group>";

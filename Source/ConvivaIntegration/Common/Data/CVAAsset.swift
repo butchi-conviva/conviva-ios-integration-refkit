@@ -49,3 +49,40 @@ public class CVAAsset: NSObject {
         super.init()
     }
 }
+
+/// An extension of class CVAAsset which is used to provide basic objects which are used in Conviva calls.
+extension CVAAsset {
+    /**
+     This function prepares the Metadata values which will be lated passed to Conviva.
+     */
+    func getMetadata(asset : CVAAsset) -> [String : Any] {
+        return [Conviva.Keys.Metadata.title : asset.title ?? "Default Asset",
+                Conviva.Keys.Metadata.userId : Conviva.Values.Metadata.userId,
+                Conviva.Keys.Metadata.playerName : Conviva.Values.Metadata.playerName,
+                Conviva.Keys.Metadata.live : asset.islive,
+                Conviva.Keys.Metadata.duration : asset.duration,
+                Conviva.Keys.Metadata.efps : asset.efps,
+                Conviva.Keys.Metadata.tags : getCustomTags() as NSMutableDictionary] as [String : Any]
+    }
+    
+    /**
+     This function prepares the Metadata's tags values which will be lated passed to Conviva.
+     */
+    func getCustomTags() -> NSMutableDictionary {
+        #if os(iOS)
+        let deviceID = UIDevice.current.identifierForVendor?.uuidString
+        #else
+        let deviceID = ""
+        #endif
+        return [Conviva.Keys.Metadata.matchId : Conviva.Values.Metadata.matchId,
+                Conviva.Keys.Metadata.productType : Conviva.Values.Metadata.productType,
+                Conviva.Keys.Metadata.playerVendor : Conviva.Values.Metadata.playerVendor,
+                Conviva.Keys.Metadata.playerVersion : Conviva.Values.Metadata.playerVersion,
+                Conviva.Keys.Metadata.product : Conviva.Values.Metadata.product,
+                Conviva.Keys.Metadata.assetID : Conviva.Values.Metadata.assetID,
+                Conviva.Keys.Metadata.carrier : Conviva.Values.Metadata.carrier,
+                Conviva.Keys.Metadata.deviceID : deviceID as Any,
+                Conviva.Keys.Metadata.appBuild : Bundle.main.object(forInfoDictionaryKey: Conviva.Keys.infoDictionary) as Any,
+                Conviva.Keys.Metadata.favouriteTeam : UserDefaults.getFavouriteTeamName() as Any]
+    }
+}
