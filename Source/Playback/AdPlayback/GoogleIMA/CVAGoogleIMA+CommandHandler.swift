@@ -27,7 +27,12 @@ extension CVAGoogleIMAHandler : CVAAdCommandHandler {
         return .success;
     }
     
-    // Request ad from GoogleIMA
+    /**
+     Used to request ad from GoogleIMA.
+     - Parameters:
+        - asset: The CVAAsset instance. Contains information about content.
+        - adAsset: The CVAAdAsset instance. Contains information about ad.
+     */
     func startAdRequest(asset: CVAAsset, adAsset: CVAAdAsset) {
         
         let player = self.dataSource?.contentPlayer;
@@ -53,21 +58,34 @@ extension CVAGoogleIMAHandler : CVAAdCommandHandler {
     }
 }
 
+/// An extension of class CVAGoogleIMAHandler which is used to keep some private utility functions.
 extension CVAGoogleIMAHandler {
-    // Initialize CVAAdView
+
+    /**
+     Used to initialize CVAAdView.
+     */
     private func setUpAdView() {
-        
         let screenRect = UIScreen.main.bounds
         self.adContainerView = CVAAdView()
         self.adContainerView?.frame = CGRect(x: 0, y: 0, width: screenRect.size.width, height: screenRect.size.height)
         self.adContainerView?.backgroundColor = UIColor.red
     }
 
+    /**
+     Used to set Content player.
+     - Parameters:
+        - contentPlayer: An AVPlayer instance.
+     */
     private func setUpContentPlayer(contentPlayer : AVPlayer) {
         self.contentPlayer = contentPlayer
     }
     
-    // Request ads for provided tag.
+    /**
+     Used to request ads from adsLoader for provided tag.
+     - Parameters:
+        - adTagUrl: The Google IMA ad tag URL
+        - view: The CVAAdView instance on which ads will be rendered.
+     */
     private func requestAds(_ adTagUrl: String!, view: CVAAdView) {
         // Create an ad request with Google IMA's ad tag, display container, and optional user context.
         if contentPlayer == self.contentPlayer {
@@ -81,8 +99,13 @@ extension CVAGoogleIMAHandler {
         }
     }
     
+    /**
+     Used to provide an ad container to Google IMA.
+     - Parameters:
+        - view: The CVAAdView instance on which ads will be rendered.
+     - Returns: An instance of type IMAAdDisplayContainer.
+     */
     private func createAdDisplayContainer(view: CVAAdView) -> IMAAdDisplayContainer {
         return IMAAdDisplayContainer(adContainer: view, companionSlots: nil)
     }
-
 }

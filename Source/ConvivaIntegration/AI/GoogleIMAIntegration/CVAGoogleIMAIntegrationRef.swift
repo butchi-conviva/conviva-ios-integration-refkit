@@ -12,26 +12,77 @@ import ConvivaAVFoundation
 import GoogleInteractiveMediaAds
 
 /// A class used to keep all methods used for Conviva Google IMA integration.
+/// This class is set as the delegate of Google IMA ad loader. This will be used to inject Conviva calls based on the callbacks recieved from Google IMA' ad loader.
+/// This class is also set as the delegate of Google IMA ad manager. This will be used to inject Conviva calls based on the callbacks recieved from Google IMA' ad manager.
+
 class CVAGoogleIMAIntegrationRef : CVAAVPlayerIntegrationRef {
-    var adSession : ConvivaLightSession?
     
-    /// This will be used to get the calls directly from Google IMA adsLoader, inject Conviva code and then return the call back to CVAGoogleIMAHandler for further processing
+    /**
+     Following variable of type ConvivaLightSession will be used to execute all of the ad specific Conviva moniting.
+     */
+    var convivaAdSession : ConvivaLightSession?
+    
+    /**
+     Following variable of type CVAGoogleIMAHandler will be used to get the calls directly from Google IMA adsLoader, inject Conviva code and then return the call back to CVAGoogleIMAHandler for further processing related to ad/content playback based on Google IMA adsLoader callbacks.
+     */
     var adsLoaderDelegate : CVAGoogleIMAHandler?
     
-    /// This will be used to get the calls directly from Google IMA adsManager, inject Conviva code and then return the call back to CVAGoogleIMAHandler for further processing
+    /**
+     Following variable of type CVAGoogleIMAHandler will be used to get the calls directly from Google IMA adsManager, inject Conviva code and then return the call back to CVAGoogleIMAHandler for further processing related to ad/content playback based on Google IMA adsManager callbacks.
+     */
     var adsManagerDelegate : CVAGoogleIMAHandler?
+    
+    /**
+     The instance of player which is used to play content.
+     */
     var contentPlayer : Any?
+    
+    /**
+     Following variable of type Int will be used to track Index of ads as reported by Google IMA's podInfo.
+     */
     var adIndex : Int?
+    
+    /**
+     Following variable of type Int will be used to track pod duration as reported by Google IMA's podInfo.
+     */
     var podDuration : Int?
+    
+    /**
+     Following variable of type Int will be used to track ad breaks.
+     */
     var adBreak : Int = 0
+    
+    /**
+     Following variable of type Int will be used to track pod position as reported by Google IMA's podInfo.
+     */
     var podPosition : String?
+    
+    /**
+     Following variable of type Int will be used to determine if content is paused or not, as reported by Google IMA's IMAAdsManager.
+     */
     var isContentPaused : Bool?
 
+    /**
+     Following function set adsLoaderDelegate variable as CVAGoogleIMAHandler's instance.
+     Will be called from CVAGoogleIMAHandler as part of ad loader setup.
+     This is done to get the calls directly from Google IMA adsLoader, inject Conviva code and then return the call back to CVAGoogleIMAHandler for further processing related to ad/content playback based on Google IMA adsLoader callbacks.
+     - Parameters:
+        - delegate: Instance of type CVAGoogleIMAHandler
+     - Returns: Return self variable which will be set as Google IMA's adsLoaderDelegate.
+     */
     func setConvivaAdsLoaderDelegate(delegate : CVAGoogleIMAHandler) -> Any {
         self.adsLoaderDelegate = delegate
         return self
     }
 
+    /**
+     Following function set adsManagerDelegate variable as CVAGoogleIMAHandler's instance.
+     Will be called from CVAGoogleIMAHandler as part of ad manager setup.
+     This is done to get the calls directly from Google IMA adsManager, inject Conviva code and then return the call back to CVAGoogleIMAHandler for further processing related to ad/content playback based on Google IMA adsManager callbacks.
+     - Parameters:
+        - delegate: Instance of type CVAGoogleIMAHandler
+     - Returns: Return self variable which will be set as Google IMA's adsManagerDelegate.
+     */
     func setConvivaAdsManagerDelegate(delegate : CVAGoogleIMAHandler) -> Any {
         self.adsManagerDelegate = delegate
         return self
@@ -39,7 +90,7 @@ class CVAGoogleIMAIntegrationRef : CVAAVPlayerIntegrationRef {
     
     /**
      This function should be called when main content's monitoring is paused.
-     i.e. call adStart(), post calling detachPlayer().
+     i.e. Call adStart(), post calling detachPlayer().
      */
     func adStart() {
         if(self.convivaContentSession != nil){
@@ -49,7 +100,7 @@ class CVAGoogleIMAIntegrationRef : CVAAVPlayerIntegrationRef {
 
     /**
      This function should be called when main content's monitoring is resumed.
-     i.e. call adEnd(), post calling attachPlayer().
+     i.e. Call adEnd(), post calling attachPlayer().
      */
     func adEnd() {
         if(self.convivaContentSession != nil && self.adIndex != -1){
@@ -67,8 +118,8 @@ class CVAGoogleIMAIntegrationRef : CVAAVPlayerIntegrationRef {
      Visit https://community.conviva.com/site/global/platforms/ios/av_player/index.gsp#updateContentMetadata
      */
     func createAdsession(streamer : Any?, contentInfo : ConvivaContentInfo) {
-        if(self.adSession == nil){
-            self.adSession = LivePass.createAdSession(streamer, contentSession: self.convivaContentSession, convivaContentInfo: contentInfo, options: nil)
+        if(self.convivaAdSession == nil){
+            self.convivaAdSession = LivePass.createAdSession(streamer, contentSession: self.convivaContentSession, convivaContentInfo: contentInfo, options: nil)
         }
     }
     
@@ -76,9 +127,9 @@ class CVAGoogleIMAIntegrationRef : CVAAVPlayerIntegrationRef {
      Used to cleanup a Conviva monitoring session for ad.
      */
     func cleanupAdsession() {
-        if(self.adSession != nil){
-            LivePass.cleanupSession(self.adSession)
-            self.adSession = nil;
+        if(self.convivaAdSession != nil){
+            LivePass.cleanupSession(self.convivaAdSession)
+            self.convivaAdSession = nil;
         }
     }
 
@@ -88,8 +139,8 @@ class CVAGoogleIMAIntegrationRef : CVAAVPlayerIntegrationRef {
         - state: The play state of ad.
      */
     func setAdPlayerState(state : ConvivaAdPlayerState) {
-        if(self.adSession != nil){
-            self.adSession?.setAdPlayerState(state)
+        if(self.convivaAdSession != nil){
+            self.convivaAdSession?.setAdPlayerState(state)
         }
     }
     
@@ -99,8 +150,8 @@ class CVAGoogleIMAIntegrationRef : CVAAVPlayerIntegrationRef {
         - name: The name of ad player manager.
      */
     func setAdPlayername(name : String) {
-        if(self.adSession != nil){
-            self.adSession?.setAdPlayerName(name)
+        if(self.convivaAdSession != nil){
+            self.convivaAdSession?.setAdPlayerName(name)
         }
     }
 
@@ -110,8 +161,8 @@ class CVAGoogleIMAIntegrationRef : CVAAVPlayerIntegrationRef {
         - version: The version of ad player manager.
      */
     func setAdManagerVersion(version : String) {
-        if(self.adSession != nil){
-            self.adSession?.setAdPlayerVersion(version)
+        if(self.convivaAdSession != nil){
+            self.convivaAdSession?.setAdPlayerVersion(version)
         }
     }
 
@@ -121,8 +172,8 @@ class CVAGoogleIMAIntegrationRef : CVAAVPlayerIntegrationRef {
         - error: The playback error string.
      */
     func reportAdError(error : String) {
-        if(self.adSession != nil){
-            self.adSession?.reportError(error, errorType: ErrorSeverity.SEVERITY_FATAL)
+        if(self.convivaAdSession != nil){
+            self.convivaAdSession?.reportError(error, errorType: ErrorSeverity.SEVERITY_FATAL)
         }
     }
     
@@ -132,8 +183,8 @@ class CVAGoogleIMAIntegrationRef : CVAAVPlayerIntegrationRef {
         - bl: The buffer length value.
      */
     func setAdPlayerBufferlength(bl : NSInteger) {
-        if(self.adSession != nil){
-            self.adSession?.setAdBufferLength(bl)
+        if(self.convivaAdSession != nil){
+            self.convivaAdSession?.setAdBufferLength(bl)
         }
     }
     
@@ -143,8 +194,8 @@ class CVAGoogleIMAIntegrationRef : CVAAVPlayerIntegrationRef {
         - pht: The play head time value.
      */
     func setAdPlayHeadTime(pht : NSInteger) {
-        if(self.adSession != nil){
-            self.adSession?.setAdPlayHeadTime(pht)
+        if(self.convivaAdSession != nil){
+            self.convivaAdSession?.setAdPlayHeadTime(pht)
         }
     }
 
@@ -155,14 +206,14 @@ class CVAGoogleIMAIntegrationRef : CVAAVPlayerIntegrationRef {
         - height: The resolution height value.
      */
     func setAdVideoResolution(width : NSInteger, height: NSInteger) {
-        if(self.adSession != nil){
-            self.adSession?.setAdVideoResolutionWidth(width, andHeight: height)
+        if(self.convivaAdSession != nil){
+            self.convivaAdSession?.setAdVideoResolutionWidth(width, andHeight: height)
         }
     }
 }
 
+/// An extension of class CVAGoogleIMAIntegrationRef which is used to implement IMAAdsLoaderDelegate functions.
 extension CVAGoogleIMAIntegrationRef : IMAAdsLoaderDelegate {
-    // MARK:- IMAAdsLoaderDelegate methods
     /**
      *  Called when ads are successfully loaded from the ad servers by the loader.
      *
@@ -174,7 +225,7 @@ extension CVAGoogleIMAIntegrationRef : IMAAdsLoaderDelegate {
         /// 1. Insert Conviva related code.
         /// No Conviva action required at this step.
         
-        /// 2. Return the call back to CVAGoogleIMAHandler for further processing.
+        /// 2. Return the call back to CVAGoogleIMAHandler for further processing related to ad/content playback.
         if(self.adsLoaderDelegate != nil){
             self.adsLoaderDelegate?.adsLoader(loader, adsLoadedWith: adsLoadedData)
         }
@@ -190,6 +241,7 @@ extension CVAGoogleIMAIntegrationRef : IMAAdsLoaderDelegate {
         print("#Conviva : adsLoader adErrorData \(String(describing: adErrorData.adError.message))")
         
         /// 1. Insert Conviva related code.
+        /// If adsLoader has failed, Create a Conviva session, report such error and cleanup the Conviva session.
         
         let error : IMAAdError = adErrorData.adError
         let errorString : String = "errorType : \(error.type.rawValue)  errorCode : \(error.code)  errorMessage : \(error.message ?? "") "
@@ -203,7 +255,7 @@ extension CVAGoogleIMAIntegrationRef : IMAAdsLoaderDelegate {
             adEnd()
         }
         
-        /// 2. Return the call back to CVAGoogleIMAHandler for further processing.
+        /// 2. Return the call back to CVAGoogleIMAHandler for further processing related to ad/content playback.
         
         if(self.adsLoaderDelegate != nil){
             self.adsLoaderDelegate?.adsLoader(loader, failedWith: adErrorData)
@@ -211,8 +263,8 @@ extension CVAGoogleIMAIntegrationRef : IMAAdsLoaderDelegate {
     }
 }
 
+/// An extension of class CVAGoogleIMAIntegrationRef which is used to implement IMAAdsManagerDelegate functions.
 extension CVAGoogleIMAIntegrationRef : IMAAdsManagerDelegate {
-    // MARK:- IMAAdsManagerDelegate methods
     /**
      *  Called when there is an IMAAdEvent.
      *
@@ -229,13 +281,17 @@ extension CVAGoogleIMAIntegrationRef : IMAAdsManagerDelegate {
         }
         
         /// 1. Insert Conviva related code.
+
         let adInfo : IMAAd = event.ad
         
         let podInfo : IMAAdPodInfo = adInfo.adPodInfo
         
         switch event.type {
+            
         case IMAAdEventType.LOADED:
-            print("")
+            
+            /// Once adsManager has recieved the LOADED event, capture the metadata information from event and create a Conviva session for ad monitoring.
+
             self.adIndex = podInfo.podIndex
             self.podDuration = Int(podInfo.maxDuration)
             if(!podInfo.isBumper){
@@ -309,39 +365,57 @@ extension CVAGoogleIMAIntegrationRef : IMAAdsManagerDelegate {
             setAdPlayername(name: "Google-IMA")
             
         case IMAAdEventType.PAUSE:
+            
+            /// Once adsManager has recieved the PAUSE event, report relavant values to Conviva.
+
             setAdPlayerState(state: .CONVIVA_AD_PAUSED)
             setAdPlayHeadTime(pht: NSInteger(adsManager.adPlaybackInfo?.currentMediaTime ?? 0))
             setAdPlayerBufferlength(bl: NSInteger(adsManager.adPlaybackInfo?.bufferedMediaTime ?? 0))
             
         case IMAAdEventType.RESUME:
-            setAdPlayerState(state: .CONVIVA_AD_PLAYING)
             
+            /// Once adsManager has recieved the RESUME event, report relavant values to Conviva.
+
+            setAdPlayerState(state: .CONVIVA_AD_PLAYING)
             setAdPlayHeadTime(pht: NSInteger(adsManager.adPlaybackInfo?.currentMediaTime ?? 0) )
             setAdPlayerBufferlength(bl: NSInteger( adsManager.adPlaybackInfo?.bufferedMediaTime ?? 0) )
             setAdVideoResolution(width: adInfo.width, height: adInfo.height)
             
         case IMAAdEventType.STARTED:
+            
+            /// Once adsManager has recieved the STARTED event, report relavant values to Conviva.
+            
             setAdPlayerState(state: .CONVIVA_AD_PLAYING)
             setAdPlayHeadTime(pht: NSInteger( adsManager.adPlaybackInfo?.currentMediaTime ?? 0) )
             setAdPlayerBufferlength(bl: NSInteger(adsManager.adPlaybackInfo?.bufferedMediaTime ?? 0) )
             setAdVideoResolution(width: adInfo.width, height: adInfo.height)
             
         case IMAAdEventType.COMPLETE:
+            
+            /// Once adsManager has recieved the COMPLETE event, cleanup the Conviva Ad session.
+
             cleanupAdsession()
             
         case IMAAdEventType.ALL_ADS_COMPLETED:
+            
+            /// Once adsManager has recieved the ALL_ADS_COMPLETED event, cleanup the Conviva Ad session.
+
             cleanupAdsession()
             if(podInfo.podIndex == -1){
-                
                 self.adBreak = 0;
-
                 cleanupContentSession()
             }
             
         case IMAAdEventType.SKIPPED:
+            
+            /// Once adsManager has recieved the SKIPPED event, cleanup the Conviva Ad session.
+
             cleanupAdsession()
             
         case IMAAdEventType.LOG:
+            
+            /// Once adsManager has recieved the LOG event, report an error and cleanup the Conviva Ad session.
+
             let dict : [String : Any]? = event.adData?["logData"] as? [String : Any]
             
             if let dict = dict {
@@ -360,7 +434,7 @@ extension CVAGoogleIMAIntegrationRef : IMAAdsManagerDelegate {
             print("")
         }
         
-        /// 2. Return the call back to CVAGoogleIMAHandler for further processing.
+        /// 2. Return the call back to CVAGoogleIMAHandler for further processing related to ad/content playback.
         
         if(self.adsManagerDelegate != nil) {
             self.adsManagerDelegate?.adsManager(adsManager, didReceive: event)
@@ -378,7 +452,8 @@ extension CVAGoogleIMAIntegrationRef : IMAAdsManagerDelegate {
         print("#Conviva : adsManager didReceive error")
         
         /// 1. Insert Conviva related code.
-        
+        /// If adsManager has failed, Create a Conviva session, report such error and cleanup the Conviva session.
+
         let errorType = error.type
         let errorCode = error.code
         let errorString : String = "type: \(errorType) code: \(errorCode) message: \(String(describing: error.message))"
@@ -388,7 +463,7 @@ extension CVAGoogleIMAIntegrationRef : IMAAdsManagerDelegate {
         reportAdError(error: errorString)
         cleanupAdsession()
         
-        /// 2. Return the call back to CVAGoogleIMAHandler for further processing.
+        /// 2. Return the call back to CVAGoogleIMAHandler for further processing related to ad/content playback.
         
         if(self.adsManagerDelegate != nil) {
             self.adsManagerDelegate?.adsManager(adsManager, didReceive: error)
@@ -405,7 +480,7 @@ extension CVAGoogleIMAIntegrationRef : IMAAdsManagerDelegate {
     public func adsManagerDidRequestContentPause(_ adsManager: IMAAdsManager!) {
         
         /// 1. Insert Conviva related code.
-        
+        /// Since adsManager has notified ContentPause, pause main content monitoring using detachPlayer() and notify start of ad using adStart().
         detachPlayer()
         adStart()
         self.adBreak = self.adBreak + 1;
@@ -418,7 +493,7 @@ extension CVAGoogleIMAIntegrationRef : IMAAdsManagerDelegate {
             self.convivaContentSession?.sendEvent("Conviva.PodStart", withAttributes: podStartAttributes)
         }
         
-        /// 2. Return the call back to CVAGoogleIMAHandler for further processing.
+        /// 2. Return the call back to CVAGoogleIMAHandler for further processing related to ad/content playback.
         
         if(self.adsManagerDelegate != nil) {
             self.adsManagerDelegate?.adsManagerDidRequestContentPause(adsManager)
@@ -434,7 +509,8 @@ extension CVAGoogleIMAIntegrationRef : IMAAdsManagerDelegate {
     public func adsManagerDidRequestContentResume(_ adsManager: IMAAdsManager!) {
         
         /// 1. Insert Conviva related code.
-        
+        /// Since adsManager has notified ContentResume, resume main content monitoring using attachPlayer() and notify end of ad using adEnd().
+
         if let streamer = self.contentPlayer {
             attachPlayer(player: streamer)
             adEnd()
@@ -449,11 +525,10 @@ extension CVAGoogleIMAIntegrationRef : IMAAdsManagerDelegate {
             self.convivaContentSession?.sendEvent("Conviva.PodEnd", withAttributes: podEndAttributes)
         }
         
-        /// 2. Return the call back to CVAGoogleIMAHandler for further processing.
+        /// 2. Return the call back to CVAGoogleIMAHandler for further processing related to ad/content playback.
         
         if(self.adsManagerDelegate != nil) {
             self.adsManagerDelegate?.adsManagerDidRequestContentResume(adsManager)
         }
     }
-
 }

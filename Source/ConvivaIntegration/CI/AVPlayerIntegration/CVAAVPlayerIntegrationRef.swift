@@ -31,7 +31,7 @@ class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
     private var metadataDict : [String : Any] = [:]
     
     /**
-     The ConvivaLightSession instance.
+     Following variable of type ConvivaLightSession will be used to execute all of the ad specific Conviva moniting.
      */
     var convivaContentSession : ConvivaLightSession!
     
