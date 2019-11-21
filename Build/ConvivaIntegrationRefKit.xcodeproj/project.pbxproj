@@ -90,8 +90,11 @@
 		6FF376392345DF3600B08B99 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF376382345DF3600B08B99 /* AVFoundation.framework */; };
 		6FF3763B2345DF3B00B08B99 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF3763A2345DF3B00B08B99 /* AVKit.framework */; };
 		6FF3CDA223587F4700E5DA89 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3CDA123587F4700E5DA89 /* Utilities.swift */; };
+		6FFB941523868C26002D4159 /* ConvivaSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FFB941423868C26002D4159 /* ConvivaSDK.framework */; };
+		6FFB941723868C3F002D4159 /* ConvivaSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FFB941623868C3E002D4159 /* ConvivaSDK.framework */; };
 		98723899499A51205D211077 /* libPods-ConvivaIntegrationRefKit-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1908F91FC365F6324DEC7DDD /* libPods-ConvivaIntegrationRefKit-tvOSTests.a */; };
 		E0F6670543C6D3DADF2C775A /* libPods-ConvivaIntegrationRefKitTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CAAE668520922B01338A3DB /* libPods-ConvivaIntegrationRefKitTests.a */; };
+		EA312CDBABD874F1C0A6DF8A /* libPods-ConvivaIntegrationRefKit-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB42093C27A58B4A7EDFE47D /* libPods-ConvivaIntegrationRefKit-tvOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,6 +178,8 @@
 		6FF376382345DF3600B08B99 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		6FF3763A2345DF3B00B08B99 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		6FF3CDA123587F4700E5DA89 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		6FFB941423868C26002D4159 /* ConvivaSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ConvivaSDK.framework; path = Frameworks/ConvivaSDK/Framework/iOS/ConvivaSDK.framework; sourceTree = "<group>"; };
+		6FFB941623868C3E002D4159 /* ConvivaSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ConvivaSDK.framework; path = Frameworks/ConvivaSDK/Framework/tvOS/ConvivaSDK.framework; sourceTree = "<group>"; };
 		781691A37BE7A816F1EDA4BE /* Pods-ConvivaIntegrationRefKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConvivaIntegrationRefKit.debug.xcconfig"; path = "Target Support Files/Pods-ConvivaIntegrationRefKit/Pods-ConvivaIntegrationRefKit.debug.xcconfig"; sourceTree = "<group>"; };
 		7CAAE668520922B01338A3DB /* libPods-ConvivaIntegrationRefKitTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ConvivaIntegrationRefKitTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D2487BCCEDC91AE75374E2C /* Pods-ConvivaIntegrationRefKit-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConvivaIntegrationRefKit-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-ConvivaIntegrationRefKit-tvOSTests/Pods-ConvivaIntegrationRefKit-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -187,6 +192,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FFB941723868C3F002D4159 /* ConvivaSDK.framework in Frameworks */,
+				EA312CDBABD874F1C0A6DF8A /* libPods-ConvivaIntegrationRefKit-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,6 +210,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FFB941523868C26002D4159 /* ConvivaSDK.framework in Frameworks */,
 				6F4ED8C3237AFBE700F49963 /* GoogleInteractiveMediaAds.framework in Frameworks */,
 				6FF3763B2345DF3B00B08B99 /* AVKit.framework in Frameworks */,
 				6FF376392345DF3600B08B99 /* AVFoundation.framework in Frameworks */,
@@ -227,6 +235,8 @@
 		13B1E89525835D0BEC92A0AB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6FFB941423868C26002D4159 /* ConvivaSDK.framework */,
+				6FFB941623868C3E002D4159 /* ConvivaSDK.framework */,
 				6F4ED8C2237AFBE700F49963 /* GoogleInteractiveMediaAds.framework */,
 				6F24B94B234B245100F4361A /* PSDKLibrary.framework */,
 				6FF3763A2345DF3B00B08B99 /* AVKit.framework */,
@@ -885,6 +895,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks/ConvivaSDK/Framework/tvOS",
+				);
 				INFOPLIST_FILE = "ConvivaIntegrationRefKit-tvOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -912,6 +926,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks/ConvivaSDK/Framework/tvOS",
+				);
 				INFOPLIST_FILE = "ConvivaIntegrationRefKit-tvOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1111,6 +1129,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/GoogleAds-IMA-iOS-SDK",
+					"$(PROJECT_DIR)/Frameworks/ConvivaSDK/Framework/iOS",
 				);
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = ConvivaIntegrationRefKit/Info.plist;
@@ -1149,6 +1168,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/GoogleAds-IMA-iOS-SDK",
+					"$(PROJECT_DIR)/Frameworks/ConvivaSDK/Framework/iOS",
 				);
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = ConvivaIntegrationRefKit/Info.plist;

@@ -9,7 +9,7 @@
 import Foundation
 
 import UIKit
-// import ConvivaSDK
+import ConvivaSDK
 import AVFoundation
 
 class CVACustomSDKIntegrationRef {
