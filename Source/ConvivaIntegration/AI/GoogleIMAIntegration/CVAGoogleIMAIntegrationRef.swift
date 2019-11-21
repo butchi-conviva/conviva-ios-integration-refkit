@@ -173,7 +173,7 @@ class CVAGoogleIMAIntegrationRef : CVAAVPlayerIntegrationRef {
      */
     func reportAdError(error : String) {
         if(self.convivaAdSession != nil){
-            self.convivaAdSession?.reportError(error, errorType: ErrorSeverity.SEVERITY_FATAL)
+            self.convivaAdSession?.reportError(error, errorType: ErrorSeverity.ERROR_FATAL)
         }
     }
     

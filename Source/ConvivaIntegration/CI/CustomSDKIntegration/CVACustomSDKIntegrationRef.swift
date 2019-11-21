@@ -12,50 +12,171 @@ import UIKit
 import ConvivaSDK
 import AVFoundation
 
-class CVACustomSDKIntegrationRef {
-//    var mainPlayer : OoyalaPlayer!
-}
+private let kConviva_Key = Conviva.Credentials.customerKey
+private let kConviva_Gateway_URL_Test = Conviva.Credentials.gatewayURLTest
+private let kConviva_Gateway_URL_Prod = Conviva.Credentials.gatewayURLTest
 
-/*
-class CVACustomSDKIntegrationRef : CVABaseIntegrationRef {
+class CVACustomPlayerIntegrationRef : CVABaseIntegrationRef {
     var client : CISClientProtocol!
-    var isInitalised : Bool = false
+    
     var videoSessionID : Int32!
     
     var playerStateManager : CISPlayerStateManagerProtocol!
     
     var customPlayer : CustomPlayer!
-    var customPlayerInterface : CustomPlayerInterface!
     
-    func setupConvivaMonitoring() {
-        if self.isInitalised == false {
-            let systemInterface : CISSystemInterfaceProtocol = IOSSystemInterfaceFactory.initializeWithSystemInterface()
+    var customPlayerInterface : CustomPlayerInterface!
+
+    func initialize() {
+        let systemInterFactory : CISSystemInterfaceProtocol = IOSSystemInterfaceFactory.initializeWithSystemInterface()
+        let setting = CISSystemSettings.init()
+        setting.logLevel = .LOGLEVEL_NONE
+        let factory : CISSystemFactoryProtocol = CISSystemFactoryCreator.create(withCISSystemInterface: systemInterFactory, setting: setting)
+        
+        let settingError : Error? = nil
+        let clientError : Error? = nil
+        
+        var clientSettings : CISClientSettingProtocol
+        do {
+            clientSettings = try CISClientSettingCreator.create(withCustomerKey: kConviva_Key)
             
-            let settings : CISSystemSettings = CISSystemSettings()
+            #if DEBUG
+            clientSettings.setGatewayUrl(kConviva_Gateway_URL_Test)
+            #else
+            clientSetting.setGatewayUrl(kConviva_Gateway_URL_Prod)
+            #endif
             
-            if !logLevel {
-                settings.logLevel = LogLevel.LOGLEVEL_NONE
-            }
-            
-            let systemFactory : CISSystemFactoryProtocol = CISSystemFactoryCreator.create(withCISSystemInterface: systemInterface, setting: settings)
             do {
-                let clientSettings : CISClientSettingProtocol  = try CISClientSettingCreator.create(withCustomerKey: customerKey)
-                clientSettings.setGatewayUrl(gatewayURL)
-                self.client = try CISClientCreator.create(withClientSettings: clientSettings, factory: systemFactory)
-                self.isInitalised = true
-            } catch let error as NSError{
-                print("Error : \(error.description)")
+                client = try CISClientCreator.create(withClientSettings: clientSettings, factory: factory)
+            }
+                
+            catch {
+                print(clientError!)
             }
         }
+            
+        catch {
+            print(settingError!)
+        }
+        
+        if (clientError != nil) {
+            print("[REFERENCE APP] [clientError] [ \(clientError!) ]")
+        }
+        else if (settingError != nil){
+            NSLog("[REFERENCE APP] [settingError] [ \(settingError!) ]")
+        }
+        else{
+            print("[REFERENCE APP] [SUCCESS] [INIT SUCCESS]")
+        }
+    }
+
+    func cleanup() {
+        
     }
     
-    func createConvivaSession(){
-        if isInitalised == false || self.client == nil {
+    func createContentSession(player: Any, metadata: [String : Any]?) {
+        guard self.client != nil else  {
             return
         }
         self.videoSessionID = self.client.createSession(with: self.createMetadataObject())
     }
     
+    func cleanupContentSession() {
+        if (videoSessionID != NO_SESSION_KEY) {
+            client.cleanupSession(videoSessionID)
+            videoSessionID = NO_SESSION_KEY
+            customPlayerInterface.cleanupCustomPLayerInterface()
+            customPlayerInterface = nil
+            customPlayer.stop()
+            customPlayer = nil
+        }
+    }
+    
+    func destroySession() {
+        guard self.client != nil else {
+            return
+        }
+        
+        if self.videoSessionID != NO_SESSION_KEY {
+            self.client.cleanupSession(self.videoSessionID)
+            self.videoSessionID = NO_SESSION_KEY
+        }
+    }
+    
+    func attachPlayer(player: Any) {
+        if (client != nil){
+            // createPlayerInstance() // this player will be passed from outside
+            createPlayerStateManagerInstance()
+            
+            // Create Player Interface Instance
+            if (customPlayerInterface == nil){
+                customPlayerInterface = CustomPlayerInterface.init(playerStateManager: playerStateManager, customPlayer: customPlayer)
+            }
+            
+            // Assign the CustomPlayer instance to PlayerStateManager
+            playerStateManager.setCISIClientMeasureInterface!(customPlayerInterface as? CISIClientMeasureInterface)
+            
+            // Attach PlayerStateManager to Conviva session
+            if ((playerStateManager != nil) && videoSessionID != NO_SESSION_KEY){
+                client.attachPlayer(videoSessionID, playerStateManager: playerStateManager)
+            }
+        }
+    }
+    
+    func detachPlayer() {
+        
+    }
+    
+    func sendCustomEvent(eventName: String, eventAttributes: [String : String]) {
+        if (client != nil && videoSessionID != NO_SESSION_KEY) {
+            let keys = ["test key 1", "test key 2", "test key 3"]
+            let values = ["test value1", "test value2", "test value3"]
+            let attributes : NSDictionary = [keys : values]
+            client.sendCustomEvent(videoSessionID, eventname: "global event", withAttributes: attributes as? [AnyHashable : Any])
+        }
+    }
+    
+    func sendCustomError(error: Error) {
+        if ((client) != nil){
+            if ((playerStateManager != nil) && (customPlayerInterface != nil)) {
+                customPlayerInterface.reportError()
+            }
+            else{
+                if (videoSessionID != NO_SESSION_KEY){
+                    client.reportError(videoSessionID, errorMessage: "Video start error", errorSeverity: ErrorSeverity.SEVERITY_FATAL)
+                }
+            }
+        }
+    }
+    
+    func sendCustomWarning(warning: Error) {
+        if ((client) != nil){
+            if ((playerStateManager != nil) && (customPlayerInterface != nil)) {
+                customPlayerInterface.reportError()
+            }
+            else{
+                if (videoSessionID != NO_SESSION_KEY){
+                    client.reportError(videoSessionID, errorMessage: "Video start error", errorSeverity: ErrorSeverity.SEVERITY_WARNING)
+                }
+            }
+        }
+    }
+    
+    func updateContentMetadata() {
+        
+    }
+    
+    func seekStart(position: NSInteger) {
+        customPlayerInterface.setSeekStart(seekToPosition: position)
+    }
+    
+    func seekEnd(position: NSInteger) {
+        customPlayerInterface.setSeekEnd(seekToPosition: position)
+    }
+}
+
+// For creating objects and providing values
+extension CVACustomPlayerIntegrationRef {
     func createMetadataObject() -> CISContentMetadata {
         let metadata : CISContentMetadata  = CISContentMetadata()
         
@@ -90,17 +211,6 @@ class CVACustomSDKIntegrationRef : CVABaseIntegrationRef {
         return metadata
     }
     
-    func destroySession() {
-        if isInitalised == false || self.client == nil {
-            return
-        }
-        
-        if self.videoSessionID != NO_SESSION_KEY {
-            self.client.cleanupSession(self.videoSessionID)
-            self.videoSessionID = NO_SESSION_KEY
-        }
-    }
-    
     // Create Player Instance
     func createPlayerInstance(){
         if (customPlayer == nil) {
@@ -113,51 +223,6 @@ class CVACustomSDKIntegrationRef : CVABaseIntegrationRef {
         if (playerStateManager == nil){
             playerStateManager = client.getPlayerStateManager()
         }
-    }
-    
-    func attachPlayer(player: Any?) {
-        if (client != nil){
-            // createPlayerInstance() // this player will be passed from outside
-            createPlayerStateManagerInstance()
-            
-            // Create Player Interface Instance
-            if (customPlayerInterface == nil){
-                customPlayerInterface = CustomPlayerInterface.init(playerStateManager: playerStateManager, customPlayer: customPlayer)
-            }
-            
-            // Assign the CustomPlayer instance to PlayerStateManager
-            playerStateManager.setCISIClientMeasureInterface!(customPlayerInterface as? CISIClientMeasureInterface)
-            
-            // Attach PlayerStateManager to Conviva session
-            if ((playerStateManager != nil) && videoSessionID != NO_SESSION_KEY){
-                client.attachPlayer(videoSessionID, playerStateManager: playerStateManager)
-            }
-        }
-    }
-    
-    func setPlayerState(playerState: PlayerState?) {
-        customPlayerInterface.setPlayerState(playerState: playerState!)
-    }
-    
-    func setSeekStart(seekToPosition : Int64) {
-        customPlayerInterface.setSeekStart(seekToPosition: seekToPosition)
-    }
-    
-    func setSeekEnd(seekToPosition : Int64) {
-        customPlayerInterface.setSeekEnd(seekToPosition: seekToPosition)
-    }
-    
-    func setCDNServerIP(cdnServerIP : String) {
-        customPlayerInterface.setCDNServerIP(cdnServerIP: cdnServerIP)
-    }
-    
-    func setBitrateKbps(newBitrateKbps: Int) {
-        customPlayerInterface.setBitrateKbps(newBitrateKbps: newBitrateKbps)
-    }
-    
-    // Reusing a PlayerStateManager instance
-    func resetPlayerStateManager(){
-        playerStateManager.reset!()
     }
     
     // Clean up the CustomPlayer Interface
@@ -176,43 +241,31 @@ class CVACustomSDKIntegrationRef : CVABaseIntegrationRef {
         }
     }
     
-    // Clean up the session
-    func cleanupSession(){
-        if (videoSessionID != NO_SESSION_KEY) {
-            client.cleanupSession(videoSessionID)
-            videoSessionID = NO_SESSION_KEY
-            customPlayerInterface.cleanupCustomPLayerInterface()
-            customPlayerInterface = nil
-            customPlayer.stop()
-            customPlayer = nil
-        }
-    }
-    
     func cleanupCustomPLayerInterface(){
         // CLEAN UP CustomPlayer IF REQUIRED
         // DEREGISTER NOTIFICATIONS
     }
     
-    func reportError() {
-        if ((client) != nil){
-            if ((playerStateManager != nil) && (customPlayerInterface != nil)) {
-                customPlayerInterface.reportError()
-            }
-            else{
-                if (videoSessionID != NO_SESSION_KEY){
-                    client.reportError(videoSessionID, errorMessage: "Video start error", errorSeverity: .ERROR_FATAL)
-                }
-            }
-        }
+    // Reusing a PlayerStateManager instance
+    func resetPlayerStateManager(){
+        playerStateManager.reset!()
     }
     
-    func sendCustomEvent() {
-        if (client != nil && videoSessionID != NO_SESSION_KEY) {
-            let keys = ["test key 1", "test key 2", "test key 3"]
-            let values = ["test value1", "test value2", "test value3"]
-            let attributes : NSDictionary = [keys : values]
-            client.sendCustomEvent(videoSessionID, eventname: "global event", withAttributes: attributes as? [AnyHashable : Any])
-        }
+}
+
+// For reporting additional custom values
+extension CVACustomPlayerIntegrationRef {
+    
+    func setPlayerState(playerState: PlayerState?) {
+        customPlayerInterface.setPlayerState(playerState: playerState!)
+    }
+    
+    func setCDNServerIP(cdnServerIP : String) {
+        customPlayerInterface.setCDNServerIP(cdnServerIP: cdnServerIP)
+    }
+    
+    func setBitrateKbps(newBitrateKbps: Int) {
+        customPlayerInterface.setBitrateKbps(newBitrateKbps: newBitrateKbps)
     }
     
     // Player State can be reported as following. It must be done when player reports a state change event
@@ -229,4 +282,3 @@ class CVACustomSDKIntegrationRef : CVABaseIntegrationRef {
         }
     }
 }
-*/

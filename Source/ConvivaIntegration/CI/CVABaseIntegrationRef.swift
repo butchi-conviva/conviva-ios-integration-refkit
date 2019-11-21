@@ -17,12 +17,12 @@ protocol CVABaseIntegrationRef {
     /**
      Used to initialize Conviva monitoring.
      */
-    static func initialize()
+    func initialize()
     
     /**
      Used to cleanup Conviva monitoring.
      */
-    static func cleanup()
+    func cleanup()
     
     /**
      Used to define the level of logs to be printed. Set either True or False

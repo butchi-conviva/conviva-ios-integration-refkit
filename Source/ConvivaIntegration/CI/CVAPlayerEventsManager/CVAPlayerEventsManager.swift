@@ -16,9 +16,11 @@ protocol CVAPlayerEventsManagerProtocol {
     /**
      The CVAAVPlayerManager class initializer.
      Initialization of Integration Reference classes like CVAAVPlayerIntegrationRef etc should happen here.
+     - Parameters:
+        - integrationRef: Tell about which type of Conviva integration is done.
      */
-    init()
-    
+    init(integrationRef : CVABaseIntegrationRef)
+
     /**
      This function will be called when player is going to start playback.
      This function is used to call CVAAVPlayerIntegrationRef's createSession function.
@@ -106,18 +108,34 @@ protocol CVAPlayerEventsManagerProtocol {
 
 struct CVAPlayerEventsManager : CVAPlayerEventsManagerProtocol {
     
+    var integrationRef : CVABaseIntegrationRef!
+    
     /**
      The CVAAVPlayerIntegrationRef instance which is used to call all of Conviva AVPlayer library's behaviour.
      */
     var convivaAVPlayerIntegrationRef : CVAAVPlayerIntegrationRef!
 
     /**
+     The CVACustomPlayerIntegrationRef instance which is used to call all of Conviva iOS SDK library's behaviour.
+     */
+    var convivaCustomPlayerIntegrationRef : CVACustomPlayerIntegrationRef!
+
+    /**
      The CVAAVPlayerManager class initializer.
      Initialization of Integration Reference classes like CVAAVPlayerIntegrationRef etc should happen here.
      */
-    init() {
-        CVAAVPlayerIntegrationRef.initialize()
-        convivaAVPlayerIntegrationRef = CVAAVPlayerIntegrationRef()
+    init(integrationRef : CVABaseIntegrationRef) {
+        self.integrationRef = integrationRef
+        
+        if integrationRef is CVAAVPlayerIntegrationRef {
+            convivaAVPlayerIntegrationRef = CVAAVPlayerIntegrationRef()
+            convivaAVPlayerIntegrationRef.initialize()
+        }
+        
+        if integrationRef is CVACustomPlayerIntegrationRef {
+            convivaCustomPlayerIntegrationRef = CVACustomPlayerIntegrationRef()
+            convivaCustomPlayerIntegrationRef.initialize()
+        }
     }
     
     /**
@@ -128,7 +146,7 @@ struct CVAPlayerEventsManager : CVAPlayerEventsManagerProtocol {
         - assetInfo: The CVAAsset instance which contains metadata information.
      */
     func willStartPlayback(player: Any, assetInfo : CVAAsset) {
-        convivaAVPlayerIntegrationRef.createContentSession(player: player, metadata: assetInfo.getMetadata(asset: assetInfo))
+        self.integrationRef.createContentSession(player: player, metadata: assetInfo.getMetadata(asset: assetInfo))
     }
     
     /**
@@ -149,28 +167,28 @@ struct CVAPlayerEventsManager : CVAPlayerEventsManagerProtocol {
         - assetInfo: The CVAAsset instance which contains metadata information.
      */
     func didFailPlayback(player: Any,error:Error, assetInfo : CVAAsset) {
-        convivaAVPlayerIntegrationRef.cleanupContentSession()
+        self.integrationRef.cleanupContentSession()
     }
 
     /**
      This function is used to call CVAAVPlayerIntegrationRef's cleanupSession function.
      */
     func didStopPlayback() {
-        convivaAVPlayerIntegrationRef.cleanupContentSession()
+        self.integrationRef.cleanupContentSession()
     }
     
     /**
      This function is used to call CVAAVPlayerIntegrationRef's seekStart function.
      */
     func willSeekFrom(position:NSInteger) {
-        convivaAVPlayerIntegrationRef.seekStart(position: position);
+        self.integrationRef.seekStart(position: position);
     }
     
     /**
      This function is used to call CVAAVPlayerIntegrationRef's seekEnd function.
      */
     func didSeekTo(position:NSInteger) {
-        convivaAVPlayerIntegrationRef.seekEnd(position: position);
+        self.integrationRef.seekEnd(position: position);
     }
     
     /**
@@ -186,7 +204,7 @@ struct CVAPlayerEventsManager : CVAPlayerEventsManagerProtocol {
      This function is used to call CVAAVPlayerIntegrationRef's cleanupSession function.
      */
     func didEnterBackground() {
-        convivaAVPlayerIntegrationRef.cleanupContentSession()
+        self.integrationRef.cleanupContentSession()
     }
 
     /**
@@ -197,7 +215,7 @@ struct CVAPlayerEventsManager : CVAPlayerEventsManagerProtocol {
         - assetInfo: The CVAAsset instance which contains metadata information.
      */
     func willEnterForeground(player: Any, assetInfo : CVAAsset) {
-        convivaAVPlayerIntegrationRef.createContentSession(player: player, metadata: assetInfo.getMetadata(asset: assetInfo))
+        self.integrationRef.createContentSession(player: player, metadata: assetInfo.getMetadata(asset: assetInfo))
     }
     
     /**
@@ -205,7 +223,7 @@ struct CVAPlayerEventsManager : CVAPlayerEventsManagerProtocol {
      This function is used to call CVAAVPlayerIntegrationRef's cleanupSession function.
      */
     func didReceiveAudioInterruption() {
-        convivaAVPlayerIntegrationRef.cleanupContentSession()
+        self.integrationRef.cleanupContentSession()
     }
     
     /**
@@ -216,7 +234,7 @@ struct CVAPlayerEventsManager : CVAPlayerEventsManagerProtocol {
         - assetInfo: The CVAAsset instance which contains metadata information.
      */
     func didFinishAudioInterruption(player: Any, assetInfo : CVAAsset) {
-        convivaAVPlayerIntegrationRef.createContentSession(player: player, metadata: assetInfo.getMetadata(asset: assetInfo))
+        self.integrationRef.createContentSession(player: player, metadata: assetInfo.getMetadata(asset: assetInfo))
     }
 }
 

@@ -15,7 +15,7 @@ import ConvivaAVFoundation
 
 private let kConviva_Key = Conviva.Credentials.customerKey
 private let kConviva_Gateway_URL_Test = Conviva.Credentials.gatewayURLTest
-private let kConviva_Gateway_URL_Prod = Conviva.Credentials.gatewayURLProd
+private let kConviva_Gateway_URL_Prod = Conviva.Credentials.gatewayURLTest
 
 /// A class used to keep all methods used for Conviva AVPlayer integration.
 class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
@@ -45,8 +45,8 @@ class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
     /**
      Used to setup Conviva monitoring.
      */
-    static func initialize() {
-        saveConvivaCredentials()
+    func initialize() {
+        CVAAVPlayerIntegrationRef.saveConvivaCredentials()
         var clientSettings = Dictionary <String, Any>()
         
         #if DEBUG
@@ -62,7 +62,7 @@ class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
     /**
      Used to cleanup Conviva monitoring.
      */
-    static func cleanup() {
+    func cleanup() {
         LivePass.cleanup()
     }
     
@@ -167,7 +167,7 @@ class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
      */
     func sendCustomError(error : Error) {
         if (convivaContentSession != nil){
-            convivaContentSession.reportError(error.localizedDescription, errorType: ErrorSeverity.SEVERITY_FATAL)
+            convivaContentSession.reportError(error.localizedDescription, errorType: ErrorSeverity.ERROR_FATAL)
         }
     }
     
@@ -178,7 +178,7 @@ class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
      */
     func sendCustomWarning(warning : Error) {
         if (convivaContentSession != nil){
-            convivaContentSession.reportError(warning.localizedDescription, errorType: ErrorSeverity.SEVERITY_WARNING)
+            convivaContentSession.reportError(warning.localizedDescription, errorType: ErrorSeverity.ERROR_WARNING)
         }
     }
     

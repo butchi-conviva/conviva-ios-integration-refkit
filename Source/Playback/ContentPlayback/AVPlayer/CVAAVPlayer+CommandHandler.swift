@@ -38,7 +38,11 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
         self.asset = asset
         initializeAVPlayer()
         
-        playerEventManager = CVAPlayerEventsManager()
+        // Later to be handled from callbacks from UI or using Macros
+        let convivaAVPlayerRef = CVAAVPlayerIntegrationRef()
+        let convivaSDKRef = CVAAVPlayerIntegrationRef()
+
+        playerEventManager = CVAPlayerEventsManager(integrationRef: convivaAVPlayerRef)
         
         if avPlayer != nil {
              playerEventManager.willStartPlayback(player: avPlayer as Any, assetInfo: self.asset)

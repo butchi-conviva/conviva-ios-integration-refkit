@@ -82,6 +82,7 @@
 		6F5452292355F82C004BBB79 /* CustomPlayerInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5452242355F82C004BBB79 /* CustomPlayerInterface.swift */; };
 		6F54522A2355F82C004BBB79 /* CVACustomSDKIntegrationRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5452252355F82C004BBB79 /* CVACustomSDKIntegrationRef.swift */; };
 		6F54522B2355F82C004BBB79 /* CVAAVPlayerIntegrationRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5452272355F82C004BBB79 /* CVAAVPlayerIntegrationRef.swift */; };
+		6F70ED2D2386B6FF00D3F330 /* JWPlayer_iOS_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FFB941823868F5F002D4159 /* JWPlayer_iOS_SDK.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		6F95DE07237EA345005B4BA8 /* CVAGoogleIMAIntegrationRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F95DE06237EA345005B4BA8 /* CVAGoogleIMAIntegrationRef.swift */; };
 		6F95DE0923828859005B4BA8 /* CVAGoogleIMA+CommandHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F95DE0823828858005B4BA8 /* CVAGoogleIMA+CommandHandler.swift */; };
 		6FF376332345DF1C00B08B99 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF376322345DF1C00B08B99 /* SystemConfiguration.framework */; };
@@ -180,6 +181,7 @@
 		6FF3CDA123587F4700E5DA89 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		6FFB941423868C26002D4159 /* ConvivaSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ConvivaSDK.framework; path = Frameworks/ConvivaSDK/Framework/iOS/ConvivaSDK.framework; sourceTree = "<group>"; };
 		6FFB941623868C3E002D4159 /* ConvivaSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ConvivaSDK.framework; path = Frameworks/ConvivaSDK/Framework/tvOS/ConvivaSDK.framework; sourceTree = "<group>"; };
+		6FFB941823868F5F002D4159 /* JWPlayer_iOS_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JWPlayer_iOS_SDK.framework; path = "../../../Build/Pods/JWPlayer-SDK/JWPlayer_iOS_SDK.framework"; sourceTree = "<group>"; };
 		781691A37BE7A816F1EDA4BE /* Pods-ConvivaIntegrationRefKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConvivaIntegrationRefKit.debug.xcconfig"; path = "Target Support Files/Pods-ConvivaIntegrationRefKit/Pods-ConvivaIntegrationRefKit.debug.xcconfig"; sourceTree = "<group>"; };
 		7CAAE668520922B01338A3DB /* libPods-ConvivaIntegrationRefKitTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ConvivaIntegrationRefKitTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D2487BCCEDC91AE75374E2C /* Pods-ConvivaIntegrationRefKit-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConvivaIntegrationRefKit-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-ConvivaIntegrationRefKit-tvOSTests/Pods-ConvivaIntegrationRefKit-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F70ED2D2386B6FF00D3F330 /* JWPlayer_iOS_SDK.framework in Frameworks */,
 				6FFB941523868C26002D4159 /* ConvivaSDK.framework in Frameworks */,
 				6F4ED8C3237AFBE700F49963 /* GoogleInteractiveMediaAds.framework in Frameworks */,
 				6FF3763B2345DF3B00B08B99 /* AVKit.framework in Frameworks */,
@@ -235,6 +238,7 @@
 		13B1E89525835D0BEC92A0AB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6FFB941823868F5F002D4159 /* JWPlayer_iOS_SDK.framework */,
 				6FFB941423868C26002D4159 /* ConvivaSDK.framework */,
 				6FFB941623868C3E002D4159 /* ConvivaSDK.framework */,
 				6F4ED8C2237AFBE700F49963 /* GoogleInteractiveMediaAds.framework */,
@@ -1118,6 +1122,7 @@
 			baseConfigurationReference = 781691A37BE7A816F1EDA4BE /* Pods-ConvivaIntegrationRefKit.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -1130,6 +1135,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/GoogleAds-IMA-iOS-SDK",
 					"$(PROJECT_DIR)/Frameworks/ConvivaSDK/Framework/iOS",
+					"/Users/gtiwari/Desktop/Code/GIT_Q42019/iOS-SDK+EI/conviva-ios-reference-app/Build/Pods/JWPlayer-SDK",
 				);
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = ConvivaIntegrationRefKit/Info.plist;
@@ -1140,9 +1146,11 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.conviva.ConvivaIntegrationRefKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
@@ -1157,6 +1165,7 @@
 			baseConfigurationReference = CA70205E3EA3A28AF50101B8 /* Pods-ConvivaIntegrationRefKit.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -1169,6 +1178,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/GoogleAds-IMA-iOS-SDK",
 					"$(PROJECT_DIR)/Frameworks/ConvivaSDK/Framework/iOS",
+					"/Users/gtiwari/Desktop/Code/GIT_Q42019/iOS-SDK+EI/conviva-ios-reference-app/Build/Pods/JWPlayer-SDK",
 				);
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = ConvivaIntegrationRefKit/Info.plist;
@@ -1179,9 +1189,11 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.conviva.ConvivaIntegrationRefKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.2;
 				SYSTEM_HEADER_SEARCH_PATHS = "";

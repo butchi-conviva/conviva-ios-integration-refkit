@@ -7,7 +7,7 @@
 //
 
 import Foundation
-// import ConvivaSDK
+import ConvivaSDK
 
 class CustomPlayer {
     var videoURL : URL
@@ -29,9 +29,6 @@ class CustomPlayer {
     }
 }
 
-class CustomPlayerInterface {}
-
-/*
 class CustomPlayerInterface {
     var playerStateManager : CISPlayerStateManagerProtocol
     var customPlayer : CustomPlayer
@@ -52,21 +49,20 @@ class CustomPlayerInterface {
     func setPlayerState(playerState : PlayerState) {
         playerStateManager.setPlayerState!(playerState)
     }
-
-    func setSeekStart(seekToPosition : Int64) {
-        playerStateManager.setSeekStart!(seekToPosition)
+    
+    func setSeekStart(seekToPosition : NSInteger) {
+        playerStateManager.setSeekStart!(Int64(seekToPosition))
     }
-
-    func setSeekEnd(seekToPosition : Int64) {
-        playerStateManager.setSeekEnd!(seekToPosition)
+    
+    func setSeekEnd(seekToPosition : NSInteger) {
+        playerStateManager.setSeekEnd!(Int64(seekToPosition))
     }
-
+    
     func setCDNServerIP(cdnServerIP : String) {
         playerStateManager.setCDNServerIP!(cdnServerIP)
     }
-
+    
     func setBitrateKbps(newBitrateKbps: Int) {
         playerStateManager.setBitrateKbps!(newBitrateKbps)
     }
 }
-*/
