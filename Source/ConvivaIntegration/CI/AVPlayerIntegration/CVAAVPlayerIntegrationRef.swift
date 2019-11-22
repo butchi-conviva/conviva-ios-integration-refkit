@@ -32,6 +32,7 @@ class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
     
     /**
      Following variable of type ConvivaLightSession will be used to execute all of the ad specific Conviva moniting.
+     The main content session is also used for ad session creation. 
      */
     static var convivaContentSession : ConvivaLightSession!
     
@@ -247,7 +248,10 @@ class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
         convivaMetadata.isLive = (metadataDict[Conviva.Keys.ConvivaContentInfo.isLive] != nil) ? true : false
         convivaMetadata.resource = CDN_NAME_AKAMAI
         convivaMetadata.encodedFramerate = metadataDict[Conviva.Keys.ConvivaContentInfo.encodedFramerate] as! Int
-        convivaMetadata.contentLength = metadataDict[Conviva.Keys.ConvivaContentInfo.contentLength] as! Int
+        
+        /// Since AVPlayer library auto-collects content length, following reporting of contentLength should be avoided.
+        /// In case customer(s) are willing to send their own custom contentLength value, they can uncommennt following and the value being set in asset will be picked up.
+        // convivaMetadata.contentLength = metadataDict[Conviva.Keys.ConvivaContentInfo.contentLength] as! Int
         convivaMetadata.tags = metadataDict[Conviva.Keys.ConvivaContentInfo.tags] as? NSMutableDictionary
         return convivaMetadata
     }

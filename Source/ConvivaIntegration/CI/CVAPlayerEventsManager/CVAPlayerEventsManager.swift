@@ -43,7 +43,7 @@ protocol CVAPlayerEventsManagerProtocol {
         - player: The player instance which has started the playback.
         - assetInfo: The CVAAsset instance which contains metadata information.
      */
-    func didFailPlayback(player: Any,error:Error, assetInfo : CVAAsset)
+    func didFailPlayback(player: Any,error:Error)
 
     /**
      This function will be called when player stops playback.
@@ -148,7 +148,8 @@ struct CVAPlayerEventsManager : CVAPlayerEventsManagerProtocol {
         - player: The player instance which has started the playback.
         - assetInfo: The CVAAsset instance which contains metadata information.
      */
-    func didFailPlayback(player: Any,error:Error, assetInfo : CVAAsset) {
+    func didFailPlayback(player: Any,error:Error) {
+        convivaAVPlayerIntegrationRef.sendCustomError(error: error)
         convivaAVPlayerIntegrationRef.cleanupContentSession()
     }
 

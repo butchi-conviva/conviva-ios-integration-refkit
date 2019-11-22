@@ -23,7 +23,7 @@ class CVAGoogleIMAIntegrationRef : CVAAVPlayerIntegrationRef {
     var convivaAdSession : ConvivaLightSession?
     
     /**
-     Following variable of type ConvivaLightSession will be used to execute all of the ad specific Conviva moniting.
+     Following variable of type ConvivaLightSession will be used to create convivaAdSession.
      */
     var convivaVideoSession : ConvivaLightSession?
 
