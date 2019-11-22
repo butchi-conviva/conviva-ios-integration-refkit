@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30689E3859B98CA8CEA1BC25 /* libPods-ConvivaIntegrationRefKit-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB42093C27A58B4A7EDFE47D /* libPods-ConvivaIntegrationRefKit-tvOS.a */; };
 		510FBB5B236996FD005BC13C /* ConvivaIntegrationRefKit_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 510FBB52236996FD005BC13C /* ConvivaIntegrationRefKit_tvOS.framework */; };
 		510FBB60236996FD005BC13C /* ConvivaIntegrationRefKit_tvOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510FBB5F236996FD005BC13C /* ConvivaIntegrationRefKit_tvOSTests.swift */; };
 		510FBB62236996FD005BC13C /* ConvivaIntegrationRefKit_tvOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 510FBB54236996FD005BC13C /* ConvivaIntegrationRefKit_tvOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -187,6 +188,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30689E3859B98CA8CEA1BC25 /* libPods-ConvivaIntegrationRefKit-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -55,10 +55,20 @@ extension CVAGoogleIMAHandler : CVAAdCommandHandler {
             switch adAsset.type {
             case .preroll :
                 imaTag = Conviva.GoogleIMAAdTags.kPrerollTag
+            case .skippable :
+                imaTag = Conviva.GoogleIMAAdTags.kSkippableTag
             case .postroll :
                 imaTag = Conviva.GoogleIMAAdTags.kPostrollTag
-            default :
-                imaTag = Conviva.GoogleIMAAdTags.kPrerollTag
+            case .adRules :
+                imaTag = Conviva.GoogleIMAAdTags.kAdRulesTag
+            case .adRulesPods :
+                imaTag = Conviva.GoogleIMAAdTags.kAdRulesPodsTag
+            case .vmapPods :
+                imaTag = Conviva.GoogleIMAAdTags.kVMAPPodsTag
+            case .wrapper :
+                imaTag = Conviva.GoogleIMAAdTags.kWrapperTag
+            case .adSense :
+                imaTag = Conviva.GoogleIMAAdTags.kAdSenseTag
             }
             
             self.requestAds(imaTag, view: adContainerView!)

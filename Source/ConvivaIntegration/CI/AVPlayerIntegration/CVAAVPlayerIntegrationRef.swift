@@ -33,7 +33,7 @@ class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
     /**
      Following variable of type ConvivaLightSession will be used to execute all of the ad specific Conviva moniting.
      */
-    var convivaContentSession : ConvivaLightSession!
+    static var convivaContentSession : ConvivaLightSession!
     
     /**
      The ConvivaContentInfo instance.
@@ -91,20 +91,25 @@ class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
             Conviva.Keys.ConvivaContentInfo.tags: self.metadataDict[Conviva.Keys.Metadata.tags] as Any]
         
         if let session = LivePass.createSession(withStreamer: self.videoPlayer, andConvivaContentInfo: getConvivaContentInfoFromMetadata(metadata)) {
-            self.convivaContentSession = session
+            CVAAVPlayerIntegrationRef.convivaContentSession = session
+
         }
         else{
             print(Conviva.Errors.initializationError)
         }
     }
 
+    func getConvivaContentSession() -> ConvivaLightSession{
+        return CVAAVPlayerIntegrationRef.convivaContentSession
+    }
+    
     /**
      Used to cleanup a Conviva monitoring session.
      */
     func cleanupContentSession() {
-        if  self.convivaContentSession != nil {
-            LivePass.cleanupSession(self.convivaContentSession)
-            self.convivaContentSession = nil
+        if  CVAAVPlayerIntegrationRef.convivaContentSession != nil {
+            LivePass.cleanupSession(CVAAVPlayerIntegrationRef.convivaContentSession)
+            CVAAVPlayerIntegrationRef.convivaContentSession = nil
         }
     }
     
@@ -115,8 +120,8 @@ class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
      */
     func attachPlayer(player: Any) {
         if player is AVPlayer {
-            if(self.videoPlayer != nil && convivaContentSession != nil){
-                convivaContentSession.attachStreamer(self.videoPlayer)
+            if(CVAAVPlayerIntegrationRef.convivaContentSession != nil){
+                CVAAVPlayerIntegrationRef.convivaContentSession.attachStreamer(player)
             }
         }
         else {
@@ -129,8 +134,8 @@ class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
      It should be called when a streamer object has been attached using attachPlayer earlier.
      */
     func detachPlayer() {
-        if(convivaContentSession != nil){
-            convivaContentSession.pauseMonitor()
+        if(CVAAVPlayerIntegrationRef.convivaContentSession != nil){
+            CVAAVPlayerIntegrationRef.convivaContentSession.pauseMonitor()
         }
     }
     
@@ -144,8 +149,8 @@ class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
         - eventAttributes: Event Attributes of type Dictionary
      */
     func sendCustomEvent(eventName: String, eventAttributes : [String : String]) {
-        if (convivaContentSession != nil){
-            self.convivaContentSession.sendEvent(eventName, withAttributes: eventAttributes)
+        if (CVAAVPlayerIntegrationRef.convivaContentSession != nil){
+            CVAAVPlayerIntegrationRef.convivaContentSession.sendEvent(eventName, withAttributes: eventAttributes)
         }
         
         /*
@@ -166,8 +171,8 @@ class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
         - error: An error instance of type Error. The localizedDescription of this error is sent to Conviva.
      */
     func sendCustomError(error : Error) {
-        if (convivaContentSession != nil){
-            convivaContentSession.reportError(error.localizedDescription, errorType: ErrorSeverity.SEVERITY_FATAL)
+        if (CVAAVPlayerIntegrationRef.convivaContentSession != nil){
+            CVAAVPlayerIntegrationRef.convivaContentSession.reportError(error.localizedDescription, errorType: ErrorSeverity.SEVERITY_FATAL)
         }
     }
     
@@ -177,8 +182,8 @@ class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
         - warning: An error instance of type Error. The localizedDescription of this error is sent to Conviva.
      */
     func sendCustomWarning(warning : Error) {
-        if (convivaContentSession != nil){
-            convivaContentSession.reportError(warning.localizedDescription, errorType: ErrorSeverity.SEVERITY_WARNING)
+        if (CVAAVPlayerIntegrationRef.convivaContentSession != nil){
+            CVAAVPlayerIntegrationRef.convivaContentSession.reportError(warning.localizedDescription, errorType: ErrorSeverity.SEVERITY_WARNING)
         }
     }
     
@@ -186,8 +191,8 @@ class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
      Used to update the earlier set ConvivaContentInfo values.
      */
     func updateContentMetadata() {
-        if (convivaContentSession != nil){
-            convivaContentSession.updateContentMetadata(getUpdatedContentMetadata())
+        if (CVAAVPlayerIntegrationRef.convivaContentSession != nil){
+            CVAAVPlayerIntegrationRef.convivaContentSession.updateContentMetadata(getUpdatedContentMetadata())
         }
     }
     
@@ -197,8 +202,8 @@ class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
         - position: seek start position
      */
     func seekStart(position:NSInteger) {
-        if (convivaContentSession != nil){
-            convivaContentSession.setSeekStart(position);
+        if (CVAAVPlayerIntegrationRef.convivaContentSession != nil){
+            CVAAVPlayerIntegrationRef.convivaContentSession.setSeekStart(position);
         }
     }
     
@@ -208,8 +213,8 @@ class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
         - position: seek end position
      */
     func seekEnd(position:NSInteger) {
-        if (convivaContentSession != nil){
-            convivaContentSession.setSeekEnd(position);
+        if (CVAAVPlayerIntegrationRef.convivaContentSession != nil){
+            CVAAVPlayerIntegrationRef.convivaContentSession.setSeekEnd(position);
         }
     }
 

@@ -23,6 +23,11 @@ class CVAGoogleIMAIntegrationRef : CVAAVPlayerIntegrationRef {
     var convivaAdSession : ConvivaLightSession?
     
     /**
+     Following variable of type ConvivaLightSession will be used to execute all of the ad specific Conviva moniting.
+     */
+    var convivaVideoSession : ConvivaLightSession?
+
+    /**
      Following variable of type CVAGoogleIMAHandler will be used to get the calls directly from Google IMA adsLoader, inject Conviva code and then return the call back to CVAGoogleIMAHandler for further processing related to ad/content playback based on Google IMA adsLoader callbacks.
      */
     var adsLoaderDelegate : CVAGoogleIMAHandler?
@@ -62,6 +67,11 @@ class CVAGoogleIMAIntegrationRef : CVAAVPlayerIntegrationRef {
      */
     var isContentPaused : Bool?
 
+    override init() {
+        super.init()
+        self.convivaVideoSession = getConvivaContentSession()
+    }
+    
     /**
      Following function set adsLoaderDelegate variable as CVAGoogleIMAHandler's instance.
      Will be called from CVAGoogleIMAHandler as part of ad loader setup.
@@ -93,8 +103,8 @@ class CVAGoogleIMAIntegrationRef : CVAAVPlayerIntegrationRef {
      i.e. Call adStart(), post calling detachPlayer().
      */
     func adStart() {
-        if(self.convivaContentSession != nil){
-            LivePass.adStart(self.convivaContentSession)
+        if(self.convivaVideoSession != nil){
+            LivePass.adStart(self.convivaVideoSession)
         }
     }
 
@@ -103,8 +113,8 @@ class CVAGoogleIMAIntegrationRef : CVAAVPlayerIntegrationRef {
      i.e. Call adEnd(), post calling attachPlayer().
      */
     func adEnd() {
-        if(self.convivaContentSession != nil && self.adIndex != -1){
-            LivePass.adEnd(self.convivaContentSession)
+        if(self.convivaVideoSession != nil && self.adIndex != -1){
+            LivePass.adEnd(self.convivaVideoSession)
         }
     }
     
@@ -119,7 +129,7 @@ class CVAGoogleIMAIntegrationRef : CVAAVPlayerIntegrationRef {
      */
     func createAdsession(streamer : Any?, contentInfo : ConvivaContentInfo) {
         if(self.convivaAdSession == nil){
-            self.convivaAdSession = LivePass.createAdSession(streamer, contentSession: self.convivaContentSession, convivaContentInfo: contentInfo, options: nil)
+            self.convivaAdSession = LivePass.createAdSession(streamer, contentSession: self.convivaVideoSession, convivaContentInfo: contentInfo, options: nil)
         }
     }
     
@@ -298,7 +308,7 @@ extension CVAGoogleIMAIntegrationRef : IMAAdsManagerDelegate {
                 self.podPosition = podInfo.podIndex == 0 ? "Pre-roll" : (podInfo.podIndex == -1 ? "Post-roll": "Mid-roll");
             }
             
-            var dict : [String : Any] = [:]
+            let dict : NSMutableDictionary = [:]
             dict["c3.ad.id"] = adInfo.adId
             dict["c3.ad.system"] = adInfo.adSystem
             
@@ -358,7 +368,7 @@ extension CVAGoogleIMAIntegrationRef : IMAAdsManagerDelegate {
                 dict["c3.ad.firstCreativeId"] = adInfo.creativeID
             }
             
-            metadata.tags = dict as? NSMutableDictionary
+            metadata.tags = dict
             createAdsession(streamer: adsManager, contentInfo: metadata)
             setAdPlayerState(state: .CONVIVA_AD_BUFFERING)
             setAdManagerVersion(version: IMAAdsLoader.sdkVersion())
@@ -485,12 +495,12 @@ extension CVAGoogleIMAIntegrationRef : IMAAdsManagerDelegate {
         adStart()
         self.adBreak = self.adBreak + 1;
         self.isContentPaused = true;
-        if(self.convivaContentSession != nil) {
+        if(self.convivaVideoSession != nil) {
             var podStartAttributes : [String : Any] = [:]
             podStartAttributes["podIndex"] = self.adBreak
             podStartAttributes["podDuration"] = self.podDuration
             podStartAttributes["podPosition"] = self.podPosition
-            self.convivaContentSession?.sendEvent("Conviva.PodStart", withAttributes: podStartAttributes)
+            self.convivaVideoSession?.sendEvent("Conviva.PodStart", withAttributes: podStartAttributes)
         }
         
         /// 2. Return the call back to CVAGoogleIMAHandler for further processing related to ad/content playback.
@@ -515,14 +525,14 @@ extension CVAGoogleIMAIntegrationRef : IMAAdsManagerDelegate {
             attachPlayer(player: streamer)
             adEnd()
         }
-        if(self.convivaContentSession != nil && self.isContentPaused ?? false){
+        if(self.convivaVideoSession != nil && self.isContentPaused ?? false){
             self.isContentPaused = false;
             
             var podEndAttributes : [String : Any] = [:]
             podEndAttributes["podIndex"] = self.adBreak
             podEndAttributes["podDuration"] = self.podDuration
             podEndAttributes["podPosition"] = self.podPosition
-            self.convivaContentSession?.sendEvent("Conviva.PodEnd", withAttributes: podEndAttributes)
+            self.convivaVideoSession?.sendEvent("Conviva.PodEnd", withAttributes: podEndAttributes)
         }
         
         /// 2. Return the call back to CVAGoogleIMAHandler for further processing related to ad/content playback.

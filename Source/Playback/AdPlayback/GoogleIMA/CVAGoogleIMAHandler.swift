@@ -42,7 +42,7 @@ public class CVAGoogleIMAHandler : NSObject, AVPictureInPictureControllerDelegat
     /**
      The CVAGoogleIMAIntegrationRef instance.
      */
-    let cvaGoogleIMAIntegrationRef = CVAGoogleIMAIntegrationRef()
+    var cvaGoogleIMAIntegrationRef : CVAGoogleIMAIntegrationRef!
 
     /**
      The CVAAdView instance
@@ -85,6 +85,8 @@ public class CVAGoogleIMAHandler : NSObject, AVPictureInPictureControllerDelegat
         adsLoader = IMAAdsLoader(settings: settings)
 
         // adsLoader.contentComplete()
+
+        cvaGoogleIMAIntegrationRef = CVAGoogleIMAIntegrationRef()
 
         /// Set Conviva as the ads loader delegate.
         adsLoader.delegate = cvaGoogleIMAIntegrationRef.setConvivaAdsLoaderDelegate(delegate: self) as? IMAAdsLoaderDelegate
