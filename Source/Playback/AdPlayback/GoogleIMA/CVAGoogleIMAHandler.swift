@@ -11,8 +11,8 @@ import GoogleInteractiveMediaAds
 
 /// A class used to keep all methods required for Google IMA setup and notifications handling.
 
-public class CVAGoogleIMAHandler : NSObject, AVPictureInPictureControllerDelegate {
-    
+public class CVAGoogleIMAHandler : NSObject {
+
     /**
      Google IMA SDK handle for IMAAdsLoader.
      */
@@ -23,12 +23,15 @@ public class CVAGoogleIMAHandler : NSObject, AVPictureInPictureControllerDelegat
      */
     var adsManager: IMAAdsManager?
     
+    #if os(iOS)
     /**
      PiP objects.
      */
     var pictureInPictureController: AVPictureInPictureController?
     var pictureInPictureProxy: IMAPictureInPictureProxy?
-
+    #else
+    #endif
+    
     /**
      Content player handles
      */
@@ -91,20 +94,11 @@ public class CVAGoogleIMAHandler : NSObject, AVPictureInPictureControllerDelegat
         /// Set Conviva as the ads loader delegate.
         adsLoader.delegate = cvaGoogleIMAIntegrationRef.setConvivaAdsLoaderDelegate(delegate: self) as? IMAAdsLoaderDelegate
         
+        #if os(iOS)
         setUpPiP()
+        #endif
     }
 
-    /**
-     Following function initializes the PiP required to request ads from Google IMA.
-    */
-    func setUpPiP() {
-        // Set ourselves up for PiP.
-        pictureInPictureProxy = IMAPictureInPictureProxy(avPictureInPictureControllerDelegate: self);
-        pictureInPictureController = AVPictureInPictureController(playerLayer: AVPlayerLayer());
-        if (pictureInPictureController != nil) {
-            pictureInPictureController!.delegate = pictureInPictureProxy;
-        }
-    }    
 }
 
 /// An extension of class CVAGoogleIMAHandler which is used to implement IMAAdsLoaderDelegate functions.
@@ -207,3 +201,25 @@ extension CVAGoogleIMAHandler : IMAAdsManagerDelegate {
         contentPlayer!.play()
     }
 }
+
+#if os(iOS)
+extension CVAGoogleIMAHandler : AVPictureInPictureControllerDelegate {
+
+    /**
+     Following function initializes the PiP required to request ads from Google IMA.
+     */
+    func setUpPiP() {
+        // Set ourselves up for PiP.
+        pictureInPictureProxy = IMAPictureInPictureProxy(avPictureInPictureControllerDelegate: self);
+        pictureInPictureController = AVPictureInPictureController(playerLayer: AVPlayerLayer());
+        if (pictureInPictureController != nil) {
+            pictureInPictureController!.delegate = pictureInPictureProxy;
+        }
+    }
+
+}
+
+#else
+
+#endif
+

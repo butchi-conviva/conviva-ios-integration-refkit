@@ -8,6 +8,7 @@
 
 import Foundation
 import AVKit
+import GoogleInteractiveMediaAds
 
 /// An extension of class CVAGoogleIMAHandler which is used to implement CVAAdCommandHandler functions.
 
@@ -107,6 +108,8 @@ extension CVAGoogleIMAHandler {
         - view: The CVAAdView instance on which ads will be rendered.
      */
     private func requestAds(_ adTagUrl: String!, view: CVAAdView) {
+        
+        #if os(iOS)
         // Create an ad request with Google IMA's ad tag, display container, and optional user context.
         if contentPlayer == self.contentPlayer {
             let request = IMAAdsRequest(
@@ -117,6 +120,20 @@ extension CVAGoogleIMAHandler {
                 userContext: nil)
             adsLoader.requestAds(with: request)
         }
+
+        #else
+        // Create an ad request with Google IMA's ad tag, display container, and optional user context.
+        if contentPlayer == self.contentPlayer {
+            let request = IMAAdsRequest(
+                adTagUrl: adTagUrl,
+                adDisplayContainer: createAdDisplayContainer(view: view),
+                avPlayerVideoDisplay: IMAAVPlayerVideoDisplay(avPlayer: self.contentPlayer),
+                pictureInPictureProxy: nil,
+                userContext: nil)
+            adsLoader.requestAds(with: request)
+        }
+
+        #endif
     }
     
     /**
