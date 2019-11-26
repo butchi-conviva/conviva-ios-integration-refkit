@@ -60,6 +60,7 @@ extension CVAAVPlayer {
         // Add observer for AVPlayer status and AVPlayerItem status
         self.avPlayer?.addObserver(self, forKeyPath: #keyPath(AVPlayer.status), options: [.new, .initial], context: nil)
         self.avPlayer?.addObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem.status), options:[.new, .initial], context: nil)
+        self.avPlayer?.addObserver(self, forKeyPath: #keyPath(AVPlayer.timeControlStatus), options:[.new, .initial], context: nil)
     }
     
     /**
@@ -250,6 +251,26 @@ extension CVAAVPlayer {
                 self.responseHandler?.onPlayerEvent(event:.onContentPlayDidFail, info: [:])
 
                 NSLog("Error: \(String(describing: self.avPlayer?.currentItem?.error?.localizedDescription)), error: \(String(describing: self.avPlayer?.currentItem?.error))")
+            }
+        }
+        
+        if keyPath == #keyPath(AVPlayer.timeControlStatus) {
+            
+            if let playStateAsNumber = change?[NSKeyValueChangeKey.newKey] as? NSNumber {
+                
+                if let playState =  AVPlayer.TimeControlStatus(rawValue: playStateAsNumber.intValue) {
+                
+                    switch playState {
+                    case .playing:
+                        self.responseHandler?.onPlayerEvent(event:.onContentPlayDidPlay, info: [:])
+                    case .paused:
+                        fallthrough
+                    case .waitingToPlayAtSpecifiedRate:
+                        self.responseHandler?.onPlayerEvent(event:.onContentPlayDidPause, info: [:])
+                   
+                    }
+                    
+                }
             }
         }
     }

@@ -27,6 +27,8 @@ struct Conviva {
         static let encryptedURL2 = "http://172.19.3.111/encrypted/master.m3u8"
         static let encryptedURL3 = "https://willzhanmswest.streaming.mediaservices.windows.net/92fc0471-0878-4eeb-80a3-e5b6fc497806/NoAudio.ism/manifest(format=m3u8-aapl)"
         static let sampleLocalURL = "http://localhost/sample/index.m3u8"
+        static let hostedContent1 =  "http://reference-apps.conviva.com/vod/hls/bipbop/index.m3u8"
+        static let hostedContent2 =  "http://reference-apps.conviva.com/vod/hls/avengers/index.m3u8"
     }
 
     struct Errors {

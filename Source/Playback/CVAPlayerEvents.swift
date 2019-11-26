@@ -12,6 +12,8 @@ public enum CVAPlayerEvent : String {
     case onContentLoading           =   "onContentLoading"
     case onContentLoadDidFail       =   "onContentLoadDidFail"
     case onContentPlayDidStart      =   "onContentPlayDidStart"
+    case onContentPlayDidPause     =    "onContentPlayDidPause"
+    case onContentPlayDidPlay     =     "onContentPlayDidPlay"
     case onContentPlayDidFail       =   "onContentPlayDidFail"
     case onContentPlayDidFinish     =   "onContentPlayDidFinish"
     case onPlayHeadChange           =   "onPlayHeadChange"
@@ -26,6 +28,8 @@ public enum CVAPlayerEvent : String {
         [onContentLoading.rawValue,
          onContentLoadDidFail.rawValue,
          onContentPlayDidStart.rawValue,
+         onContentPlayDidPause.rawValue,
+         onContentPlayDidPlay.rawValue,
          onContentPlayDidFail.rawValue,
          onContentPlayDidFinish.rawValue,
          onPlayHeadChange.rawValue,
