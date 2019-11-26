@@ -8,6 +8,7 @@
 
 import Foundation
 import AVFoundation
+import ConvivaCore
 
 /// A protocol which is used to declare requirements for listening to callbacks from the player and making required Conviva calls.
 /// Player manager classes like CVAAVPlayer etc will call these functions to interact with Conviva.
@@ -104,20 +105,30 @@ protocol CVAPlayerEventsManagerProtocol {
 /// This class will contain the functional implementation for handling and calling Conviva APIs.
 /// Player manager classes like CVAAVPlayer etc will call these functions to interact with Conviva.
 
-struct CVAPlayerEventsManager : CVAPlayerEventsManagerProtocol {
-    
+@objc(CVAPlayerEventsManager)
+
+public class CVAPlayerEventsManager : NSObject {
+
     /**
      The CVAAVPlayerIntegrationRef instance which is used to call all of Conviva AVPlayer library's behaviour.
      */
     var convivaAVPlayerIntegrationRef : CVAAVPlayerIntegrationRef!
 
     /**
+     The instance of type CVAContentSessionProvider protocol.
+     This delegate will be used pass ConvivaLightSession instance from CVAPlayerEventsManager to CVAPlayerManager
+     */
+    var delegate: CVAContentSessionProvider? = nil
+
+    /**
      The CVAAVPlayerManager class initializer.
      Initialization of Integration Reference classes like CVAAVPlayerIntegrationRef etc should happen here.
      */
-    init() {
+    public required override init() {
         CVAAVPlayerIntegrationRef.initialize()
         convivaAVPlayerIntegrationRef = CVAAVPlayerIntegrationRef()
+        super.init()
+        convivaAVPlayerIntegrationRef.delegate = self
     }
     
     /**
@@ -221,3 +232,9 @@ struct CVAPlayerEventsManager : CVAPlayerEventsManagerProtocol {
     }
 }
 
+/// Following extension of CVAPlayerEventsManager class is used to pass ConvivaLightSession instance from CVAPlayerEventsManager to CVAPlayerManager
+extension CVAPlayerEventsManager : CVAContentSessionProvider {
+    public func didRecieveContentSession(session: ConvivaLightSession) {
+        self.delegate?.didRecieveContentSession(session: session)
+    }
+}

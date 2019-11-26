@@ -13,8 +13,8 @@ import GoogleInteractiveMediaAds
 /// An extension of class CVAGoogleIMAHandler which is used to implement CVAAdCommandHandler functions.
 
 extension CVAGoogleIMAHandler : CVAAdCommandHandler {
-    
-    public func startAdPlayback(adAsset:CVAAdAsset) -> CVAPlayerStatus {
+    public func startAdPlayback(adEventManager: CVAAdsEventsManager, adAsset: CVAAdAsset) -> CVAPlayerStatus {
+        self.adEventManager = adEventManager
         
         setUpIMA()
         setUpAdView()

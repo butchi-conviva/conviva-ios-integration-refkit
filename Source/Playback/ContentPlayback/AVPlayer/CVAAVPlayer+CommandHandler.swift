@@ -34,14 +34,14 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
         - asset: An instance of CVAAsset.
      - Returns: An instance of CVAPlayerStatus.
      */
-    public func startAssetPlayback(asset : CVAAsset) -> CVAPlayerStatus {
+    public func startAssetPlayback(playerEventManager : CVAPlayerEventsManager, asset : CVAAsset) -> CVAPlayerStatus {
         self.asset = asset
         initializeAVPlayer()
         
-        playerEventManager = CVAPlayerEventsManager()
+        self.playerEventManager = playerEventManager
         
         if avPlayer != nil {
-             playerEventManager.willStartPlayback(player: avPlayer as Any, assetInfo: self.asset)
+             self.playerEventManager.willStartPlayback(player: avPlayer as Any, assetInfo: self.asset)
              avPlayer?.play()
         }
         
@@ -92,7 +92,8 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
     public func retryAssetPlayback(asset:CVAAsset,info : [AnyHashable : Any]?) -> CVAPlayerStatus {
         
         destroyAVPlayer();
-        return startAssetPlayback(asset: asset);
+        return startAssetPlayback(playerEventManager: self.playerEventManager, asset: asset)
+        // return startAssetPlayback(asset: asset);
     }
     
     /**

@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import AVFoundation
+import ConvivaCore
 
 public class CVAPlayerManager: NSObject {
     
@@ -19,18 +20,28 @@ public class CVAPlayerManager: NSObject {
     var currentAsset:CVAAsset?
     var currentAdAsset:CVAAdAsset?
     
+    var playerManager : CVAPlayerEventsManager?
+    var adManager : CVAAdsEventsManager?
+    
     public init(playerWithCmdHandler:CVAPlayerCommandHandler,
                 adCommandHandler:CVAAdCommandHandler,
                 playerEventManager:CVAPlayerEventManager,
-                playerContentViewProvider:CVAPlayerContentViewProvider) {
+                playerContentViewProvider:CVAPlayerContentViewProvider,
+                playerMgr : CVAPlayerEventsManager,
+                adMgr : CVAAdsEventsManager) {
         
         self.playerCommandHandler = playerWithCmdHandler;
         self.adCommandHandler = adCommandHandler;
         self.playerEventManager = playerEventManager;
         self.playerContentViewProvider = playerContentViewProvider;
         
+        self.adManager = adMgr
+        self.playerManager = playerMgr
+
         super.init();
         
+        self.playerManager!.delegate = self
+
         playerCommandHandler.playerResponseHandler = self;
         adCommandHandler.dataSource = self;
         adCommandHandler.responseHandler = self;
@@ -59,12 +70,12 @@ extension CVAPlayerManager : CVAPlayerCmdExecutor {
                 
                 self.currentAsset = asset;
                 self.currentAdAsset = adAsset;
-                
-                status = playerCommandHandler.startAssetPlayback(asset: asset);
+
+                status = playerCommandHandler.startAssetPlayback(playerEventManager: self.playerManager!, asset: asset);
                 status = playerCommandHandler.pauseAsset(asset: asset);
                 
                 if let _ = self.currentAdAsset {
-                    status = self.adCommandHandler.startAdPlayback(adAsset:  self.currentAdAsset!)
+                    status = self.adCommandHandler.startAdPlayback(adEventManager: self.adManager!, adAsset:  self.currentAdAsset!)
                 }
                 
             case CVAPlayerCommand.play:
@@ -177,3 +188,9 @@ extension CVAPlayerManager : CVAAdDataSource {
 
 }
 
+/// Following extension of CVAPlayerManager class is used to pass ConvivaLightSession instance from  CVAPlayerManager to CVAAdsEventsManager
+extension CVAPlayerManager: CVAContentSessionProvider {
+    public func didRecieveContentSession(session: ConvivaLightSession) {
+        self.adManager?.convivaContentSession = session
+    }    
+}
