@@ -23,6 +23,7 @@ target 'ConvivaIntegrationRefKit-tvOS' do
   # Pods for ConvivaIntegrationRefKit-tvOS
   
   pod 'ConvivaAVFoundation','3.0.7'
+  pod 'GoogleAds-IMA-tvOS-SDK', '~> 4.2'
 
   # pod 'ConvivaSDK', '2.141.4'
   # pod 'OoyalaSDK', '4.41.0'

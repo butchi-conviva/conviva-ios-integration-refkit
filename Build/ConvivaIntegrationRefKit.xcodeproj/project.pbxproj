@@ -82,6 +82,11 @@
 		6F5452292355F82C004BBB79 /* CustomPlayerInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5452242355F82C004BBB79 /* CustomPlayerInterface.swift */; };
 		6F54522A2355F82C004BBB79 /* CVACustomSDKIntegrationRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5452252355F82C004BBB79 /* CVACustomSDKIntegrationRef.swift */; };
 		6F54522B2355F82C004BBB79 /* CVAAVPlayerIntegrationRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5452272355F82C004BBB79 /* CVAAVPlayerIntegrationRef.swift */; };
+		6F88912E238BD60000F5680E /* CVAGoogleIMAIntegrationRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F95DE06237EA345005B4BA8 /* CVAGoogleIMAIntegrationRef.swift */; };
+		6F889131238C147000F5680E /* CVAAdsEventsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F889130238C146F00F5680E /* CVAAdsEventsManager.swift */; };
+		6F889132238C147000F5680E /* CVAAdsEventsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F889130238C146F00F5680E /* CVAAdsEventsManager.swift */; };
+		6F889134238D3B2000F5680E /* CVAContentSessionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F889133238D3B2000F5680E /* CVAContentSessionProvider.swift */; };
+		6F889135238D3B2000F5680E /* CVAContentSessionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F889133238D3B2000F5680E /* CVAContentSessionProvider.swift */; };
 		6F95DE07237EA345005B4BA8 /* CVAGoogleIMAIntegrationRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F95DE06237EA345005B4BA8 /* CVAGoogleIMAIntegrationRef.swift */; };
 		6F95DE0923828859005B4BA8 /* CVAGoogleIMA+CommandHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F95DE0823828858005B4BA8 /* CVAGoogleIMA+CommandHandler.swift */; };
 		6FF376332345DF1C00B08B99 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF376322345DF1C00B08B99 /* SystemConfiguration.framework */; };
@@ -166,6 +171,8 @@
 		6F5452252355F82C004BBB79 /* CVACustomSDKIntegrationRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVACustomSDKIntegrationRef.swift; sourceTree = "<group>"; };
 		6F5452272355F82C004BBB79 /* CVAAVPlayerIntegrationRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVAAVPlayerIntegrationRef.swift; sourceTree = "<group>"; };
 		6F5902E5A4BB3AA6245AC568 /* Pods-ConvivaIntegrationRefKit-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConvivaIntegrationRefKit-tvOS.release.xcconfig"; path = "Target Support Files/Pods-ConvivaIntegrationRefKit-tvOS/Pods-ConvivaIntegrationRefKit-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		6F889130238C146F00F5680E /* CVAAdsEventsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVAAdsEventsManager.swift; sourceTree = "<group>"; };
+		6F889133238D3B2000F5680E /* CVAContentSessionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVAContentSessionProvider.swift; sourceTree = "<group>"; };
 		6F95DE06237EA345005B4BA8 /* CVAGoogleIMAIntegrationRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVAGoogleIMAIntegrationRef.swift; sourceTree = "<group>"; };
 		6F95DE0823828858005B4BA8 /* CVAGoogleIMA+CommandHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CVAGoogleIMA+CommandHandler.swift"; sourceTree = "<group>"; };
 		6FF376302345DB8200B08B99 /* OoyalaSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OoyalaSDK.framework; path = 3rdparty/Ooyala/4.43/OoyalaSDK.framework; sourceTree = "<group>"; };
@@ -334,23 +341,25 @@
 			path = GoogleIMA;
 			sourceTree = "<group>";
 		};
-		516B66C62384039100B40CDD /* CI */ = {
+		516B66C62384039100B40CDD /* ExperienceInsights */ = {
 			isa = PBXGroup;
 			children = (
 				6F5452222355F82C004BBB79 /* CVABaseIntegrationRef.swift */,
+				6F889133238D3B2000F5680E /* CVAContentSessionProvider.swift */,
 				510FBB83236997FC005BC13C /* CVAPlayerEventsManager */,
 				6F5452262355F82C004BBB79 /* AVPlayerIntegration */,
 				6F5452232355F82C004BBB79 /* CustomSDKIntegration */,
 			);
-			path = CI;
+			path = ExperienceInsights;
 			sourceTree = "<group>";
 		};
-		516B66C7238403B600B40CDD /* AI */ = {
+		516B66C7238403B600B40CDD /* AdsInsights */ = {
 			isa = PBXGroup;
 			children = (
 				6F95DE05237EA325005B4BA8 /* GoogleIMAIntegration */,
+				6F88912F238C146F00F5680E /* CVAAdsEventsManager */,
 			);
-			path = AI;
+			path = AdsInsights;
 			sourceTree = "<group>";
 		};
 		516B66C8238406BD00B40CDD /* ContentPlayback */ = {
@@ -444,8 +453,8 @@
 		6F5452212355F82C004BBB79 /* ConvivaIntegration */ = {
 			isa = PBXGroup;
 			children = (
-				516B66C7238403B600B40CDD /* AI */,
-				516B66C62384039100B40CDD /* CI */,
+				516B66C7238403B600B40CDD /* AdsInsights */,
+				516B66C62384039100B40CDD /* ExperienceInsights */,
 				6F1C6B78235F2008002E5DDA /* Common */,
 			);
 			name = ConvivaIntegration;
@@ -467,6 +476,14 @@
 				6F5452272355F82C004BBB79 /* CVAAVPlayerIntegrationRef.swift */,
 			);
 			path = AVPlayerIntegration;
+			sourceTree = "<group>";
+		};
+		6F88912F238C146F00F5680E /* CVAAdsEventsManager */ = {
+			isa = PBXGroup;
+			children = (
+				6F889130238C146F00F5680E /* CVAAdsEventsManager.swift */,
+			);
+			path = CVAAdsEventsManager;
 			sourceTree = "<group>";
 		};
 		6F95DE05237EA325005B4BA8 /* GoogleIMAIntegration */ = {
@@ -770,6 +787,7 @@
 				6F46531F237C1FFB00F7ED98 /* CVAAdView.swift in Sources */,
 				510FBB6C236997C6005BC13C /* CVACustomSDKIntegrationRef.swift in Sources */,
 				510FBB6D236997C6005BC13C /* CVALiveAsset.swift in Sources */,
+				6F88912E238BD60000F5680E /* CVAGoogleIMAIntegrationRef.swift in Sources */,
 				510FBB6E236997C6005BC13C /* CVAAsset.swift in Sources */,
 				510FBB6F236997C6005BC13C /* CVAAssetKeys.swift in Sources */,
 				516B66C22383F9AA00B40CDD /* CVAAdAsset.swift in Sources */,
@@ -780,6 +798,7 @@
 				510FBB72236997C6005BC13C /* Constants.swift in Sources */,
 				510FBB73236997C6005BC13C /* UserDefaults+Extension.swift in Sources */,
 				510FBB75236997C6005BC13C /* CVAAVPlayer.swift in Sources */,
+				6F889132238C147000F5680E /* CVAAdsEventsManager.swift in Sources */,
 				510FBB76236997C6005BC13C /* CVAAVPlayer+CommandHandler.swift in Sources */,
 				510FBB77236997C6005BC13C /* CVAAVPlayer+EventsHandler.swift in Sources */,
 				510FBB78236997C6005BC13C /* CVAPlayerEventListener.swift in Sources */,
@@ -794,6 +813,7 @@
 				510FBB7D236997C6005BC13C /* CVAPlayerEventManager.swift in Sources */,
 				510FBB7E236997C6005BC13C /* CVAPlayerResponseHandler.swift in Sources */,
 				510FBB7F236997C6005BC13C /* CVAPlayerCommandHandler.swift in Sources */,
+				6F889135238D3B2000F5680E /* CVAContentSessionProvider.swift in Sources */,
 				510FBB80236997C6005BC13C /* CVAAVPlayerView.swift in Sources */,
 				510FBB81236997C6005BC13C /* CVAPlayerCmdExecutor.swift in Sources */,
 				510FBB82236997C6005BC13C /* CVAPlayerEvents.swift in Sources */,
@@ -831,6 +851,7 @@
 				5176E72723262E5E00E1946D /* CVAPlayerEventManager.swift in Sources */,
 				5176E72623262E5E00E1946D /* CVAPlayerManager.swift in Sources */,
 				5176E72923262E5E00E1946D /* CVAPlayerResponseHandler.swift in Sources */,
+				6F889131238C147000F5680E /* CVAAdsEventsManager.swift in Sources */,
 				6F1C6B77235F1DDE002E5DDA /* CVAAVPlayer.swift in Sources */,
 				6F54522A2355F82C004BBB79 /* CVACustomSDKIntegrationRef.swift in Sources */,
 				5176E72D23262E5E00E1946D /* CVAPlayerEvents.swift in Sources */,
@@ -845,6 +866,7 @@
 				5176E72B23262E5E00E1946D /* CVAAVPlayerView.swift in Sources */,
 				6F1C6B73235F1D47002E5DDA /* CVAAVPlayer+EventsHandler.swift in Sources */,
 				6F5452292355F82C004BBB79 /* CustomPlayerInterface.swift in Sources */,
+				6F889134238D3B2000F5680E /* CVAContentSessionProvider.swift in Sources */,
 				5176E73323262E5E00E1946D /* UserDefaults+Extension.swift in Sources */,
 				516B66C42383FA8100B40CDD /* CVAAdAssetKeys.swift in Sources */,
 				5176E72F23262E5E00E1946D /* CVAAsset.swift in Sources */,
@@ -896,9 +918,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
 			};
 			name = Debug;
 		};
@@ -923,9 +945,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
 			};
 			name = Release;
 		};

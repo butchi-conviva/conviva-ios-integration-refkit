@@ -16,7 +16,7 @@ class Utilities {
         - A string type value of device identifier
      */
     func getDeviceID() -> String {
-        #if os(ios)
+        #if os(iOS)
         return (UIDevice.current.identifierForVendor?.uuidString)!
         #else
         return ""

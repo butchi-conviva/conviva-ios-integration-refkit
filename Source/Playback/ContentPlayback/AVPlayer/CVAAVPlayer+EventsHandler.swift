@@ -55,6 +55,8 @@ extension CVAAVPlayer {
         
         NotificationCenter.default.addObserver(self, selector:#selector(didFailPlaying(_:)) , name:NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object:player.currentItem)
         
+        NotificationCenter.default.addObserver(self, selector:#selector(didFailPlaying(_:)) , name:NSNotification.Name.AVPlayerItemPlaybackStalled, object:player.currentItem)
+        
         NotificationCenter.default.addObserver(self, selector:#selector(didFailPlaying(_:)) , name:NSNotification.Name.AVPlayerItemNewErrorLogEntry, object:player.currentItem)
         
         // Add observer for AVPlayer status and AVPlayerItem status
@@ -71,6 +73,8 @@ extension CVAAVPlayer {
         
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: player.currentItem)
         
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: player.currentItem)
+
         NotificationCenter.default.removeObserver(self, name:NSNotification.Name.AVPlayerItemNewErrorLogEntry, object:player.currentItem)
         
         self.avPlayer?.removeObserver(self, forKeyPath: #keyPath(AVPlayer.status))
@@ -116,6 +120,7 @@ extension CVAAVPlayer {
      */
     func addObserverForRate(_ player: AVPlayer) {
         player.addObserver(self, forKeyPath: "rate", options:NSKeyValueObservingOptions(), context: nil)
+        player.currentItem?.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.status), options: [.old, .new], context: nil)
     }
     
     /**
@@ -132,7 +137,18 @@ extension CVAAVPlayer {
      In this situation Conviva session should be cleaned up.
      */
     @objc private func didFailPlaying(_ sender: Notification) -> Void {
-        playerEventManager.didStopPlayback()
+        
+        /// When the playback is attempted in very low bandwidth (~56kbps) the AVPlayerItemPlaybackStalled event is recieved which causes playback error. This is not handled in the library hence we need to explicitely send this error.
+        /// Since for this event, sender.userInfo is nil, we need to send custom error.
+        if sender.name == NSNotification.Name.AVPlayerItemPlaybackStalled {
+            let error = NSError(domain:"", code:401, userInfo:[ NSLocalizedDescriptionKey: "Playback stalled"])
+            playerEventManager.didFailPlayback(player: self.avPlayer as Any, error: error as Error)
+        }
+
+        else {
+            playerEventManager.didStopPlayback()
+        }
+        
         self.responseHandler?.onPlayerEvent(event:.onContentPlayDidFail, info: [:])
     }
     
@@ -238,7 +254,6 @@ extension CVAAVPlayer {
                 }
             }
         }
-        
         if keyPath == #keyPath(AVPlayer.currentItem.status) {
             let newStatus: AVPlayerItem.Status
             if let newStatusAsNumber = change?[NSKeyValueChangeKey.newKey] as? NSNumber {
