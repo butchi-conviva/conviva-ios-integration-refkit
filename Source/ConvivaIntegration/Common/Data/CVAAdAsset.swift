@@ -9,11 +9,15 @@
 import Foundation
 
 enum CVAAdType : String {
+    /// Following are the set of ad tags supported by Google IMA
     case preroll = "preroll"
-    case midroll = "midroll"
+    case skippable = "skippable"
     case postroll = "postroll"
-    
-    
+    case adRules = "adRules"
+    case adRulesPods = "adRulesPods"
+    case vmapPods = "vmapPods"
+    case wrapper = "wrapper"
+    case adSense = "adSense"
 }
 
 public class CVAAdAsset: NSObject {

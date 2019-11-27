@@ -14,7 +14,7 @@ public protocol CVAAdCommandHandler : class {
     
     var dataSource:CVAAdDataSource? { get set }
     
-    func startAdPlayback(adAsset:CVAAdAsset) -> CVAPlayerStatus
+    func startAdPlayback(adEventManager : CVAAdsEventsManager, adAsset:CVAAdAsset) -> CVAPlayerStatus
 
     func stopAdPlayback(asset:CVAAdAsset) -> CVAPlayerStatus
     

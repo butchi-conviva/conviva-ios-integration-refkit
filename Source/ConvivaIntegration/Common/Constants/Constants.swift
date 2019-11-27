@@ -15,8 +15,8 @@ struct Conviva {
     struct Credentials {
         static let gatewayURLKey = "gatewayUrl"
         static let customerKey   = "1a6d7f0de15335c201e8e9aacbc7a0952f5191d7"
-        static let gatewayURLTest = "https://conviva.testonly.conviva.com"
-        static let gatewayURLProd = "https://cws.conviva.com"
+        static let gatewayURLTest = "https://touchstone.conviva.com"
+        static let gatewayURLProd = "https://touchstone.conviva.com"
     }
 
     /// A struct used to store list of playback URLs.

@@ -36,7 +36,7 @@ public class CVAAVPlayer: NSObject {
     /**
      The CVAAVPlayerManager instance which takes care of all Conviva implementation.
      */
-    var playerEventManager : CVAPlayerEventsManagerProtocol!
+    var playerEventManager : CVAPlayerEventsManager!
     
     /**
      The CVAAsset instance which is used to fetch asset info.

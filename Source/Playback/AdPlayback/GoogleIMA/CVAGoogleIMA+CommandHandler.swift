@@ -8,12 +8,13 @@
 
 import Foundation
 import AVKit
+import GoogleInteractiveMediaAds
 
 /// An extension of class CVAGoogleIMAHandler which is used to implement CVAAdCommandHandler functions.
 
 extension CVAGoogleIMAHandler : CVAAdCommandHandler {
-    
-    public func startAdPlayback(adAsset:CVAAdAsset) -> CVAPlayerStatus {
+    public func startAdPlayback(adEventManager: CVAAdsEventsManager, adAsset: CVAAdAsset) -> CVAPlayerStatus {
+        self.adEventManager = adEventManager
         
         setUpIMA()
         setUpAdView()
@@ -55,10 +56,20 @@ extension CVAGoogleIMAHandler : CVAAdCommandHandler {
             switch adAsset.type {
             case .preroll :
                 imaTag = Conviva.GoogleIMAAdTags.kPrerollTag
+            case .skippable :
+                imaTag = Conviva.GoogleIMAAdTags.kSkippableTag
             case .postroll :
                 imaTag = Conviva.GoogleIMAAdTags.kPostrollTag
-            default :
-                imaTag = Conviva.GoogleIMAAdTags.kPrerollTag
+            case .adRules :
+                imaTag = Conviva.GoogleIMAAdTags.kAdRulesTag
+            case .adRulesPods :
+                imaTag = Conviva.GoogleIMAAdTags.kAdRulesPodsTag
+            case .vmapPods :
+                imaTag = Conviva.GoogleIMAAdTags.kVMAPPodsTag
+            case .wrapper :
+                imaTag = Conviva.GoogleIMAAdTags.kWrapperTag
+            case .adSense :
+                imaTag = Conviva.GoogleIMAAdTags.kAdSenseTag
             }
             
             self.requestAds(imaTag, view: adContainerView!)
@@ -97,6 +108,8 @@ extension CVAGoogleIMAHandler {
         - view: The CVAAdView instance on which ads will be rendered.
      */
     private func requestAds(_ adTagUrl: String!, view: CVAAdView) {
+        
+        #if os(iOS)
         // Create an ad request with Google IMA's ad tag, display container, and optional user context.
         if contentPlayer == self.contentPlayer {
             let request = IMAAdsRequest(
@@ -107,6 +120,20 @@ extension CVAGoogleIMAHandler {
                 userContext: nil)
             adsLoader.requestAds(with: request)
         }
+
+        #else
+        // Create an ad request with Google IMA's ad tag, display container, and optional user context.
+        if contentPlayer == self.contentPlayer {
+            let request = IMAAdsRequest(
+                adTagUrl: adTagUrl,
+                adDisplayContainer: createAdDisplayContainer(view: view),
+                avPlayerVideoDisplay: IMAAVPlayerVideoDisplay(avPlayer: self.contentPlayer),
+                pictureInPictureProxy: nil,
+                userContext: nil)
+            adsLoader.requestAds(with: request)
+        }
+
+        #endif
     }
     
     /**
