@@ -7,6 +7,7 @@ target 'ConvivaIntegrationRefKit' do
   
   pod 'ConvivaAVFoundation','3.0.7'
   pod 'GoogleAds-IMA-iOS-SDK', '~> 3.7'
+  pod 'OpenSSL-Universal'
 
   # pod 'ConvivaSDK', '2.141.4'
   # pod 'OoyalaSDK', '4.41.0'
