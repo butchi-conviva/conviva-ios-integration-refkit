@@ -55,7 +55,7 @@ public class CVAGoogleIMAHandler : NSObject {
     /**
      Following variable of type Int will be used to track pod duration as reported by Google IMA's podInfo.
      */
-    var podDuration : Int?
+    var podDuration : Int = 0
     
     /**
      Following variable of type Int will be used to track ad breaks.
@@ -446,9 +446,9 @@ extension CVAGoogleIMAHandler : IMAAdsManagerDelegate {
         self.adBreak = self.adBreak + 1;
         self.isContentPaused = true;
 
-        var podStartAttributes : [String : Any] = [:]
-        podStartAttributes["podIndex"] = self.adBreak
-        podStartAttributes["podDuration"] = self.podDuration
+        var podStartAttributes : [String : String] = [:]
+        podStartAttributes["podIndex"] = String(self.adBreak)
+        podStartAttributes["podDuration"] = String(self.podDuration)
         podStartAttributes["podPosition"] = self.podPosition
         
         /// Report custom PodStart evennt to Conviva.
@@ -482,9 +482,9 @@ extension CVAGoogleIMAHandler : IMAAdsManagerDelegate {
         if(self.isContentPaused ?? false){
             self.isContentPaused = false;
             
-            var podEndAttributes : [String : Any] = [:]
-            podEndAttributes["podIndex"] = self.adBreak
-            podEndAttributes["podDuration"] = self.podDuration
+            var podEndAttributes : [String : String] = [:]
+            podEndAttributes["podIndex"] = String(self.adBreak)
+            podEndAttributes["podDuration"] = String(self.podDuration)
             podEndAttributes["podPosition"] = self.podPosition
             
             /// Report custom PodEnd evennt to Conviva.

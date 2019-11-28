@@ -72,7 +72,7 @@ protocol CVABaseIntegrationRefProtocol {
         - eventName: Event name of type String
         - eventAttributes: Event Attributes of type Dictionary
      */
-    func sendCustomEvent(eventName: String, eventAttributes : [String : Any])
+    func sendCustomEvent(eventName: String, eventAttributes : [String : String])
 
     /**
      Used to send a custom error to Conviva.
@@ -185,7 +185,7 @@ class CVABaseIntegrationRef: CVABaseIntegrationRefProtocol {
      - eventName: Event name of type String
      - eventAttributes: Event Attributes of type Dictionary
      */
-    func sendCustomEvent(eventName: String, eventAttributes : [String : Any]) {
+    func sendCustomEvent(eventName: String, eventAttributes : [String : String]) {
         if (self.convivaContentSession != nil){
             self.convivaContentSession.sendEvent(eventName, withAttributes: eventAttributes)
         }

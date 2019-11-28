@@ -148,7 +148,7 @@ protocol CVAAdsEventsManagerProtocol {
         - eventName: The event name.
         - eventAttributes: The event dictionary
      */
-    func didReportCustomEvent(eventName: String, eventAttributes : [String : Any])
+    func didReportCustomEvent(eventName: String, eventAttributes : [String : String])
 
 }
 
@@ -337,9 +337,8 @@ public class CVAAdsEventsManager : NSObject, CVAAdsEventsManagerProtocol {
      - Parameters:
      - event: The event object.
      */
-    func didReportCustomEvent(eventName: String, eventAttributes : [String : Any]) {
+    func didReportCustomEvent(eventName: String, eventAttributes : [String : String]) {
         convivaGoogleIMAIntegrationRef.sendCustomEvent(eventName: eventName, eventAttributes: eventAttributes)
-
     }
 }
 

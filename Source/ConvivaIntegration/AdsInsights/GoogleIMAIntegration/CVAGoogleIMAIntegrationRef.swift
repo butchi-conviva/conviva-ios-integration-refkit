@@ -184,4 +184,18 @@ class CVAGoogleIMAIntegrationRef : CVABaseIntegrationRef {
             self.convivaAdSession?.setAdVideoResolutionWidth(width, andHeight: height)
         }
     }
+    
+    /**
+     Used to send a custom event e.g. PodStart or PodEnd events to Conviva.
+     You may send a custom Player Insight event that is or is not associated with a monitoring session.
+     - Parameters:
+        - eventName: Event name of type String
+        - eventAttributes: Event Attributes of type Dictionary
+     */
+
+    override func sendCustomEvent(eventName: String, eventAttributes : [String : String]) {
+        if (self.convivaVideoSession != nil){
+            self.convivaVideoSession!.sendEvent(eventName, withAttributes: eventAttributes)
+        }
+    }
 }
