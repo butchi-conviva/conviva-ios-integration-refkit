@@ -241,7 +241,7 @@ extension CVAGoogleIMAHandler : IMAAdsManagerDelegate {
             }
             
             dict["c3.ad.creativeId"] = adInfo.creativeID
-            dict["c3.ad.sequence"] = podInfo.adPosition
+            dict["c3.ad.sequence"] = String(podInfo.adPosition)
             dict["c3.ad.technology"] = "Client Side"
             dict["c3.ad.position"] = self.podPosition
             dict["c3.ad.mediaFileApiFramework"] = "NA"
