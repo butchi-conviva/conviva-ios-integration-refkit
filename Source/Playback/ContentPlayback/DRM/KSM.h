@@ -10,6 +10,6 @@
 
 @interface KSM : NSObject
 
-+ (void) spc2ckc:(NSData*)spc completionHandler:(void (^)(NSError* error,NSData* ckc))completionHandler;
++ (void) spc2ckc:(NSData*)spc assetID:(NSString*)assetID completionHandler:(void (^)(NSError* error,NSData* ckc))completionHandler;
 
 @end
