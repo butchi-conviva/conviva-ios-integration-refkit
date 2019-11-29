@@ -138,16 +138,14 @@ extension CVAAVPlayer {
      */
     @objc private func didFailPlaying(_ sender: Notification) -> Void {
         
+        Swift.print("didFailPlaying \(sender)")
+        
         /// When the playback is attempted in very low bandwidth (~56kbps) the AVPlayerItemPlaybackStalled event is recieved which causes playback error. This is not handled in the library hence we need to explicitely send this error.
         /// Since for this event, sender.userInfo is nil, we need to send custom error.
-        if sender.name == NSNotification.Name.AVPlayerItemPlaybackStalled {
-            let error = NSError(domain:"", code:401, userInfo:[ NSLocalizedDescriptionKey: "Playback stalled"])
-            playerEventManager.didFailPlayback(player: self.avPlayer as Any, error: error as Error)
-        }
-
-        else {
-            playerEventManager.didStopPlayback()
-        }
+        //if sender.name == NSNotification.Name.AVPlayerItemPlaybackStalled {
+        //    let error = NSError(domain:"", code:401, userInfo:[ NSLocalizedDescriptionKey: "Playback stalled"])
+        //    playerEventManager.didFailPlayback(player: self.avPlayer as Any, error: error as Error)
+        
         
         self.responseHandler?.onPlayerEvent(event:.onContentPlayDidFail, info: [:])
     }

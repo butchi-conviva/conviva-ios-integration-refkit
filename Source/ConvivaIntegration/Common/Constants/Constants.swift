@@ -23,8 +23,8 @@ struct Conviva {
     struct URLs {
         static let devimagesURL = "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8"
         static let unencryptedURL = "http://localhost/unencrypted/prog_index.m3u8"
-        static let encryptedURL1 = "http://localhost/encrypted/master.m3u8"
-        static let encryptedURL2 = "http://172.19.3.111/encrypted/master.m3u8"
+        static let encryptedURL1 = "http://localhost/reference-app-server/v1/content/hls/drm/bipbop/index.m3u8"
+        static let encryptedURL2 = "http://localhost/reference-app-server/v1/content/hls/drm/avengers/index.m3u8"
         static let encryptedURL3 = "https://willzhanmswest.streaming.mediaservices.windows.net/92fc0471-0878-4eeb-80a3-e5b6fc497806/NoAudio.ism/manifest(format=m3u8-aapl)"
         static let sampleLocalURL = "http://localhost/sample/index.m3u8"
         static let hostedContent1 =  "http://reference-apps.conviva.com/vod/hls/bipbop/index.m3u8"
