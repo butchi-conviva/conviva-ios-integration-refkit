@@ -34,6 +34,8 @@ extension CVAGoogleIMAHandler : CVAAdCommandHandler {
             adsManager!.destroy()
         }
         
+        adEventManager.didStopAdPlayback()
+        
         return .success;
     }
     
