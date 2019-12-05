@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "KSM.h"
-#import "SKDServer.h"
+//#import "SKDServer.h"
 @implementation KSM
 
 + (void) spc2ckc:(NSData*)spc assetID:(NSString*)assetID completionHandler:(void (^)(NSError* error,NSData* ckc))completionHandler {
     
-    UInt8        *contentKeyCtx = NULL;
+  /*  UInt8        *contentKeyCtx = NULL;
     UInt32       contentKeyCtxSize = 0;
     const char *stringAsChar = [assetID cStringUsingEncoding:[NSString defaultCStringEncoding]];
     
@@ -35,7 +35,7 @@
         completionHandler(error,ckcData);
         
     });
-
+*/
 }
 
 @end
