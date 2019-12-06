@@ -140,29 +140,29 @@ extension CVAAVPlayer {
         
         Swift.print("didFailPlaying \(sender)")
         
-        /// When the playback is attempted in very low bandwidth (~56kbps) the AVPlayerItemPlaybackStalled event is recieved which causes playback error. This is not handled in the library hence we need to explicitely send this error.
-        /// Since for this event, sender.userInfo is nil, we need to send custom error.
-        if sender.name == NSNotification.Name.AVPlayerItemFailedToPlayToEndTime {
-            if let error = self.avPlayer?.currentItem?.error {
-                playerEventManager.didFailPlayback(player: self.avPlayer as Any, error: error as Error)
-            }
-            else {
-                let error = NSError(domain:PlayerError.Playback_Failed_Error.domain, code:PlayerError.Playback_Failed_Error.code, userInfo:[ NSLocalizedDescriptionKey: "Playback failed"])
-                playerEventManager.didFailPlayback(player: self.avPlayer as Any, error: error as Error)
-            }
-            self.responseHandler?.onPlayerEvent(event:.onContentPlayDidFail, info: [:])
+        if sender.name ==  NSNotification.Name.AVPlayerItemNewErrorLogEntry {   //  For all error log entries
+            return
         }
-        else if sender.name == NSNotification.Name.AVPlayerItemPlaybackStalled {
-            if let error = self.avPlayer?.currentItem?.error {
-                playerEventManager.didFailPlayback(player: self.avPlayer as Any, error: error as Error)
-            }
-            else {
-                let error = NSError(domain:PlayerError.Playback_Stalled_Error.domain, code:PlayerError.Playback_Stalled_Error.code, userInfo:[ NSLocalizedDescriptionKey: "Playback stalled"])
-                playerEventManager.didFailPlayback(player: self.avPlayer as Any, error: error as Error)
-            }
-            self.responseHandler?.onPlayerEvent(event:.onContentPlayDidFail, info: [:])
+        
+        var playbackError: Error!
+        
+        if let error = self.avPlayer?.currentItem?.error {
+            playbackError = error
         }
-        else if sender.name == NSNotification.Name.AVPlayerItemNewErrorLogEntry {   //  For every chunk failed to download
+        else {
+            if sender.name == NSNotification.Name.AVPlayerItemFailedToPlayToEndTime {
+                playbackError = NSError(domain:PlayerError.Playback_Failed_Error.domain, code:PlayerError.Playback_Failed_Error.code, userInfo:[ NSLocalizedDescriptionKey: "Playback failed"])
+            }
+            else if sender.name == NSNotification.Name.AVPlayerItemPlaybackStalled {
+                /// When the playback is attempted in very low bandwidth (~56kbps) the AVPlayerItemPlaybackStalled event is recieved which causes playback error. This is not handled in the library hence we need to explicitely send this error.
+                /// Since for this event, sender.userInfo is nil, we need to send custom error.
+                playbackError = NSError(domain:PlayerError.Playback_Stalled_Error.domain, code:PlayerError.Playback_Stalled_Error.code, userInfo:[ NSLocalizedDescriptionKey: "Playback stalled"])
+            }
+            else {  //  Any Other Error Notifications
+                playbackError = NSError(domain:PlayerError.Unknown_Error.domain, code:PlayerError.Unknown_Error.code, userInfo:[ NSLocalizedDescriptionKey: "Playback failed"])
+            }
+            playerEventManager.didFailPlayback(player: self.avPlayer as Any, error: playbackError as Error)
+            self.responseHandler?.onPlayerEvent(event:.onContentPlayDidFail, info: [:])
         }
     }
     
