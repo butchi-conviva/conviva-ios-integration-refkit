@@ -43,7 +43,7 @@ protocol CVABaseIntegrationRefProtocol {
                     If the initial values are not available, this paramter can be nil as well.
                     If the values need to be updated later, please use updateContentMetadata.
      */
-    func createContentSession(player: Any, metadata: [String : Any]?)
+    func createContentSession(player: Any?, metadata: [String : Any]?)
     
     /**
      Used to cleanup a Conviva monitoring session.
@@ -261,7 +261,7 @@ class CVABaseIntegrationRef: CVABaseIntegrationRefProtocol {
 extension CVABaseIntegrationRefProtocol {
     // MARK: Conviva session management - Functions/variables responsible for Conviva session management.
     
-    func createContentSession(player: Any, metadata: [String : Any]?) {
+    func createContentSession(player: Any?, metadata: [String : Any]?) {
         
     }
     

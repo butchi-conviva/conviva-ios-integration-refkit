@@ -38,6 +38,24 @@ protocol CVAPlayerEventsManagerProtocol {
     func didStartPlayback(player: Any, assetInfo : CVAAsset)
     
     /**
+     This function will be called when player is going to check DRM rights/encryption.
+     This function is used to call CVAAVPlayerIntegrationRef's createSession function.
+     - Parameters:
+        - player: The player instance which has started the playback.
+        - assetInfo: The CVAAsset instance which contains metadata information.
+     */
+    func willStartEncryptedAssetLoading(player: Any, assetInfo : CVAAsset)
+
+    /**
+     This function will be called when player finished checking DRM rights/encryption.
+     This function is used to call CVAAVPlayerIntegrationRef's createSession function.
+     - Parameters:
+        - player: The player instance which has started the playback.
+        - assetInfo: The CVAAsset instance which contains metadata information.
+     */
+    func didFinishEncryptedAssetLoading(player: Any, assetInfo : CVAAsset)
+
+    /**
      This function will be called when player  failed to play the content.
      This function is used to call CVAAVPlayerIntegrationRef's cleanupSession function.
      - Parameters:
@@ -152,6 +170,28 @@ public class CVAPlayerEventsManager : NSObject {
         
     }
     
+    /**
+     This function will be called when player is going to check DRM rights/encryption.
+     This function is used to call CVAAVPlayerIntegrationRef's createSession function.
+     - Parameters:
+        - player: The player instance which has started the playback.
+        - assetInfo: The CVAAsset instance which contains metadata information.
+     */
+    func willStartEncryptedAssetLoading(player: Any, assetInfo : CVAAsset) {
+        convivaAVPlayerIntegrationRef.createContentSession(player: nil, metadata: assetInfo.getMetadata(asset: assetInfo))
+    }
+
+    /**
+     This function will be called when player finished checking DRM rights/encryption.
+     This function is used to call CVAAVPlayerIntegrationRef's createSession function.
+     - Parameters:
+        - player: The player instance which has started the playback.
+        - assetInfo: The CVAAsset instance which contains metadata information.
+     */
+    func didFinishEncryptedAssetLoading(player: Any, assetInfo : CVAAsset) {
+        convivaAVPlayerIntegrationRef.attachPlayer(player: player)
+    }
+
     /**
      This function will be called when player  failed to play the content.
      This function is used to call CVAAVPlayerIntegrationRef's cleanupSession function.

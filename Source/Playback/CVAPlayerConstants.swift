@@ -8,6 +8,14 @@
 
 import Foundation
 
+struct PlayerError {
+    static let Playback_Failed_Error = (code: -1001, domain: "playback_failed_error")
+    static let Playback_Stalled_Error = (code: -1002, domain: "playback_stalled_error")
+    static let Encrypted_Key_URL_Error = (code: -1003, domain: "encrypted_key_url_error")
+    static let Encrypted_Key_Error = (code: -1004, domain: "encrypted_key_error")
+    static let Unknown_Error = (code: -1005, domain: "unknown_error")
+}
+
 public enum CVAPlayerCommand : String {
     
     case start = "start"
