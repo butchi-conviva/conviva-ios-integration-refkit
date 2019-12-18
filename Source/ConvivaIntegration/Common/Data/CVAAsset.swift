@@ -30,7 +30,8 @@ public class CVAAsset: NSObject {
     private(set) var  duration:Int = 1 * 60 * 60;
     private(set) var  efps:Int = 30;
     private(set) var  contentid:Int64 = 30;
-    
+    var watchedDuration:Float64 = 0;
+
     init(data:Dictionary<String,Any>?) {
         
         if let actualData = data {
@@ -45,7 +46,7 @@ public class CVAAsset: NSObject {
             
             self.cdn = (actualData[CVAAssetKeys.cdn] as? String) ?? CVAAsset.defaultCDN;
             self.contentid = (actualData[CVAAssetKeys.contenid] as? Int64) ?? 0;
-            
+            self.watchedDuration = (actualData[CVAAssetKeys.watchedDuration] as? Float64) ?? 0;
         }
         
         super.init()

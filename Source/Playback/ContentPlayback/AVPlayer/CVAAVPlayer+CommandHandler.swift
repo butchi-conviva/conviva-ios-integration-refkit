@@ -53,6 +53,35 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
         return .success;
     }
     
+    
+    /**
+     This function is called when player is initially loaded.
+     - Parameters:
+        - asset: An instance of CVAAsset.
+     - Returns: An instance of CVAPlayerStatus.
+     */
+    public func resumeAssetPlayback(playerEventManager : CVAPlayerEventsManager, asset : CVAAsset) -> CVAPlayerStatus {
+        self.asset = asset
+        initializeAVPlayer()
+        
+        self.playerEventManager = playerEventManager
+        
+        if avPlayer != nil {
+            if asset.isEncrypted {  //  DRM Protected/Encrypted Content
+                self.playerEventManager.willStartEncryptedAssetLoading(player: avPlayer as Any, assetInfo: self.asset)
+            }
+            else {  // Non DRM
+                self.playerEventManager.willStartPlayback(player: avPlayer as Any, assetInfo: self.asset)
+            }
+            
+            let seekTime = CMTimeMakeWithSeconds(self.asset.watchedDuration, preferredTimescale: 1)
+            seekplayer(avPlayer: avPlayer!, toTime: seekTime, convivaSeekEvents: false)
+        }
+        
+        return .success;
+    }
+
+    
     /**
      This function is called when playback is started.
      - Parameters:
@@ -202,17 +231,24 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
      - Parameters:
         - avplayer: An instance of AVPlayer where content was seeked.
         - toTime: CMTime
+        - convivaSeekEvents: Bool      true/false:  Send/Don't send Conviva Seek Events (pss/pse)
      */
-    private func seekplayer(avPlayer:AVPlayer,toTime:CMTime,completionHandler:(() -> Void)? = nil) {
+    private func seekplayer(avPlayer:AVPlayer, toTime:CMTime, convivaSeekEvents: Bool = true, completionHandler:(() -> Void)? = nil) {
         
         let seekTimeInSecs = CMTimeGetSeconds(toTime);
-        playerEventManager.willSeekFrom(position: NSInteger(seekTimeInSecs));
+       
+        if convivaSeekEvents {
+            playerEventManager.willSeekFrom(position: NSInteger(seekTimeInSecs));
+        }
+        
         avPlayer.seek(to: toTime, completionHandler: { (completedSeek) in
-            if true == completedSeek{
-                self.playerEventManager.didSeekTo(position: NSInteger(seekTimeInSecs));
-            }
-            else {
-                self.playerEventManager.didFailSeekTo(position: NSInteger(seekTimeInSecs));
+            if convivaSeekEvents {
+                if true == completedSeek{
+                    self.playerEventManager.didSeekTo(position: NSInteger(seekTimeInSecs));
+                }
+                else {
+                    self.playerEventManager.didFailSeekTo(position: NSInteger(seekTimeInSecs));
+                }
             }
         })
     }
