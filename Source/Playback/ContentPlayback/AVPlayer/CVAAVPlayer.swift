@@ -59,6 +59,11 @@ public class CVAAVPlayer: NSObject {
      var avAudioSession : AVAudioSession?
     
     /**
+     The AVPlayer instance which will be passed to Conviva API for monitoring.
+     */
+    var errorReported : Bool = false
+
+    /**
      The CVAAVPlayer class initializer. CVAAVPlayerManager's implementation responsible for Conviva initialization should happen here.
      */
     public override init() {
@@ -91,7 +96,7 @@ public class CVAAVPlayer: NSObject {
         let playerItem = AVPlayerItem(asset: asset)
         
         avPlayer = AVPlayer(playerItem: playerItem)
-
+        errorReported = false
         print(#function, videoURL as Any)
 
         self.avPlayerLayer = AVPlayerLayer(player: avPlayer)
@@ -117,5 +122,6 @@ public class CVAAVPlayer: NSObject {
         if let avPlayer = avPlayer {
             deRegisterPlayerNotification(avPlayer)
         }
+        errorReported = false
     }
 }

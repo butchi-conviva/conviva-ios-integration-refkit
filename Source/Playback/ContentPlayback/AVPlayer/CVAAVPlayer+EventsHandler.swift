@@ -161,8 +161,12 @@ extension CVAAVPlayer {
             else {  //  Any Other Error Notifications
                 playbackError = NSError(domain:PlayerError.Unknown_Error.domain, code:PlayerError.Unknown_Error.code, userInfo:[ NSLocalizedDescriptionKey: "Playback failed"])
             }
+        }
+        
+        if !errorReported {
             playerEventManager.didFailPlayback(player: self.avPlayer as Any, error: playbackError as Error)
             self.responseHandler?.onPlayerEvent(event:.onContentPlayDidFail, info: [:])
+            errorReported = true
         }
     }
     
@@ -277,14 +281,18 @@ extension CVAAVPlayer {
             }
             if newStatus == .failed {
                 NSLog("Error: \(String(describing: self.avPlayer?.currentItem?.error?.localizedDescription)), error: \(String(describing: self.avPlayer?.currentItem?.error))")
+                var playbackError: Error
                 if let error = self.avPlayer?.currentItem?.error {
-                    playerEventManager.didFailPlayback(player: self.avPlayer as Any, error: error)
+                    playbackError = error
                 }
                 else {  //  If no Error Object - Custom error object
-                    let error = NSError(domain: PlayerError.Playback_Failed_Error.domain, code: PlayerError.Playback_Failed_Error.code, userInfo: nil)
-                    playerEventManager.didFailPlayback(player: self.avPlayer as Any, error: error)
+                    playbackError = NSError(domain: PlayerError.Playback_Failed_Error.domain, code: PlayerError.Playback_Failed_Error.code, userInfo: nil)
                 }
-                self.responseHandler?.onPlayerEvent(event:.onContentPlayDidFail, info: [:])
+                if !errorReported {
+                    playerEventManager.didFailPlayback(player: self.avPlayer as Any, error: playbackError as Error)
+                    self.responseHandler?.onPlayerEvent(event:.onContentPlayDidFail, info: [:])
+                    errorReported = true
+                }
             }
         }
         

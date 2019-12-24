@@ -71,11 +71,13 @@ extension CVAPlayerManager : CVAPlayerCmdExecutor {
                 self.currentAsset = asset;
                 self.currentAdAsset = adAsset;
 
-                status = playerCommandHandler.startAssetPlayback(playerEventManager: self.playerManager!, asset: asset);
-                status = playerCommandHandler.pauseAsset(asset: asset);
-                
+                status = playerCommandHandler.initAssetPlayback(playerEventManager: self.playerManager!, asset: asset);
+
                 if let _ = self.currentAdAsset {
                     status = self.adCommandHandler.startAdPlayback(adEventManager: self.adManager!, adAsset:  self.currentAdAsset!)
+                }
+                else {
+                    status = playerCommandHandler.playAsset(asset: asset);
                 }
                 
             case CVAPlayerCommand.play:
