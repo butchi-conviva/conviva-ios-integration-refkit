@@ -30,6 +30,8 @@ extension CVAAVPlayer {
                                                                     if(0 < elapsedtime){
                                                                         let totalDuration = CMTimeGetSeconds((self!.avPlayer?.currentItem!.duration)!);
                                                                         self?.responseHandler?.onPlayerEvent(event:.onPlayHeadChange, info: [playbackPosition:elapsedtime,totalContentDuration:totalDuration])
+                                                                        
+                                                                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PlaybackProgress"), object:nil,userInfo:  ["progress":(elapsedtime/totalDuration)])
                                                                     }
             }
         }
@@ -267,6 +269,7 @@ extension CVAAVPlayer {
             }
         }
         
+        if #available( iOS 10.0, tvOS 10.0, *) {
         if keyPath == #keyPath(AVPlayer.timeControlStatus) {
             
             if let playStateAsNumber = change?[NSKeyValueChangeKey.newKey] as? NSNumber {
@@ -285,6 +288,7 @@ extension CVAAVPlayer {
                     
                 }
             }
+        }
         }
     }
     

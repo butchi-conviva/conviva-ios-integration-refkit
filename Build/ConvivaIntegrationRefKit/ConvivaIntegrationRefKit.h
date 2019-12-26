@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <GoogleInteractiveMediaAds/GoogleInteractiveMediaAds.h>
+#import "KSM.h"
 
 //! Project version number for ConvivaIntegrationRefKit.
 FOUNDATION_EXPORT double ConvivaIntegrationRefKitVersionNumber;

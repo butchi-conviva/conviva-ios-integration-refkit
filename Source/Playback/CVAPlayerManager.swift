@@ -104,6 +104,7 @@ extension CVAPlayerManager : CVAPlayerCmdExecutor {
                 
             case CVAPlayerCommand.retry:
                 status = playerCommandHandler.retryAssetPlayback(asset: asset, info:info);
+            
             }
         }
         
@@ -126,6 +127,7 @@ extension CVAPlayerManager : CVAPlayerResponseHandler {
                     avPlayerLayer.frame = contentView.bounds;
                     avPlayerLayer.removeFromSuperlayer();
                     contentView.layer.insertSublayer(avPlayerLayer, at:UInt32(contentView.layer.sublayers?.count ?? 0) )
+                    contentView.isUserInteractionEnabled = false;
                     Swift.print("command \(command) status \(status) info \(info) contentView.bounds \(contentView.bounds)");
                 }
             }

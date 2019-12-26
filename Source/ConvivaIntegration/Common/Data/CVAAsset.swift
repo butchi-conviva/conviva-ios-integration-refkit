@@ -28,6 +28,8 @@ public class CVAAsset: NSObject {
     private(set) var  duration:Int = 1 * 60 * 60;
     private(set) var  efps:Int = 30;
     private(set) var  contentid:Int64 = 30;
+    private(set) var  encrypted:Bool = false;
+    private(set) var  supportedAdTypes:CVASupportedAdTypes = .preroll;
     
     init(data:Dictionary<String,Any>?) {
         
@@ -37,12 +39,20 @@ public class CVAAsset: NSObject {
             self.desc = (actualData[CVAAssetKeys.desc] as? String) ?? "NA";
             self.callsign = (actualData[CVAAssetKeys.callsign] as? String) ?? "NA";
             self.thumbnail = (actualData[CVAAssetKeys.thumbnail] as? String) ?? "NA";
-            
-            let mediaURLString = (actualData[CVAAssetKeys.playbackURI] as? String);
-            self.playbackURI = (nil != mediaURLString) ? NSURL(string: mediaURLString!) : CVAAsset.mediaURL;
-            
+        
             self.cdn = (actualData[CVAAssetKeys.cdn] as? String) ?? CVAAsset.defaultCDN;
             self.contentid = (actualData[CVAAssetKeys.contenid] as? Int64) ?? 0;
+            
+            let contentNode = (actualData[CVAAssetKeys.content] as? Dictionary<String,Any>);
+            if let content = contentNode {
+                
+                let mediaURLString = (content[CVAAssetKeys.streamUrl] as? String);
+                Swift.print("CVAAsset asset url",mediaURLString)
+                self.playbackURI = (nil != mediaURLString) ? NSURL(string: mediaURLString!) : CVAAsset.mediaURL;
+                self.encrypted = (content[CVAAssetKeys.contenid] as? Bool) ?? false;
+                
+                self.supportedAdTypes = CVASupportedAdTypes(rawValue:(content[CVAAssetKeys.adtype] as? Int) ?? 0);
+            }
             
         }
         
