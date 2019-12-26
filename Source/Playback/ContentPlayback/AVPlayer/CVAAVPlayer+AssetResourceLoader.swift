@@ -19,17 +19,16 @@ extension CVAAVPlayer : AVAssetResourceLoaderDelegate {
         /// First check if a url is set in the manifest.
         guard let contentKeyUrl = loadingRequest.request.url else {
             print(#function, "Unable to read the url/host data.")
-            loadingRequest.finishLoading(with: NSError(domain: "url_error", code: -1, userInfo: nil))
+            self.didFailedAssetLoading(domain: PlayerError.Encrypted_Key_URL_Error.domain, code: PlayerError.Encrypted_Key_URL_Error.code, userInfo: nil, loadingRequest: loadingRequest)
             return false // e.g. hls.conviva.error
         }
         
         print(#function, contentKeyUrl)
         
         var contentKeyUrlString = contentKeyUrl.absoluteString;
-        guard true == contentKeyUrlString.contains("ckm://") else {
-            
+        guard true == contentKeyUrlString.contains("ckm://"), !contentKeyUrlString.isEmpty else {
             print(#function, "Unable to read the url/host data.")
-            loadingRequest.finishLoading(with: NSError(domain: "url_error", code: -1, userInfo: nil))
+            self.didFailedAssetLoading(domain: PlayerError.Encrypted_Key_URL_Error.domain, code: PlayerError.Encrypted_Key_URL_Error.code, userInfo: nil, loadingRequest: loadingRequest)
             return false // e.g. hls.conviva.error
         }
         
@@ -43,20 +42,40 @@ extension CVAAVPlayer : AVAssetResourceLoaderDelegate {
             
             let session = URLSession(configuration: URLSessionConfiguration.default)
             let task = session.dataTask(with: request) { data, response, error in
-            if let data = data {
-                loadingRequest.dataRequest?.respond(with: data)
-                loadingRequest.finishLoading()
-            } else {
-                print(#function, "Unable to fetch the key.")
-                loadingRequest.finishLoading(with: NSError(domain: "content_key_error", code: -4, userInfo: nil)) // e.g. hls.conviva.error
-            }
+                if let httpResponse = response as? HTTPURLResponse {
+                    let statusCode = httpResponse.statusCode
+                    switch statusCode {
+                    case 200..<300:
+                        if let data = data {
+                            loadingRequest.dataRequest?.respond(with: data)
+                            loadingRequest.finishLoading()
+                            self.playerEventManager.didFinishEncryptedAssetLoading(player: self.avPlayer as Any, assetInfo: self.asset)
+                        } else {    //  Data not available
+                            print(#function, "Unable to fetch the key.")
+                            self.didFailedAssetLoading(domain: PlayerError.Encrypted_Key_Error.domain, code: PlayerError.Encrypted_Key_Error.code, userInfo: nil, loadingRequest: loadingRequest)
+                        }
+                    default:    //  Response code other than 200...300
+                        print(#function, "Unable to fetch the key.")
+                        self.didFailedAssetLoading(domain: PlayerError.Encrypted_Key_Error.domain, code: statusCode, userInfo: nil, loadingRequest: loadingRequest)
+                    }
+                }
+                else {  //  No Response
+                    print(#function, "Unable to fetch the key.")
+                    self.didFailedAssetLoading(domain: PlayerError.Encrypted_Key_Error.domain, code: PlayerError.Encrypted_Key_Error.code, userInfo: nil, loadingRequest: loadingRequest)
+                }
             }
             task.resume()
         }
-        else {
+        else {  //  Key URL not available
             print(#function, "Unable to fetch the key.")
-            loadingRequest.finishLoading(with: NSError(domain: "url_error", code: -1, userInfo: nil)) // e.g. hls.conviva.error
+            self.didFailedAssetLoading(domain: PlayerError.Encrypted_Key_URL_Error.domain, code: PlayerError.Encrypted_Key_URL_Error.code, userInfo: nil, loadingRequest: loadingRequest)
         }
         return true
+    }
+    
+    func didFailedAssetLoading(domain: String, code: Int, userInfo dict: [String : Any]? = nil, loadingRequest: AVAssetResourceLoadingRequest) {
+        let error = NSError(domain: domain, code: code, userInfo: dict)
+        loadingRequest.finishLoading(with: error)
+        self.playerEventManager.didFailPlayback(player: self.avPlayer as Any, error: error)
     }
 }

@@ -12,9 +12,10 @@ public class CVAAsset: NSObject {
     
     static let mediaURL = NSURL(string: Conviva.URLs.hostedContent1)
 //    static let mediaURL = NSURL(string: Conviva.URLs.encryptedURL1)
-//    static let mediaURL = NSURL(string: Conviva.URLs.encryptedURL2)
+//      static let mediaURL = NSURL(string: Conviva.URLs.encryptedURL2)
 //    static let mediaURL = NSURL(string: Conviva.URLs.encryptedURL3)
 //    static let mediaURL = NSURL(string: Conviva.URLs.unencryptedURL)
+//    static let mediaURL = NSURL(string: Conviva.URLs.devimagesURL)
 //    static let mediaURL = NSURL(string: "http://localhost/sample/index.m3u8")
     static let defaultCDN = "akamai"
     
@@ -25,6 +26,7 @@ public class CVAAsset: NSObject {
     private(set) var playbackURI:NSURL?
     private(set) var cdn:String?
     private(set) var  islive:Bool = false;
+    private(set) var  isEncrypted:Bool = false; //  true for encrypted content
     private(set) var  duration:Int = 1 * 60 * 60;
     private(set) var  efps:Int = 30;
     private(set) var  contentid:Int64 = 30;

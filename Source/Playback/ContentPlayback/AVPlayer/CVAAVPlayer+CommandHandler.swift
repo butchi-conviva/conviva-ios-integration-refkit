@@ -41,8 +41,13 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
         self.playerEventManager = playerEventManager
         
         if avPlayer != nil {
-             self.playerEventManager.willStartPlayback(player: avPlayer as Any, assetInfo: self.asset)
-             avPlayer?.play()
+            if asset.isEncrypted {  //  DRM Protected/Encrypted Content
+                self.playerEventManager.willStartEncryptedAssetLoading(player: avPlayer as Any, assetInfo: self.asset)
+            }
+            else {  // Non DRM
+                self.playerEventManager.willStartPlayback(player: avPlayer as Any, assetInfo: self.asset)
+            }
+            avPlayer?.play()
         }
         
         return .success;

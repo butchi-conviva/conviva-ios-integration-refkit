@@ -40,7 +40,7 @@ class CVAAVPlayerIntegrationRef : CVABaseIntegrationRef {
      If the values need to be updated later, please use updateContentMetadata.
      Visit https://community.conviva.com/site/global/platforms/ios/av_player/index.gsp#updateContentMetadata
      */
-    func createContentSession(player: Any, metadata: [String : Any]?) {
+    func createContentSession(player: Any?, metadata: [String : Any]?) {
         self.videoPlayer = player as? AVPlayer
         self.metadataDict = metadata ?? ["" : ""]
         

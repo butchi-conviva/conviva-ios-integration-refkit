@@ -142,14 +142,30 @@ extension CVAAVPlayer {
         
         Swift.print("didFailPlaying \(sender)")
         
-        /// When the playback is attempted in very low bandwidth (~56kbps) the AVPlayerItemPlaybackStalled event is recieved which causes playback error. This is not handled in the library hence we need to explicitely send this error.
-        /// Since for this event, sender.userInfo is nil, we need to send custom error.
-        //if sender.name == NSNotification.Name.AVPlayerItemPlaybackStalled {
-        //    let error = NSError(domain:"", code:401, userInfo:[ NSLocalizedDescriptionKey: "Playback stalled"])
-        //    playerEventManager.didFailPlayback(player: self.avPlayer as Any, error: error as Error)
+        if sender.name ==  NSNotification.Name.AVPlayerItemNewErrorLogEntry {   //  For all error log entries
+            return
+        }
         
+        var playbackError: Error!
         
-        self.responseHandler?.onPlayerEvent(event:.onContentPlayDidFail, info: [:])
+        if let error = self.avPlayer?.currentItem?.error {
+            playbackError = error
+        }
+        else {
+            if sender.name == NSNotification.Name.AVPlayerItemFailedToPlayToEndTime {
+                playbackError = NSError(domain:PlayerError.Playback_Failed_Error.domain, code:PlayerError.Playback_Failed_Error.code, userInfo:[ NSLocalizedDescriptionKey: "Playback failed"])
+            }
+            else if sender.name == NSNotification.Name.AVPlayerItemPlaybackStalled {
+                /// When the playback is attempted in very low bandwidth (~56kbps) the AVPlayerItemPlaybackStalled event is recieved which causes playback error. This is not handled in the library hence we need to explicitely send this error.
+                /// Since for this event, sender.userInfo is nil, we need to send custom error.
+                playbackError = NSError(domain:PlayerError.Playback_Stalled_Error.domain, code:PlayerError.Playback_Stalled_Error.code, userInfo:[ NSLocalizedDescriptionKey: "Playback stalled"])
+            }
+            else {  //  Any Other Error Notifications
+                playbackError = NSError(domain:PlayerError.Unknown_Error.domain, code:PlayerError.Unknown_Error.code, userInfo:[ NSLocalizedDescriptionKey: "Playback failed"])
+            }
+            playerEventManager.didFailPlayback(player: self.avPlayer as Any, error: playbackError as Error)
+            self.responseHandler?.onPlayerEvent(event:.onContentPlayDidFail, info: [:])
+        }
     }
     
     /**
@@ -262,10 +278,15 @@ extension CVAAVPlayer {
                 newStatus = .unknown
             }
             if newStatus == .failed {
-                
-                self.responseHandler?.onPlayerEvent(event:.onContentPlayDidFail, info: [:])
-
                 NSLog("Error: \(String(describing: self.avPlayer?.currentItem?.error?.localizedDescription)), error: \(String(describing: self.avPlayer?.currentItem?.error))")
+                if let error = self.avPlayer?.currentItem?.error {
+                    playerEventManager.didFailPlayback(player: self.avPlayer as Any, error: error)
+                }
+                else {  //  If no Error Object - Custom error object
+                    let error = NSError(domain: PlayerError.Playback_Failed_Error.domain, code: PlayerError.Playback_Failed_Error.code, userInfo: nil)
+                    playerEventManager.didFailPlayback(player: self.avPlayer as Any, error: error)
+                }
+                self.responseHandler?.onPlayerEvent(event:.onContentPlayDidFail, info: [:])
             }
         }
         
