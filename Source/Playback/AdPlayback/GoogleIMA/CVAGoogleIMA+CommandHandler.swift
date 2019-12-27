@@ -137,8 +137,7 @@ extension CVAGoogleIMAHandler {
             let request = IMAAdsRequest(
                 adTagUrl: adTagUrl,
                 adDisplayContainer: createAdDisplayContainer(view: view),
-                avPlayerVideoDisplay: IMAAVPlayerVideoDisplay(avPlayer: self.contentPlayer),
-                pictureInPictureProxy: nil,
+                contentPlayhead: self.contentPlayhead,
                 userContext: nil)
             adsLoader.requestAds(with: request)
         }
