@@ -101,6 +101,9 @@ extension CVAGoogleIMAHandler {
      */
     private func setUpContentPlayer(contentPlayer : AVPlayer) {
         self.contentPlayer = contentPlayer
+        // Set up our content playhead and contentComplete callback.
+        self.contentPlayhead = IMAAVPlayerContentPlayhead(avPlayer: self.contentPlayer!)
+        NotificationCenter.default.addObserver(self, selector:#selector(contentDidFinishPlaying(_:)) , name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object:self.contentPlayer?.currentItem)
     }
     
     /**
@@ -114,11 +117,16 @@ extension CVAGoogleIMAHandler {
         #if os(iOS)
         // Create an ad request with Google IMA's ad tag, display container, and optional user context.
         if contentPlayer == self.contentPlayer {
+//            let request = IMAAdsRequest(
+//                adTagUrl: adTagUrl,
+//                adDisplayContainer: createAdDisplayContainer(view: view),
+//                avPlayerVideoDisplay: IMAAVPlayerVideoDisplay(avPlayer: self.contentPlayer),
+//                pictureInPictureProxy: pictureInPictureProxy,
+//                userContext: nil)
             let request = IMAAdsRequest(
                 adTagUrl: adTagUrl,
                 adDisplayContainer: createAdDisplayContainer(view: view),
-                avPlayerVideoDisplay: IMAAVPlayerVideoDisplay(avPlayer: self.contentPlayer),
-                pictureInPictureProxy: pictureInPictureProxy,
+                contentPlayhead: self.contentPlayhead,
                 userContext: nil)
             adsLoader.requestAds(with: request)
         }
@@ -146,5 +154,15 @@ extension CVAGoogleIMAHandler {
      */
     private func createAdDisplayContainer(view: CVAAdView) -> IMAAdDisplayContainer {
         return IMAAdDisplayContainer(adContainer: view, companionSlots: nil)
+    }
+    
+    //  MARK: - Notifications
+    
+    @objc func contentDidFinishPlaying(_ sender: Notification) -> Void {
+        if let currentItem = sender.object as? AVPlayerItem {
+            if currentItem == self.contentPlayer?.currentItem {
+                self.adsLoader.contentComplete()
+            }
+        }
     }
 }

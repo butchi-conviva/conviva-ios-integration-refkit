@@ -11,7 +11,7 @@ import Foundation
 struct CVASupportedAdTypes : OptionSet {
     
     let rawValue: Int
-    
+    static let noroll = CVASupportedAdTypes(rawValue:  0 << 0)
     static let preroll = CVASupportedAdTypes(rawValue:  1 << 0)
     static let midroll = CVASupportedAdTypes(rawValue:  1 << 1)
     static let postroll = CVASupportedAdTypes(rawValue: 1 << 2)

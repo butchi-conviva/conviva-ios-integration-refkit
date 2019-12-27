@@ -23,13 +23,25 @@ enum CVAAdType : String {
 public class CVAAdAsset: NSObject {
 
     private(set) var id:Int = 0;
-    private(set) var type:CVAAdType = .preroll
+    private(set) var type:CVAAdType = .adRules
     
-    init(data:Dictionary<String,Any>?) {
+    init(data:Dictionary<String,Any>?, supportedAdTypes: CVASupportedAdTypes) {
         
         if let actualData = data {
             self.id = (actualData[CVAdAssetKeys.id] as? Int) ?? 0;
-            self.type = CVAAdType(rawValue: (actualData[CVAdAssetKeys.adType] as? String) ?? "preroll") ?? CVAAdType.preroll;
+        }
+        
+        if supportedAdTypes == .noroll {
+            //  No Ads
+        }
+        else if supportedAdTypes == .preroll {
+            self.type = CVAAdType(rawValue: CVAAdType.preroll.rawValue)!
+        }
+        else if supportedAdTypes == .postroll {
+            self.type = CVAAdType(rawValue: CVAAdType.postroll.rawValue)!
+        }
+        else {
+            self.type = CVAAdType(rawValue: CVAAdType.adRules.rawValue)!
         }
     }
 }
