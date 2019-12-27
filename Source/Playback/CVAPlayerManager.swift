@@ -84,9 +84,15 @@ extension CVAPlayerManager : CVAPlayerCmdExecutor {
             case CVAPlayerCommand.pause:
                 status = playerCommandHandler.pauseAsset(asset: asset);
                 
-            case CVAPlayerCommand.seek:
-                status = playerCommandHandler.seekAsset(asset: asset, info : info!);
-                
+            case CVAPlayerCommand.seekStart:
+                status = playerCommandHandler.seekStartAsset(asset: asset, info : info!);
+            
+            case CVAPlayerCommand.seekValueChange:
+                status = playerCommandHandler.seekValueChangeAsset(asset: asset, info : info!);
+
+            case CVAPlayerCommand.seekEnd:
+                status = playerCommandHandler.seekEndAsset(asset: asset, info : info!);
+
             case CVAPlayerCommand.stop:
                 if let _ = self.currentAdAsset {
                     status = self.adCommandHandler.stopAdPlayback(asset: self.currentAdAsset!)
