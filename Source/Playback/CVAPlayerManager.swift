@@ -58,7 +58,12 @@ extension CVAPlayerManager : CVAPlayerCmdExecutor {
         let adInfo = info?["adInfo"] ?? nil;
         
         let asset = (nil != assetInfo ) ? CVAAsset(data: assetInfo as? [String:Any]) : CVAAsset(data: nil);
-        let adAsset = (nil != adInfo ) ? CVAAdAsset(data: adInfo as? [String:Any]) : CVAAdAsset(data:nil);
+        
+        var adAsset: CVAAdAsset?
+        
+        if asset.supportedAdTypes != .noroll {
+            adAsset = (nil != adInfo ) ? CVAAdAsset(data: adInfo as? [String:Any], supportedAdTypes: asset.supportedAdTypes) : CVAAdAsset(data:nil, supportedAdTypes: asset.supportedAdTypes);
+        }
         
         var status:CVAPlayerStatus = .failed;
         
