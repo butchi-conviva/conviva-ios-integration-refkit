@@ -23,6 +23,11 @@ public class CVAGoogleIMAHandler : NSObject {
     var adsLoader: IMAAdsLoader!
     
     /**
+     Playhead used by the SDK to track content video progress and insert mid-rolls..
+     */
+    var contentPlayhead: IMAAVPlayerContentPlayhead!
+
+    /**
      Google IMA SDK handle for IMAAdsManager.
      */
     var adsManager: IMAAdsManager?

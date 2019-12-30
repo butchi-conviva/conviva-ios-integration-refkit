@@ -58,7 +58,12 @@ extension CVAPlayerManager : CVAPlayerCmdExecutor {
         let adInfo = info?["adInfo"] ?? nil;
         
         let asset = (nil != assetInfo ) ? CVAAsset(data: assetInfo as? [String:Any]) : CVAAsset(data: nil);
-        let adAsset = (nil != adInfo ) ? CVAAdAsset(data: adInfo as? [String:Any]) : CVAAdAsset(data:nil);
+        
+        var adAsset: CVAAdAsset?
+        
+        if asset.supportedAdTypes != .noroll {
+            adAsset = (nil != adInfo ) ? CVAAdAsset(data: adInfo as? [String:Any], supportedAdTypes: asset.supportedAdTypes) : CVAAdAsset(data:nil, supportedAdTypes: asset.supportedAdTypes);
+        }
         
         var status:CVAPlayerStatus = .failed;
         
@@ -89,9 +94,15 @@ extension CVAPlayerManager : CVAPlayerCmdExecutor {
             case CVAPlayerCommand.pause:
                 status = playerCommandHandler.pauseAsset(asset: asset);
                 
-            case CVAPlayerCommand.seek:
-                status = playerCommandHandler.seekAsset(asset: asset, info : info!);
-                
+            case CVAPlayerCommand.seekStart:
+                status = playerCommandHandler.seekStartAsset(asset: asset, info : info!);
+            
+            case CVAPlayerCommand.seekValueChange:
+                status = playerCommandHandler.seekValueChangeAsset(asset: asset, info : info!);
+
+            case CVAPlayerCommand.seekEnd:
+                status = playerCommandHandler.seekEndAsset(asset: asset, info : info!);
+
             case CVAPlayerCommand.stop:
                 if let _ = self.currentAdAsset {
                     status = self.adCommandHandler.stopAdPlayback(asset: self.currentAdAsset!)

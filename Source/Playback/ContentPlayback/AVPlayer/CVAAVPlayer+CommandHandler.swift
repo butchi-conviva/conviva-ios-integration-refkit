@@ -140,7 +140,7 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
         
         if let _ = avPlayer {
            
-            seekplayer(avPlayer: avPlayer!, toTime: CMTime.zero)
+            seekplayer(avPlayer: avPlayer!, toTime: CMTime.zero, callConvivaSeekEvents: false)
             self.avPlayer!.play();
         }
         
@@ -148,22 +148,58 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
     }
     
     /**
-     This function is called when player's seekbar is seeked.
+     This function is called when player's seekbar started seeking.
      - Parameters:
         - asset: An instance of CVAAsset.
         - info: A dictionary containing seek information.
      - Returns: An instance of CVAPlayerStatus.
      */
-    public func seekAsset(asset:CVAAsset, info : [AnyHashable : Any]) -> CVAPlayerStatus {
+    public func seekStartAsset(asset:CVAAsset, info : [AnyHashable : Any]) -> CVAPlayerStatus {
+        let seekTimeScale = info["value"]
+                
+        if let time = seekTimeScale {
+            let seekTime = getSeekPosition(avplayer: avPlayer!, value: time as! Float)
+            let seekTimeInSecs = CMTimeGetSeconds(seekTime);
+            playerEventManager.willSeekFrom(position: NSInteger(seekTimeInSecs));
+        }
+        return .success;
+    }
+
+    /**
+     This function is called while player's seekbar is seeking.
+     - Parameters:
+        - asset: An instance of CVAAsset.
+        - info: A dictionary containing seek information.
+     - Returns: An instance of CVAPlayerStatus.
+     */
+    public func seekValueChangeAsset(asset:CVAAsset, info : [AnyHashable : Any]) -> CVAPlayerStatus {
         let seekTimeScale = info["value"]
         
         if let time = seekTimeScale {
-            seek(avplayer: avPlayer!, value: time as! Float)
+           let seekTime = getSeekPosition(avplayer: avPlayer!, value: time as! Float)
+           seekplayer(avPlayer:avPlayer!,toTime: seekTime, callConvivaSeekEvents: false);
         }
         
         return .success;
     }
-    
+
+    /**
+     This function is called when player's seekbar finished seeking.
+     - Parameters:
+        - asset: An instance of CVAAsset.
+        - info: A dictionary containing seek information.
+     - Returns: An instance of CVAPlayerStatus.
+     */
+    public func seekEndAsset(asset:CVAAsset, info : [AnyHashable : Any]) -> CVAPlayerStatus {
+        let seekTimeScale = info["value"]
+        
+        if let time = seekTimeScale {
+            let seekTime = getSeekPosition(avplayer: avPlayer!, value: time as! Float)
+            seekplayer(avPlayer:avPlayer!, toTime: seekTime, callConvivaSeekEvents: true);
+        }
+        
+        return .success;
+    }
     /**
      This function performs fast forward player by 10 secs.
      - Parameters:
@@ -174,13 +210,11 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
     public func skipfwdAsset(asset:CVAAsset, info : [AnyHashable : Any]?) -> CVAPlayerStatus {
         
         if let _ = avPlayer, let _ = avPlayer!.currentItem{
-            
             let duration = avPlayer!.currentItem!.currentTime()
             var totalSeconds = CMTimeGetSeconds(duration)
             totalSeconds += 10.0;
-            
             let seekTime = CMTime(value: Int64(totalSeconds), timescale: 1)
-            seekplayer(avPlayer: avPlayer!, toTime: seekTime)
+            seekplayer(avPlayer: avPlayer!, toTime: seekTime, callConvivaSeekEvents: false)
         }
         
         return .success;
@@ -196,13 +230,11 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
     public func skipbwdAsset(asset:CVAAsset, info : [AnyHashable : Any]?) -> CVAPlayerStatus {
         
         if let _ = avPlayer, let _ = avPlayer!.currentItem{
-            
             let duration = avPlayer!.currentItem!.currentTime()
             var totalSeconds = CMTimeGetSeconds(duration)
             totalSeconds -= 10.0;
-            
             let seekTime = CMTime(value: Int64(totalSeconds), timescale: 1)
-            seekplayer(avPlayer: avPlayer!, toTime: seekTime)
+            seekplayer(avPlayer: avPlayer!, toTime: seekTime, callConvivaSeekEvents: false)
         }
         
         return .success;
@@ -214,7 +246,7 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
         - avplayer: An instance of AVPlayer where content was seeked.
         - value: Value of seek in Float
      */
-    private func seek (avplayer : AVPlayer, value: Float) {
+    private func getSeekPosition(avplayer : AVPlayer, value: Float) -> CMTime {
         
         if let duration = avplayer.currentItem?.duration {
             let totalSeconds = CMTimeGetSeconds(duration)
@@ -222,10 +254,11 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
             let value = Float64(value) * totalSeconds
             let seekTime = CMTime(value: Int64(value), timescale: 1)
             
-            seekplayer(avPlayer:avplayer,toTime: seekTime);
+            return seekTime
         }
+        return CMTime.zero
     }
-    
+
     /**
      This function is used to perform seek to desired time
      - Parameters:
@@ -233,14 +266,10 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
         - toTime: CMTime
         - convivaSeekEvents: Bool      true/false:  Send/Don't send Conviva Seek Events (pss/pse)
      */
-    private func seekplayer(avPlayer:AVPlayer, toTime:CMTime, convivaSeekEvents: Bool = true, completionHandler:(() -> Void)? = nil) {
+
+    private func seekplayer(avPlayer:AVPlayer,toTime:CMTime,callConvivaSeekEvents convivaSeekEvents: Bool = true,completionHandler:(() -> Void)? = nil) {
         
         let seekTimeInSecs = CMTimeGetSeconds(toTime);
-       
-        if convivaSeekEvents {
-            playerEventManager.willSeekFrom(position: NSInteger(seekTimeInSecs));
-        }
-        
         avPlayer.seek(to: toTime, completionHandler: { (completedSeek) in
             if convivaSeekEvents {
                 if true == completedSeek{

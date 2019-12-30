@@ -22,8 +22,12 @@ public protocol CVAPlayerCommandHandler : class {
     
     func pauseAsset(asset:CVAAsset) -> CVAPlayerStatus;
     
-    func seekAsset(asset:CVAAsset, info : [AnyHashable : Any]) -> CVAPlayerStatus;
-    
+    func seekStartAsset(asset:CVAAsset, info : [AnyHashable : Any]) -> CVAPlayerStatus;
+
+    func seekValueChangeAsset(asset:CVAAsset, info : [AnyHashable : Any]) -> CVAPlayerStatus;
+
+    func seekEndAsset(asset:CVAAsset, info : [AnyHashable : Any]) -> CVAPlayerStatus;
+
     func skipfwdAsset(asset:CVAAsset, info : [AnyHashable : Any]?) -> CVAPlayerStatus;
     
     func skipbwdAsset(asset:CVAAsset, info : [AnyHashable : Any]?) -> CVAPlayerStatus;
