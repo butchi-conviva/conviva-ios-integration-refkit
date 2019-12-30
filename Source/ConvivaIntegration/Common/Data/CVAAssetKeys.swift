@@ -19,6 +19,7 @@ struct CVAAssetKeys {
     static let duration             = "contentLength";
     static let efps                 = "encodedFramerate";
     static let contenid             = "id";
+    static let watchedDuration      = "progress";
     static let content              = "content";
     static let streamUrl            = "url";
     static let adtype               = "adtype";

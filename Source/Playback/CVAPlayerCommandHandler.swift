@@ -16,6 +16,8 @@ public protocol CVAPlayerCommandHandler : class {
     
     func startAssetPlayback(playerEventManager : CVAPlayerEventsManager, asset : CVAAsset) -> CVAPlayerStatus
     
+    func resumeAssetPlayback(playerEventManager : CVAPlayerEventsManager, asset : CVAAsset) -> CVAPlayerStatus
+
     func playAsset(asset:CVAAsset) -> CVAPlayerStatus;
     
     func pauseAsset(asset:CVAAsset) -> CVAPlayerStatus;

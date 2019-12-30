@@ -75,8 +75,13 @@ extension CVAPlayerManager : CVAPlayerCmdExecutor {
                 
                 self.currentAsset = asset;
                 self.currentAdAsset = adAsset;
-
-                status = playerCommandHandler.startAssetPlayback(playerEventManager: self.playerManager!, asset: asset);
+               
+                if asset.watchedDuration > 0 {  //  Continue from where it ended
+                    status = playerCommandHandler.resumeAssetPlayback(playerEventManager: self.playerManager!, asset: asset);
+                }
+                else {
+                    status = playerCommandHandler.startAssetPlayback(playerEventManager: self.playerManager!, asset: asset);
+                }
                 status = playerCommandHandler.pauseAsset(asset: asset);
                 
                 if let _ = self.currentAdAsset {

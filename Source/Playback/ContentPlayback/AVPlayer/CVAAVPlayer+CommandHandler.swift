@@ -53,6 +53,35 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
         return .success;
     }
     
+    
+    /**
+     This function is called when player is initially loaded.
+     - Parameters:
+        - asset: An instance of CVAAsset.
+     - Returns: An instance of CVAPlayerStatus.
+     */
+    public func resumeAssetPlayback(playerEventManager : CVAPlayerEventsManager, asset : CVAAsset) -> CVAPlayerStatus {
+        self.asset = asset
+        initializeAVPlayer()
+        
+        self.playerEventManager = playerEventManager
+        
+        if avPlayer != nil {
+            if asset.isEncrypted {  //  DRM Protected/Encrypted Content
+                self.playerEventManager.willStartEncryptedAssetLoading(player: avPlayer as Any, assetInfo: self.asset)
+            }
+            else {  // Non DRM
+                self.playerEventManager.willStartPlayback(player: avPlayer as Any, assetInfo: self.asset)
+            }
+            
+            let seekTime = CMTimeMakeWithSeconds(self.asset.watchedDuration, preferredTimescale: 1)
+            seekplayer(avPlayer: avPlayer!, toTime: seekTime, callConvivaSeekEvents: false)
+        }
+        
+        return .success;
+    }
+
+    
     /**
      This function is called when playback is started.
      - Parameters:
@@ -235,7 +264,9 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
      - Parameters:
         - avplayer: An instance of AVPlayer where content was seeked.
         - toTime: CMTime
+        - convivaSeekEvents: Bool      true/false:  Send/Don't send Conviva Seek Events (pss/pse)
      */
+
     private func seekplayer(avPlayer:AVPlayer,toTime:CMTime,callConvivaSeekEvents convivaSeekEvents: Bool = true,completionHandler:(() -> Void)? = nil) {
         
         let seekTimeInSecs = CMTimeGetSeconds(toTime);
