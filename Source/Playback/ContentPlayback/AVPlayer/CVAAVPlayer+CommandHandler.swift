@@ -75,7 +75,7 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
             }
             
             let seekTime = CMTimeMakeWithSeconds(self.asset.watchedDuration, preferredTimescale: 1)
-            seekplayer(avPlayer: avPlayer!, toTime: seekTime, convivaSeekEvents: false)
+            seekplayer(avPlayer: avPlayer!, toTime: seekTime, callConvivaSeekEvents: false)
         }
         
         return .success;
