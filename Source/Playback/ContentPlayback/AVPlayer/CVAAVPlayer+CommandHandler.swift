@@ -89,7 +89,9 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
      - Returns: An instance of CVAPlayerStatus.
      */
     public func playAsset(asset:CVAAsset) -> CVAPlayerStatus {
-        avPlayer!.play()
+        if let _ = avPlayer {
+            avPlayer!.play()
+        }
         
         return .success;
     }
@@ -101,7 +103,10 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
      - Returns: An instance of CVAPlayerStatus.
      */
     public func pauseAsset(asset:CVAAsset) -> CVAPlayerStatus {
-        avPlayer!.pause()
+        if let _ = avPlayer {
+            avPlayer!.pause()
+        }
+
         return .success;
     }
     
@@ -157,7 +162,7 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
     public func seekStartAsset(asset:CVAAsset, info : [AnyHashable : Any]) -> CVAPlayerStatus {
         let seekTimeScale = info["value"]
                 
-        if let time = seekTimeScale {
+        if let time = seekTimeScale, let _ = avPlayer {
             let seekTime = getSeekPosition(avplayer: avPlayer!, value: time as! Float)
             let seekTimeInSecs = CMTimeGetSeconds(seekTime);
             playerEventManager.willSeekFrom(position: NSInteger(seekTimeInSecs));
@@ -175,7 +180,7 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
     public func seekValueChangeAsset(asset:CVAAsset, info : [AnyHashable : Any]) -> CVAPlayerStatus {
         let seekTimeScale = info["value"]
         
-        if let time = seekTimeScale {
+        if let time = seekTimeScale, let _ = avPlayer {
            let seekTime = getSeekPosition(avplayer: avPlayer!, value: time as! Float)
            seekplayer(avPlayer:avPlayer!,toTime: seekTime, callConvivaSeekEvents: false);
         }
@@ -193,7 +198,7 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
     public func seekEndAsset(asset:CVAAsset, info : [AnyHashable : Any]) -> CVAPlayerStatus {
         let seekTimeScale = info["value"]
         
-        if let time = seekTimeScale {
+        if let time = seekTimeScale, let _ = avPlayer {
             let seekTime = getSeekPosition(avplayer: avPlayer!, value: time as! Float)
             seekplayer(avPlayer:avPlayer!, toTime: seekTime, callConvivaSeekEvents: true);
         }
