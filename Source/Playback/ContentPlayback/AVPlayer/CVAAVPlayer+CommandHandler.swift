@@ -212,9 +212,10 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
         if let _ = avPlayer, let _ = avPlayer!.currentItem{
             let duration = avPlayer!.currentItem!.currentTime()
             var totalSeconds = CMTimeGetSeconds(duration)
+            playerEventManager.willSeekFrom(position: NSInteger(totalSeconds));
             totalSeconds += 10.0;
             let seekTime = CMTime(value: Int64(totalSeconds), timescale: 1)
-            seekplayer(avPlayer: avPlayer!, toTime: seekTime, callConvivaSeekEvents: false)
+            seekplayer(avPlayer: avPlayer!, toTime: seekTime, callConvivaSeekEvents: true)
         }
         
         return .success;
@@ -232,9 +233,10 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
         if let _ = avPlayer, let _ = avPlayer!.currentItem{
             let duration = avPlayer!.currentItem!.currentTime()
             var totalSeconds = CMTimeGetSeconds(duration)
+            playerEventManager.willSeekFrom(position: NSInteger(totalSeconds));
             totalSeconds -= 10.0;
             let seekTime = CMTime(value: Int64(totalSeconds), timescale: 1)
-            seekplayer(avPlayer: avPlayer!, toTime: seekTime, callConvivaSeekEvents: false)
+            seekplayer(avPlayer: avPlayer!, toTime: seekTime, callConvivaSeekEvents: true)
         }
         
         return .success;
