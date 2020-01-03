@@ -101,7 +101,9 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
      - Returns: An instance of CVAPlayerStatus.
      */
     public func pauseAsset(asset:CVAAsset) -> CVAPlayerStatus {
-        avPlayer!.pause()
+        if let _ = avPlayer {
+            avPlayer!.pause()
+        }
         return .success;
     }
     

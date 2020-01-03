@@ -464,6 +464,7 @@ extension CVAGoogleIMAHandler : IMAAdsManagerDelegate {
         /// The SDK is going to play ads, so pause the content.
         isAdPlayback = true
         contentPlayer!.pause()
+        self.responseHandler?.onAdEvent(event: .onAdPlayDidStart,info: [:]);
     }
 
     /**
@@ -501,6 +502,7 @@ extension CVAGoogleIMAHandler : IMAAdsManagerDelegate {
         /// The SDK is done playing ads (at least for now), so resume the content.
         isAdPlayback = false
         contentPlayer!.play()
+        self.responseHandler?.onAdEvent(event: .onAdPlayDidFinish,info: [:]);
     }
 }
 
