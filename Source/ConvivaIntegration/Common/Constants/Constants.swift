@@ -81,6 +81,42 @@ struct Conviva {
             static let deviceID = "deviceID"
             static let appBuild = "appBuild"
             static let favouriteTeam = "favouriteTeam"
+            
+            
+            //  Content Insights
+            
+            static let contentType = "contentType"  //  More advanced content delivery method.
+            static let channel = "channel"  //  The channel on which the content is consumed
+            static let brand = "brand"  //  The name of the brand to which the content belongs
+            static let affiliate = "affiliate"  //  Affiliate or MVPD name for TV Everywhere authenticated services
+            static let categoryType = "categoryType"    //  Content business categories of interest
+
+            static let tmsID = "TMSID"    //  If you are using a standardized metadata system like Gracenote
+            static let roviID = "ROVIID"    //  If you are using a standardized metadata system like Rovi
+            static let cmsID = "CMSID"  //  Customized for each CMS
+
+            static let seriesName = "seriesName"
+            static let seasonNumber = "seasonNumber"
+            static let showTitle = "showTitle"
+            static let episodeNumber = "episodeNumber"
+            static let genre = "genre"  //  Primary content genre
+            static let genreList = "genreList"  //  A list of applicable content genre in a comma separated list
+
+            static let description = "description"  //  Short description of the content
+            static let originalAirDate = "originalAirDate"
+            static let imageURL_16x9 = "imageURL_16x9"  //  Asset large image full URL
+            static let imageURL_4x3 = "imageURL_4x3"  //  Asset small image full URL
+            static let castList = "castList"  //  Comma-separated list of actors
+            static let awardsList = "awardsList"  //  Comma-separated list of awards
+
+            static let marketingID = "marketingID"  //  Marketing ID to tie back to Adobe/Salesforce/other marketing tracking tool
+            static let sourceType = "sourceType"  //  Source that initiated the video. These could both be in-app actions as well as external actions
+            static let sourceURL = "sourceURL"  //  Instance source URL
+
+            static let subscriptionType = "subscriptionType"  //  The type of subscription based on subscriber account status
+            static let subscriptionTier = "subscriptionTier"  //  The tier of the subscriber based on business categories; varies based on the offering
+            static let viewerClassification = "viewerClassification"  //  Subscriber classification based on business categories; varies based on the offering
+            static let acqusitionSource = "acqusitionSource"  //  Source from which the viewer was acquired; varies based on the offering
         }
         
         static let infoDictionary = "CFBundleShortVersionString"
@@ -105,6 +141,42 @@ struct Conviva {
             static let product = "Internal"
             static let assetID = "87623"
             static let carrier = "N/A"
+            
+            
+            //  Content Insights
+            
+            static let contentType = "VOD"  //  Acceptable list values: [Live, Live-Linear, DVR, Catchup, VOD].
+            static let channel = "CNN"
+            static let brand = "Disney"
+            static let affiliate = "AT&T-DirecTV"
+            static let categoryType = "Movies"    //  Acceptable list values: [Episodic, Movies, News, Sports, Events, Informercials, Shorts, Promos]
+
+            static let tmsID = "TMSID"
+            static let roviID = "ROVIID"
+            static let cmsID = "CMSID"
+
+            static let seriesName = "Friends"    //  Example: "Friends", Null if not applicable
+            static let seasonNumber = "1"    //  Example: 1, Null if not applicable
+            static let showTitle = "The One with All the Cheesecakes"  //  Example: "The One with All the Cheesecakes".
+            static let episodeNumber = "3"  //  Example: 3, Null if not applicable
+            static let genre = "Drama"  //  Example: Drama
+            static let genreList = "Drama, Crime, Political, Violence"  //  Example: “Drama, Crime, Political, Violence”
+
+            static let description = "Set at the intersection of the near future and the reimagined past, explore a world in which every human appetite can be indulged without consequence."
+            static let originalAirDate = "April 17 2011"  //  Example: "April 17 2011"
+            static let imageURL_16x9 = "https://tvseriesfinale.com/wp-content/uploads/2018/04/westworld-hbo-season-2-ratings-cancel-renew-season-3.png"
+            static let imageURL_4x3 = "https://tvseriesfinale.com/wp-content/uploads/2018/04/westworld-hbo-season-2-ratings-cancel-renew-season-3.png"
+            static let castList = "Tim Robbins, Morgan Freeman, Bob Gunton"    // Examples: Tim Robbins, Morgan Freeman, Bob Gunton
+            static let awardsList = "Best Picture, Best Actor in a Leading Role, Oscars 2018, Golden Globes 2017"    //  Examples: Best Picture, Best Actor in a Leading Role, Oscars 2018, Golden Globes 2017
+
+            static let marketingID = "12345"
+            static let sourceType = "Carousel"    //  Examples: In-App actions - Promotion, Auto-Play, Recommendation, Carousel, Search, Direct, Live_Linear. External - Search, Social, Web Page, Referral.
+            static let sourceURL = "http://frame.agency/?utm_source=Facebook&utm_medium=NewsFeed&utm_term=CreativeAgency&utm _content=V-1&utm_campaign=SummerCampaign"
+
+            static let subscriptionType = "Trial"   //  Examples: Trial, Paying.
+            static let subscriptionTier = "Tier 1"    //  Examples: Tier 1, Tier 2, Tier 3, Basic
+            static let viewerClassification = "Loyal"    //  Examples: Loyal, High Value
+            static let acqusitionSource = "Facebook"    //  Examples: Facebook, Marketing Campaign-12314, Super Bowl Campaign.
         }
     }
     

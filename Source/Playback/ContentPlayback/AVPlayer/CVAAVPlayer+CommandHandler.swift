@@ -41,7 +41,7 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
         self.playerEventManager = playerEventManager
         
         if avPlayer != nil {
-            if asset.isEncrypted {  //  DRM Protected/Encrypted Content
+            if asset.encrypted {  //  DRM Protected/Encrypted Content
                 self.playerEventManager.willStartEncryptedAssetLoading(player: avPlayer as Any, assetInfo: self.asset)
             }
             else {  // Non DRM
@@ -67,7 +67,7 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
         self.playerEventManager = playerEventManager
         
         if avPlayer != nil {
-            if asset.isEncrypted {  //  DRM Protected/Encrypted Content
+            if asset.encrypted {  //  DRM Protected/Encrypted Content
                 self.playerEventManager.willStartEncryptedAssetLoading(player: avPlayer as Any, assetInfo: self.asset)
             }
             else {  // Non DRM
@@ -284,5 +284,3 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
         })
     }
 }
-
-
