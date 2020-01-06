@@ -106,7 +106,6 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
         if let _ = avPlayer {
             avPlayer!.pause()
         }
-
         return .success;
     }
     
