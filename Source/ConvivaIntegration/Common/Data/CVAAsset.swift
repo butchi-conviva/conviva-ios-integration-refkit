@@ -23,10 +23,11 @@ public class CVAAsset: NSObject {
     private(set) var desc:String?
     private(set) var callsign:String?
     private(set) var thumbnail:String?
+    private(set) var backdropImage:String?
+    private(set) var mediaType:String?
     private(set) var playbackURI:NSURL?
     private(set) var cdn:String?
     private(set) var  islive:Bool = false;
-    private(set) var  isEncrypted:Bool = false; //  true for encrypted content
     private(set) var  duration:Int = 1 * 60 * 60;
     private(set) var  efps:Int = 30;
     private(set) var  contentid:Int64 = 30;
@@ -42,8 +43,22 @@ public class CVAAsset: NSObject {
             self.title = (actualData[CVAAssetKeys.title] as? String) ?? "NA";
             self.desc = (actualData[CVAAssetKeys.desc] as? String) ?? "NA";
             self.callsign = (actualData[CVAAssetKeys.callsign] as? String) ?? "NA";
-            self.thumbnail = (actualData[CVAAssetKeys.thumbnail] as? String) ?? "NA";
-        
+            
+            if let thumbNail = (actualData[CVAAssetKeys.thumbnail] as? String) {
+                self.thumbnail = "https://image.tmdb.org/t/p/w500" + thumbNail
+            }
+            else {
+                self.thumbnail = "NA";
+            }
+            
+            if let backdropImage = (actualData[CVAAssetKeys.backdropImage] as? String) {
+                self.backdropImage = "https://image.tmdb.org/t/p/w500" + backdropImage
+            }
+            else {
+                self.backdropImage = "NA";
+            }
+            
+            self.mediaType  = (actualData[CVAAssetKeys.mediaType] as? String) ?? "NA";
             self.cdn = (actualData[CVAAssetKeys.cdn] as? String) ?? CVAAsset.defaultCDN;
             self.contentid = (actualData[CVAAssetKeys.contenid] as? Int64) ?? 0;
             self.watchedDuration = (actualData[CVAAssetKeys.watchedDuration] as? Float64) ?? 0;
@@ -52,10 +67,8 @@ public class CVAAsset: NSObject {
             if let content = contentNode {
                 
                 let mediaURLString = (content[CVAAssetKeys.streamUrl] as? String);
-                Swift.print("CVAAsset asset url",mediaURLString)
                 self.playbackURI = (nil != mediaURLString) ? NSURL(string: mediaURLString!) : CVAAsset.mediaURL;
-                self.encrypted = (content[CVAAssetKeys.contenid] as? Bool) ?? false;
-                
+                self.encrypted = (content[CVAAssetKeys.encrypted] as? Bool) ?? false;
                 self.supportedAdTypes = CVASupportedAdTypes(rawValue:(content[CVAAssetKeys.adtype] as? Int) ?? 0);
             }
             
@@ -89,15 +102,21 @@ extension CVAAsset {
         #else
         let deviceID = ""
         #endif
-        return [Conviva.Keys.Metadata.matchId : Conviva.Values.Metadata.matchId,
-                Conviva.Keys.Metadata.productType : Conviva.Values.Metadata.productType,
-                Conviva.Keys.Metadata.playerVendor : Conviva.Values.Metadata.playerVendor,
-                Conviva.Keys.Metadata.playerVersion : Conviva.Values.Metadata.playerVersion,
-                Conviva.Keys.Metadata.product : Conviva.Values.Metadata.product,
-                Conviva.Keys.Metadata.assetID : Conviva.Values.Metadata.assetID,
-                Conviva.Keys.Metadata.carrier : Conviva.Values.Metadata.carrier,
-                Conviva.Keys.Metadata.deviceID : deviceID as Any,
-                Conviva.Keys.Metadata.appBuild : Bundle.main.object(forInfoDictionaryKey: Conviva.Keys.infoDictionary) as Any,
-                Conviva.Keys.Metadata.favouriteTeam : UserDefaults.getFavouriteTeamName() as Any]
+        
+        let customTags = NSMutableDictionary()
+        customTags[Conviva.Keys.Metadata.matchId] = Conviva.Values.Metadata.matchId
+        customTags[Conviva.Keys.Metadata.productType] = Conviva.Values.Metadata.productType
+        customTags[Conviva.Keys.Metadata.playerVendor] = Conviva.Values.Metadata.playerVendor
+        customTags[Conviva.Keys.Metadata.playerVersion] = Conviva.Values.Metadata.playerVersion
+        customTags[Conviva.Keys.Metadata.product] = Conviva.Values.Metadata.product
+        customTags[Conviva.Keys.Metadata.assetID] = Conviva.Values.Metadata.assetID
+        customTags[Conviva.Keys.Metadata.carrier] = Conviva.Values.Metadata.carrier
+        customTags[Conviva.Keys.Metadata.deviceID] = deviceID as Any
+        customTags[Conviva.Keys.Metadata.appBuild] = Bundle.main.object(forInfoDictionaryKey: Conviva.Keys.infoDictionary) as Any
+        customTags[Conviva.Keys.Metadata.favouriteTeam] = UserDefaults.getFavouriteTeamName() as Any
+        
+        let customTagsForCI = getCustomTagsForCI()
+        customTags.addEntries(from: customTagsForCI)
+        return customTags
     }
 }

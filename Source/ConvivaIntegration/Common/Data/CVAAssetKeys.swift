@@ -14,6 +14,8 @@ struct CVAAssetKeys {
     static let desc:String          = "overview";
     static let callsign:String      = "callsign";
     static let thumbnail:String     = "poster_path";
+    static let backdropImage:String = "backdrop_path";
+    static let mediaType:String     = "media_type";
     static let cdn:String           = "cdn";
     static let live                 = "isLive";
     static let duration             = "contentLength";
