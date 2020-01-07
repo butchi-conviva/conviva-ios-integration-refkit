@@ -143,7 +143,14 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
     public func replayAsset(asset:CVAAsset, info : [AnyHashable : Any]?) -> CVAPlayerStatus {
         
         if let _ = avPlayer {
-           
+            
+            if asset.isEncrypted {  //  DRM Protected/Encrypted Content
+                self.playerEventManager.willStartEncryptedAssetLoading(player: avPlayer as Any, assetInfo: self.asset)
+            }
+            else {  // Non DRM
+                self.playerEventManager.willStartPlayback(player: avPlayer as Any, assetInfo: self.asset)
+            }
+            
             seekplayer(avPlayer: avPlayer!, toTime: CMTime.zero, callConvivaSeekEvents: false)
             self.avPlayer!.play();
         }
