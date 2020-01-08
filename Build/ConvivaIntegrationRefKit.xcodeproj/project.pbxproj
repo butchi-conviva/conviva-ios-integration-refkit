@@ -104,7 +104,8 @@
 		6FF3CDA223587F4700E5DA89 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3CDA123587F4700E5DA89 /* Utilities.swift */; };
 		98723899499A51205D211077 /* libPods-ConvivaIntegrationRefKit-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1908F91FC365F6324DEC7DDD /* libPods-ConvivaIntegrationRefKit-tvOSTests.a */; };
 		E0F6670543C6D3DADF2C775A /* libPods-ConvivaIntegrationRefKitTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CAAE668520922B01338A3DB /* libPods-ConvivaIntegrationRefKitTests.a */; };
-		F4E60AFB07FA4405952D2684 /* libPods-ConvivaIntegrationRefKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4723EF20D1D4F8FDEB597A83 /* libPods-ConvivaIntegrationRefKit.a */; };
+		E9F5B20323C6048500ACA347 /* CVAContentInsightsRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F5B20223C6048400ACA347 /* CVAContentInsightsRef.swift */; };
+		E9F5B20423C6048500ACA347 /* CVAContentInsightsRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F5B20223C6048400ACA347 /* CVAContentInsightsRef.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -198,6 +199,7 @@
 		9D2487BCCEDC91AE75374E2C /* Pods-ConvivaIntegrationRefKit-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConvivaIntegrationRefKit-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-ConvivaIntegrationRefKit-tvOSTests/Pods-ConvivaIntegrationRefKit-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		CA70205E3EA3A28AF50101B8 /* Pods-ConvivaIntegrationRefKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConvivaIntegrationRefKit.release.xcconfig"; path = "Target Support Files/Pods-ConvivaIntegrationRefKit/Pods-ConvivaIntegrationRefKit.release.xcconfig"; sourceTree = "<group>"; };
 		CB42093C27A58B4A7EDFE47D /* libPods-ConvivaIntegrationRefKit-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ConvivaIntegrationRefKit-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9F5B20223C6048400ACA347 /* CVAContentInsightsRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVAContentInsightsRef.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,7 +230,6 @@
 				6FF376372345DF2A00B08B99 /* JavaScriptCore.framework in Frameworks */,
 				6FF376352345DF2100B08B99 /* MediaPlayer.framework in Frameworks */,
 				6FF376332345DF1C00B08B99 /* SystemConfiguration.framework in Frameworks */,
-				F4E60AFB07FA4405952D2684 /* libPods-ConvivaIntegrationRefKit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,6 +478,7 @@
 		6F5452212355F82C004BBB79 /* ConvivaIntegration */ = {
 			isa = PBXGroup;
 			children = (
+				E9F5B20123C6048400ACA347 /* ContentInsights */,
 				516B66C7238403B600B40CDD /* AdsInsights */,
 				516B66C62384039100B40CDD /* ExperienceInsights */,
 				6F1C6B78235F2008002E5DDA /* Common */,
@@ -531,6 +533,14 @@
 				6885E863A34E1E3D4BA36A61 /* Pods-ConvivaIntegrationRefKitTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		E9F5B20123C6048400ACA347 /* ContentInsights */ = {
+			isa = PBXGroup;
+			children = (
+				E9F5B20223C6048400ACA347 /* CVAContentInsightsRef.swift */,
+			);
+			path = ContentInsights;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -838,6 +848,7 @@
 				517173162387F8A0008A9B83 /* KSM.m in Sources */,
 				510FBB7C236997C6005BC13C /* CVAPlayerManager.swift in Sources */,
 				516B66CC23840DB700B40CDD /* CVAGoogleIMA+CommandHandler.swift in Sources */,
+				E9F5B20423C6048500ACA347 /* CVAContentInsightsRef.swift in Sources */,
 				510FBB7D236997C6005BC13C /* CVAPlayerEventManager.swift in Sources */,
 				510FBB7E236997C6005BC13C /* CVAPlayerResponseHandler.swift in Sources */,
 				510FBB7F236997C6005BC13C /* CVAPlayerCommandHandler.swift in Sources */,
@@ -893,6 +904,7 @@
 				510FBB85236997FC005BC13C /* CVAPlayerEventsManager.swift in Sources */,
 				5176E72323262E5E00E1946D /* CVAPlayerEventNotifier.swift in Sources */,
 				5176E72223262E5E00E1946D /* CVAPlayerEventListener.swift in Sources */,
+				E9F5B20323C6048500ACA347 /* CVAContentInsightsRef.swift in Sources */,
 				5176E72B23262E5E00E1946D /* CVAAVPlayerView.swift in Sources */,
 				6F1C6B73235F1D47002E5DDA /* CVAAVPlayer+EventsHandler.swift in Sources */,
 				6F5452292355F82C004BBB79 /* CustomPlayerInterface.swift in Sources */,

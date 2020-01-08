@@ -144,7 +144,7 @@ extension CVAAVPlayer : CVAPlayerCommandHandler {
         
         if let _ = avPlayer {
             
-            if asset.isEncrypted {  //  DRM Protected/Encrypted Content
+            if asset.encrypted {  //  DRM Protected/Encrypted Content
                 self.playerEventManager.willStartEncryptedAssetLoading(player: avPlayer as Any, assetInfo: self.asset)
             }
             else {  // Non DRM
