@@ -113,7 +113,7 @@ public class CVAGoogleIMAHandler : NSObject {
         let settings = IMASettings()
         settings.enableBackgroundPlayback = true;
         adsLoader = IMAAdsLoader(settings: settings)
-
+        self.adBreak = 0;
         adsLoader.delegate = self
 
         #if os(iOS)

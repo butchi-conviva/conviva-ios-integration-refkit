@@ -160,6 +160,9 @@ extension CVAGoogleIMAHandler {
     @objc func contentDidFinishPlaying(_ sender: Notification) -> Void {
         if let currentItem = sender.object as? AVPlayerItem {
             if currentItem == self.contentPlayer?.currentItem {
+                guard self.adsLoader != nil else {
+                    return
+                }
                 self.adsLoader.contentComplete()
             }
         }
