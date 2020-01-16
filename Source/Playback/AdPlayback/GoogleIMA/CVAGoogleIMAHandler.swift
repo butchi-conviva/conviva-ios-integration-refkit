@@ -210,12 +210,21 @@ extension CVAGoogleIMAHandler : IMAAdsManagerDelegate {
 
         // When IMAAdEventType.ALL_ADS_COMPLETED, event.ad is coming nil.
         // Following guard condition is done to avoid a crash.
+        
+        guard event != nil else {
+            return
+        }
+        
         guard event.type != IMAAdEventType.ALL_ADS_COMPLETED else {
             return
         }
         
         /// 1. Insert Conviva related code.
         
+        guard event.ad != nil else {
+            return
+        }
+
         let adInfo : IMAAd = event.ad
         
         let podInfo : IMAAdPodInfo = adInfo.adPodInfo
