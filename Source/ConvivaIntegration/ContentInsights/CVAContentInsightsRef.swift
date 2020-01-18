@@ -41,7 +41,7 @@ extension CVAAsset {
         customDictionary[Conviva.Keys.Metadata.genreList] = Conviva.Values.Metadata.genreList
        
         if let desc = self.desc {
-            customDictionary[Conviva.Keys.Metadata.description] = desc
+            customDictionary[Conviva.Keys.Metadata.description] = desc.prefix(256)
         }
         else {
             customDictionary[Conviva.Keys.Metadata.description] = Conviva.Values.Metadata.description

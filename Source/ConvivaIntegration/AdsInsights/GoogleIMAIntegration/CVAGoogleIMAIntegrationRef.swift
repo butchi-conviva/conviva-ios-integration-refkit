@@ -108,6 +108,16 @@ class CVAGoogleIMAIntegrationRef : CVABaseIntegrationRef {
     }
 
     /**
+     Used to cleanup a Conviva monitoring session.
+     */
+    func cleanupContentSession() {
+        if  self.convivaVideoSession != nil {
+            LivePass.cleanupSession(self.convivaVideoSession)
+            self.convivaVideoSession = nil
+        }
+    }
+
+    /**
      Used to set Ad Player State.
      - Parameters:
         - state: The play state of ad.

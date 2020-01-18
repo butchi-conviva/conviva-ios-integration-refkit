@@ -130,8 +130,10 @@ extension CVAAVPlayer {
      In this situation Conviva session should be cleaned up.
      */
     @objc private func didFinishPlaying(_ sender: Notification) -> Void {
-        playerEventManager.didStopPlayback()
-        self.responseHandler?.onPlayerEvent(event:.onContentPlayDidFinish, info: [:])
+        if self.asset.supportedAdTypes == .noroll || self.asset.supportedAdTypes == .preroll {
+            playerEventManager.didStopPlayback()
+            self.responseHandler?.onPlayerEvent(event:.onContentPlayDidFinish, info: [:])
+        }
     }
     
     /**

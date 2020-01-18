@@ -345,18 +345,6 @@ extension CVAGoogleIMAHandler : IMAAdsManagerDelegate {
             /// Once adsManager has recieved the COMPLETE event, cleanup the Conviva Ad session.
             adEventManager.didStopAdPlayback()
             
-            /// Resume the main content monitoring.
-            if let contentPlayer = contentPlayer {
-                contentPlayer.play()
-                adEventManager.didResumeContentMonitoring(player: contentPlayer)
-                
-                if (self.adIndex != -1) {
-                    adEventManager.didNotifyAdEnd()
-                }
-            }
-            self.responseHandler?.onAdEvent(event: .onAdPlayDidFinish,info: [:]);
-            
-
             
         case IMAAdEventType.ALL_ADS_COMPLETED:
             
@@ -487,13 +475,14 @@ extension CVAGoogleIMAHandler : IMAAdsManagerDelegate {
         /// 1. Insert Conviva related code.
         /// Since adsManager has notified ContentResume, resume main content monitoring using attachPlayer() and notify end of ad using adEnd().
         
-        if let streamer = self.contentPlayer {
-            adEventManager.didResumeContentMonitoring(player: streamer)
-            if (self.adIndex != -1) {
-                adEventManager.didNotifyAdEnd()
+        if (self.adIndex != -1) {
+            if let streamer = self.contentPlayer {
+                adEventManager.didResumeContentMonitoring(player: streamer)
             }
         }
         
+        adEventManager.didNotifyAdEnd()
+
         if(self.isContentPaused ?? false){
             self.isContentPaused = false;
             
@@ -504,6 +493,10 @@ extension CVAGoogleIMAHandler : IMAAdsManagerDelegate {
             
             /// Report custom PodEnd evennt to Conviva.
             adEventManager.didReportCustomEvent(eventName: "Conviva.PodEnd", eventAttributes: podEndAttributes)
+        }
+        
+        if self.adIndex == -1 { //  Post roll Ad
+            adEventManager.didStopContentPlayback()
         }
         
         /// 2. Continue further processing related to ad/content playback.
