@@ -86,7 +86,7 @@ extension CVAAVPlayerIntegrationRef {
         
         convivaMetadata.viewerId = metadataDict[Conviva.Keys.ConvivaContentInfo.viewerId] as? String
         convivaMetadata.playerName = metadataDict[Conviva.Keys.ConvivaContentInfo.playerName] as? String
-        convivaMetadata.isLive = (metadataDict[Conviva.Keys.ConvivaContentInfo.isLive] != nil) ? true : false
+        convivaMetadata.isLive = metadataDict[Conviva.Keys.ConvivaContentInfo.isLive] as! Bool
         convivaMetadata.resource = CDN_NAME_AKAMAI
         convivaMetadata.encodedFramerate = metadataDict[Conviva.Keys.ConvivaContentInfo.encodedFramerate] as! Int
         

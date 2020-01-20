@@ -36,7 +36,7 @@ public class CVAAsset: NSObject {
 
     private(set) var  encrypted:Bool = false;
     private(set) var  supportedAdTypes:CVASupportedAdTypes = .preroll;
-    init(data:Dictionary<String,Any>?) {
+    init(data:Dictionary<String,Any>?, isLive: Bool) {
         
         if let actualData = data {
             
@@ -62,6 +62,7 @@ public class CVAAsset: NSObject {
             self.cdn = (actualData[CVAAssetKeys.cdn] as? String) ?? CVAAsset.defaultCDN;
             self.contentid = (actualData[CVAAssetKeys.contenid] as? Int64) ?? 0;
             self.watchedDuration = (actualData[CVAAssetKeys.watchedDuration] as? Float64) ?? 0;
+            self.islive = isLive;
             
             let contentNode = (actualData[CVAAssetKeys.content] as? Dictionary<String,Any>);
             if let content = contentNode {

@@ -54,10 +54,16 @@ extension CVAPlayerManager : CVAPlayerCmdExecutor {
         
         let event = CVAPlayerCommand(rawValue: eventName);
         
+        var isLive = false
+       
+        if let contentType = info?["contentType"] as? String, contentType == "live" {
+            isLive = true
+        }
+        
         let assetInfo = info?["asset"] ?? nil;
         let adInfo = info?["adInfo"] ?? nil;
         
-        let asset = (nil != assetInfo ) ? CVAAsset(data: assetInfo as? [String:Any]) : CVAAsset(data: nil);
+        let asset = (nil != assetInfo ) ? CVAAsset(data: assetInfo as? [String:Any], isLive: isLive) : CVAAsset(data: nil, isLive: isLive);
         
         var adAsset: CVAAdAsset?
         
